@@ -1,0 +1,18 @@
+---
+import NavButton from "../components/NavButton.astro";
+---
+<header class="w-1/3 bg-daintree-700 h-screen z-40">
+    <div class="flex flex-col">
+        <div class="aspect-square bg-amber-50">
+            <a href="/">Logo</a>
+        </div>
+        <div class="flex flex-col gap-12 justify-center w-full">
+            <NavButton url="/artists" text="Artists" kanji="アーティスト" skewX="0" skewY="0" />
+            <NavButton url="/studio" text="Studio" kanji="スタジオ" skewX="0" skewY="0" />
+            <NavButton url="/about" text="About" kanji="じこしょうかい" skewX="0" skewY="0" />
+            <NavButton url="/booking" text="Booking" kanji="よやく" skewX="0" skewY="0" />
+            <NavButton url="/aftercare" text="Aftercare" kanji="アフターケア" skewX="0" skewY="0" />
+            <NavButton url="/giftcards" text="Giftcards" kanji="ギフトカード" skewX="0" skewY="0" />
+        </div>
+    </div>
+</header>

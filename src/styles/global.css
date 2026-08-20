@@ -1,0 +1,24 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: Gore;
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../assets/GoreRegular.woff") format("woff");
+}
+
+@theme {
+  --color-daintree-100: oklab(from hsla(180, 3%, 97%, 1) l a b);
+  --color-daintree-200: oklab(from hsla(180, 7%, 95%, 1) l a b);
+  --color-daintree-300: oklab(from hsla(180, 8%, 84%, 1) l a b);
+  --color-daintree-400: oklab(from hsla(185, 8%, 69%, 1) l a b);
+  --color-daintree-500: oklab(from hsla(183, 8%, 54%, 1) l a b);
+  --color-daintree-600: oklab(from hsla(183, 12%, 38%, 1) l a b);
+  --color-daintree-700: oklab(from hsla(184, 26%, 23%, 1) l a b);
+  --color-daintree-800: oklab(from hsla(184, 50%, 12%, 1) l a b);
+  --color-daintree-900: oklab(from hsla(183, 95%, 7%, 1) l a b);
+  --color-daintree-1000: oklab(from hsla(186, 100%, 2%, 1) l a b);
+
+  --font-display: "Gore", sans-serif;
+}
