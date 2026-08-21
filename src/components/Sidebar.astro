@@ -1,14 +1,15 @@
 ---
 import NavButton from "../components/NavButton.astro";
-import SidebarBg from '../assets/sidebar-bg.webp';
-console.log(SidebarBg);
+import { Image } from 'astro:assets';
+import logo from "../assets/hinkart-sidebar-logox2.webp";
+
 ---
-<header class="w-1/3  h-screen z-40 fixed left-0">
+<header class="w-1/5  h-screen z-40 fixed left-0">
     <div class="flex flex-col">
-        <div class="h-24 bg-amber-50">
-            <a href="/">Logo</a>
-        </div>
-        <div class="flex flex-col gap-5 justify-center w-full">
+        <a href="/" class="flex justify-center -mb-10 mt-10">
+            <Image src={logo} alt="Hinkart Tattoo Studio in Groningen, Netherlands" quality={100} width={logo.width / 2} />
+        </a>
+        <div class="flex flex-col gap-5 justify-center w-full pl-8">
             <NavButton url="/artists" text="Artists" kanji="アーティスト" skewX="-6" skewY="-3" posX="0" />
             <NavButton url="/studio" text="Studio" kanji="スタジオ" skewX="-12" skewY="0" posX="2" posY="-3" />
             <NavButton url="/about" text="About" kanji="じこしょうかい" skewX="-6" skewY="-3" posX="1" />
@@ -17,7 +18,7 @@ console.log(SidebarBg);
             <NavButton url="/giftcards" text="Giftcards" kanji="ギフトカード" skewX="-3" skewY="-3" posX="1" posY="1" />
         </div>
     </div>
-    <div class="absolute left-0 top-0 -z-10 h-screen w-[25dvw] bg-[url(../assets/sidebar-bg.webp)] bg-right"></div>
+    <div class="absolute left-0 top-0 -z-10 h-screen w-full bg-[url(../assets/sidebar-bgx2.webp)] bg-right bg-no-repeat bg-cover"></div>
 </header>
 
 <!-- Include load animation for sidebar. Background and buttons flying in form left side. Staggered animation -->
