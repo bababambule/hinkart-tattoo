@@ -1,0 +1,24 @@
+---
+import BaseLayout from './Layout.astro';
+const { frontmatter } = Astro.props;
+---
+<BaseLayout pageTitle={frontmatter.title}>
+    <p>Published on {frontmatter.pubDate.toString().slice(0,10)}</p>
+
+    <video autoplay controls>
+        <source src={frontmatter.video.url} type="video/webm" />
+    </video>
+
+    <p><em>{frontmatter.description}</em></p>
+    <p>Written by {frontmatter.author}</p>
+
+    <div class="tags">
+        {frontmatter.tags.map((tag: string) => (
+            <a class="tag" href={`/tags/${tag}`}>{tag}</a>
+        ))}</div>
+
+    <img src={frontmatter.image.url} width="300" alt={frontmatter.image.alt} />
+
+    <div style="height:1px; background-color:grey;"></div>
+    <slot />
+</BaseLayout>
