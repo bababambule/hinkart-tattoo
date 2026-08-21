@@ -8,6 +8,50 @@
   src: url("../assets/GoreRegular.woff") format("woff");
 }
 
+@font-face {
+  font-family: Atkinson;
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../assets/AtkinsonHyperlegible-Regular.ttf");
+}
+
+@font-face {
+  font-family: Atkinson;
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../assets/AtkinsonHyperlegible-Italic.ttf");
+}
+
+@font-face {
+  font-family: Atkinson;
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("../assets/AtkinsonHyperlegible-Bold.ttf");
+}
+
+@font-face {
+  font-family: Atkinson;
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+  src: url("../assets/AtkinsonHyperlegible-BoldItalic.ttf");
+}
+
+@font-face {
+  font-family: NotoSansJP;
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url("../assets/NotoSansJP-VariableFont_wght.ttf");
+}
+
+@utility text-stroke-1 {
+  -webkit-text-stroke: 1rem black;
+}
+
 @theme {
   --color-daintree-100: oklab(from hsla(180, 3%, 97%, 1) l a b);
   --color-daintree-200: oklab(from hsla(180, 7%, 95%, 1) l a b);
@@ -20,5 +64,18 @@
   --color-daintree-900: oklab(from hsla(183, 95%, 7%, 1) l a b);
   --color-daintree-1000: oklab(from hsla(186, 100%, 2%, 1) l a b);
 
+  --color-tree-poppy-100: oklab(from hsla(35, 86%, 97%, 1) l a b);
+  --color-tree-poppy-200: oklab(from hsla(36, 95%, 92%, 1) l a b);
+  --color-tree-poppy-300: oklab(from hsla(36, 97%, 85%, 1) l a b);
+  --color-tree-poppy-400: oklab(from hsla(36, 97%, 77%, 1) l a b);
+  --color-tree-poppy-500: oklab(from hsla(36, 97%, 62%, 1) l a b);
+  --color-tree-poppy-600: oklab(from hsla(36, 97%, 62%, 1) l a b);
+  --color-tree-poppy-700: oklab(from hsla(36, 83%, 45%, 1) l a b);
+  --color-tree-poppy-800: oklab(from hsla(36, 83%, 27%, 1) l a b);
+  --color-tree-poppy-900: oklab(from hsla(35, 83%, 9%, 1) l a b);
+  --color-tree-poppy-1000: oklab(from hsla(35, 85%, 5%, 1) l a b);
+
   --font-display: "Gore", sans-serif;
+  --font-body: "Atkinson", sans-serif;
+  --font-kanji: "NotoSansJP", sans-serif;
 }
