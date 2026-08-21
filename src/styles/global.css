@@ -91,3 +91,7 @@
   --font-body: "Atkinson", sans-serif;
   --font-kanji: "NotoSansJP", sans-serif;
 }
+
+html {
+  font-family: "Atkinson", sans-serif;
+}

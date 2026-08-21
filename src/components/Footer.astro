@@ -1,16 +1,46 @@
-<footer class="fixed bottom-0">
-    <div class="flex bg-daintree-700 max-w-fit">
-        <div class="">
-            <a href="https://share.here.com/l/53.21432,6.57328,Verlengde%20Oosterstraat%202,%209711%20EN%20Groningen,%20Netherlands?z=19.65&t=normal" target="_blank">Verlengde Osterstraat 2, 9711 en Groningen</a>
+---
+import Icons from './Icons.astro'
+import FooterLink from './FooterLink.astro';
+---
+<footer class="fixed bottom-6 left-auto right-auto flex justify-start w-full text-daintree-100 uppercase text-sm">
+    <div class="flex gap-8 bg-daintree-700 pl-[22.5dvw] h-12 pr-8 rounded-tr-md rounded-br-md border-4 border-solid border-daintree-600">
+        <a  href="https://share.here.com/l/53.21432,6.57328,Verlengde%20Oosterstraat%202,%209711%20EN%20Groningen,%20Netherlands?z=19.65&t=normal" target="_blank" class="inline-flex items-center gap-3 footer-btn">
+            <div class="-rotate-3 footer-btn__icon"><Icons icon="Map" size={32} /></div>
+            <span class="footer-btn__label">Verlengde Osterstraat 2, 9711 en Groningen</span>
+        </a>
+        <div class="flex gap-4 items-center">
+            <FooterLink url="https://www.instagram.com/hinkarttattoostudio/" label="Instagram" />
+            <FooterLink url="https://www.tiktok.com/@hinkarttattoostudio" label="Tiktok" />
+            <FooterLink url="#" label="Legal Notice" />
+            <FooterLink url="#" label="Data Privacy" />
         </div>
-        <div class="flex gap-4">
-            <a href="https://www.instagram.com/hinkarttattoostudio/" target="_blank">Instagram</a>
-            <a href="https://www.instagram.com/hinkarttattoostudio/" target="_blank">TikTok</a>
-            <a href="https://www.instagram.com/hinkarttattoostudio/" target="_blank">Newsletter</a>
-            <a href="https://www.instagram.com/hinkarttattoostudio/" target="_blank">Legal</a>
-        </div>
-        <div>
-            <a href="mailto:info@hinkart.nl">info@hinkart.nl</a>
-        </div>
+        <a  href="mailto:info@hinkart.nl" class="inline-flex items-center gap-3 footer-btn">
+            <div class="-rotate-3 footer-btn__icon"><Icons icon="Letter" size={32} /></div>
+            <span class="footer-btn__label">info@hinkart.nl</span>
+        </a>
     </div>
 </footer>
+
+<script>
+  import "../scripts/footer.ts";
+</script>
+
+<style is:inline>
+    .clip:first-of-type { 
+        clip-path: polygon(5% 5%, 100% 0%, 95% 95%, 0% 100%);
+        transform: rotate(-3deg);
+    }
+    .clip:nth-child(2) {
+        clip-path: polygon(0% 0%, 95% 5%, 100% 100%, 5% 95%);
+        transform: rotate(3deg);
+    }
+    .clip:nth-child(3) {
+        clip-path: polygon(0% 5%, 100% 5%, 95% 95%, 0% 95%);
+        transform: rotate(-3deg);
+    }
+    .clip:last-of-type {
+        clip-path: polygon(5% 0%, 100% 0%, 95% 95%, 0% 100%);
+        transform: rotate(3deg);
+    }
+
+</style>
