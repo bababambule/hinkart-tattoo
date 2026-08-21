@@ -1,0 +1,10 @@
+---
+import Icons from "./Icons.astro";
+const { icon, label, id } = Astro.props
+---
+<button id={id} aria-label={label} class="w-16 h-16 relative">
+    <div class="w-full h-full -skew-3 bg-winter-sky-600 rounded-sm"></div>
+    <div class="absolute top-0 text-winter-sky-50">
+        {icon.map((el, index) => <Icons icon={el} size={64} classes={index == 0 ? '' : 'hidden'} />)}
+    </div>
+</button>

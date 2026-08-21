@@ -16,8 +16,10 @@ import  "../styles/global.css";
 	</head>
 	<body class="bg-daintree-800 max-w-dvw max-h-dvh overflow-clip">
 		<Sidebar />
-		<slot />
-		<!-- <Footer /> -->
+		<main class="h-screen pl-[20dvw] pt-8 pb-24 pr-12">
+			<slot />
+		</main>
+		<Footer />
 	</body>
 </html>
 

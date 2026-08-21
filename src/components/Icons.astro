@@ -1,0 +1,21 @@
+---
+const { icon, size, classes } = Astro.props;
+
+const allIcons = import.meta.glob('./icons/*.astro', {eager: true});
+
+let cleanEntries = Object.entries(allIcons).map(([key, val]) => {
+    const shortKey = key.split("./icons/")[1].split(".")[0];
+    return [shortKey, val.default];
+})
+
+let icons = Object.fromEntries(cleanEntries)
+
+function capitalize(val) {
+    return String(val).charAt(0).toUpperCase() + String(val).slice(1);
+}
+
+const SelectedIcon = icons[capitalize(icon)]
+
+//console.log(cleanEntries)
+---
+<SelectedIcon size={size} classes={classes} />
