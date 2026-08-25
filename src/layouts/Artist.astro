@@ -1,12 +1,14 @@
 ---
 import BaseLayout from './Layout.astro';
 const { frontmatter } = Astro.props;
+const videos = import.meta.glob('../assets/videos/*.webm', {eager: true})
+const videoPath = videos[`../assets/videos/${frontmatter.video}`]?.default
 ---
 <BaseLayout pageTitle={frontmatter.title}>
     <p>Published on {frontmatter.pubDate.toString().slice(0,10)}</p>
 
     <video autoplay controls>
-        <source src={frontmatter.video.url} type="video/webm" />
+        <source src={videoPath} type="video/webm" />
     </video>
 
     <p><em>{frontmatter.description}</em></p>

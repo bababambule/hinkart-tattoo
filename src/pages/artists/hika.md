@@ -2,8 +2,7 @@
 layout: ../../layouts/Artist.astro
 name: Hika
 order: 1
-video:
-  url: /src/assets/videos/Hika.webm
+video: Hika.webm
 title: "My first blog post"
 pubDate: 2026-08-20
 description: "This is the first post of my new Astro blog"

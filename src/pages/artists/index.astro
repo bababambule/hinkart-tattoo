@@ -11,7 +11,7 @@ const artistSorted = allArtists.sort((a, b) => a.frontmatter.order - b.frontmatt
     <div class="embla__viewport h-full overflow-hidden">
         <div class="embla__container h-full flex">
             {artistSorted.map((post: any, index: number) => 
-                <ArtistSlide name={post.frontmatter.name} index={index} slug={post.frontmatter.slug} video={post.frontmatter.video.url} />
+                <ArtistSlide name={post.frontmatter.name} index={index} slug={post.frontmatter.slug} video={post.frontmatter.video} />
                  /*<div class="embla__slide" data-slide-index={index}>{post.frontmatter.name} - {post.frontmatter.order}</div>*/
             )}
     </div>

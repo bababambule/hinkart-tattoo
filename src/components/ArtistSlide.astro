@@ -1,11 +1,13 @@
 ---
 const { name, slug, video, index } = Astro.props
+const videos = import.meta.glob('../assets/videos/*.webm', {eager: true})
+const videoPath = videos[`../assets/videos/${video}`]?.default
 ---
 <div class="embla__slide h-full relative flex items-center min-w-1/5" data-slide-index={index}>
     <div class="video__wrapper relative bg-daintree-1000 p-2">
         <div class="video__overlay"></div>
         <video muted loop class="object-cover origin-center h-full">
-            <source src={video} />
+            <source src={videoPath} />
         </video>
     </div>
     <div class="absolute z-10 bottom-1/4 mx-auto w-full flex justify-center">
