@@ -1,5 +1,37 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import ArtistSlide from '../../components/ArtistSlide.astro'
+import PaginationButton from '../../components/PaginationButton.astro';
+
+const allArtists = Object.values(import.meta.glob('./*.md', {eager: true}));
+const artistSorted = allArtists.sort((a, b) => a.frontmatter.order - b.frontmatter.order );
 ---
 <Layout>
+<div class="embla h-full relative">
+    <div class="embla__viewport h-full overflow-hidden">
+        <div class="embla__container h-full flex">
+            {artistSorted.map((post: any, index: number) => 
+                <ArtistSlide name={post.frontmatter.name} index={index} slug={post.frontmatter.slug} video={post.frontmatter.video.url} />
+                 /*<div class="embla__slide" data-slide-index={index}>{post.frontmatter.name} - {post.frontmatter.order}</div>*/
+            )}
+    </div>
+    <div class="flex justify-between w-1/4 absolute top-1/2 left-1/2 -translate-x-1/2  pointer-events-none ">
+        <PaginationButton label="Prev" type="prev" />
+        <PaginationButton label="Next" type="next" />
+    </div>
+  </div>
+</div>
 </Layout>
+
+<style>
+    .embla {
+        --slide-spacing: 0rem;
+    }
+
+    .embla__container {
+        touch-action: pan-y pinch-zoom;
+        margin-left: calc(var(--slide-spacing) * -1)
+    }
+</style>
+
+<script src="../../scripts/artists.ts"></script>

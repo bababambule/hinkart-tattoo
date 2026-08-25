@@ -1,5 +1,7 @@
 ---
 layout: ../../layouts/Artist.astro
+name: Hika
+order: 1
 video:
   url: /src/assets/videos/Hika.webm
 title: "My first blog post"

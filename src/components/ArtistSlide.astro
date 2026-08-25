@@ -1,0 +1,32 @@
+---
+const { name, slug, video, index } = Astro.props
+---
+<div class="embla__slide h-full relative flex items-center min-w-1/5" data-slide-index={index}>
+    <div class="video__wrapper relative bg-daintree-1000 p-2">
+        <div class="video__overlay"></div>
+        <video muted loop class="object-cover origin-center h-full">
+            <source src={video} />
+        </video>
+    </div>
+    <div class="absolute z-10 bottom-1/4 mx-auto w-full flex justify-center">
+        <p class="artist__name font-display text-daintree-600 text-5xl -rotate-3" data-name={name}>{name}</p>
+        <p class="artist__name--shadow font-display text-daintree-600 text-5xl -rotate-3 absolute" data-name={name}>{name}</p>
+    </div>
+</div>
+
+<style>
+    .embla__slide {
+        min-width: 20%;
+        padding-left: var(--slide-spacing);
+        transform-origin: center;
+    }
+
+    .video__overlay {
+        position: absolute;
+        z-index: 1;
+        width: 100%;
+        height: 100%;
+        mix-blend-mode: hard-light;
+    }
+
+</style>

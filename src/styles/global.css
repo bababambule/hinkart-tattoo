@@ -87,6 +87,16 @@
   --color-winter-sky-900: oklab(from hsla(331, 100%, 8%, 1) l a b);
   --color-winter-sky-1000: oklab(from hsla(332, 100%, 5%, 1) l a b);
 
+  --color-regal-blue-100: oklab(from hsla(197, 30%, 95%, 1) l a b);
+  --color-regal-blue-200: oklab(from hsla(196, 28%, 87%, 1) l a b);
+  --color-regal-blue-300: oklab(from hsla(197, 29%, 74%, 1) l a b);
+  --color-regal-blue-400: oklab(from hsla(198, 29%, 61%, 1) l a b);
+  --color-regal-blue-500: oklab(from hsla(198, 30%, 48%, 1) l a b);
+  --color-regal-blue-600: oklab(from hsla(198, 52%, 36%, 1) l a b);
+  --color-regal-blue-700: oklab(from hsla(198, 97%, 23%, 1) l a b);
+  --color-regal-blue-800: oklab(from hsla(198, 97%, 23%, 1) l a b);
+  --color-regal-blue-900: oklab(from hsla(198, 97%, 23%, 1) l a b);
+
   --font-display: "Gore", sans-serif;
   --font-body: "Atkinson", sans-serif;
   --font-kanji: "NotoSansJP", sans-serif;
