@@ -1,28 +1,16 @@
 ---
 layout: ../../layouts/Artist.astro
-name: Hika
+name: "Hika"
 order: 1
-video: Hika.webm
-title: "My first blog post"
-pubDate: 2026-08-20
-description: "This is the first post of my new Astro blog"
-author: "BabaBambule"
-image:
-  url: "https://docs.astro.build/assets/rose.webp"
-  alt: "The Astro logo on a dark background with pink glow."
-tags: ["astro", "blogging", "learning in public"]
+video: "Hika.webm"
+pronouns: "She/Her"
+languages: ["Portugese", "English"]
+biography: "Founder, instructor and anime enthusiast. Hika has a chameleonic talent in multiple tattoo styles and years of experience. She’s honest and capable of elevating your idea to the next level."
+tags: ["Japanese", "Anime", "Color", "Black & Grey", "Neo Traditional"]
+mail: "hika@hinkart.nl"
+instagram: "https://www.instagram.com/hinkart_tattoo/"
 ---
 
-Welcome to my _new blog_ about learning Astro! Here, I will share my learning journey as I build a new website.
-
-## What I've accomplished
-
-1. **Installing Astro**: First, I created a new Astro project and set up my online account.
-
-2. **Making Pages**: I then learned how to make pages by creating new `.astro` files and placing them in the `src/pages/`folder.
-
-3. **Making Blog Posts**: This is my first blog post! I now have Astro pages and Markdown posts!
-
-## What's next
-
-I will finish the Astro tutorial, and then keep adding more posts. Watch this space for more to come.
+<slot name="biography">
+  <p>Founder, instructor and anime enthusiast. Hika has a chameleonic talent in multiple tattoo styles and years of experience. She’s honest and capable of elevating your idea to the next level.</p>
+</slot>

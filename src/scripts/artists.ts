@@ -115,6 +115,7 @@ emblaApi.on("slidesInView", (emblaApi) => {
       duration: 0.5,
       ease: "elastic.out(1,0.3)",
     });
+
     gsap.to(item.querySelector(".artist__name--shadow"), {
       color: "var(--color-daintree-1000)",
       scale: 1,
@@ -124,6 +125,11 @@ emblaApi.on("slidesInView", (emblaApi) => {
       duration: 1,
       ease: "elastic.out(1,0.3)",
       webkitTextStrokeWidth: "0.5rem",
+    });
+
+    gsap.to(item.querySelector(".artist__select"), {
+      opacity: 0,
+      y: 50,
     });
   });
 
@@ -162,6 +168,13 @@ emblaApi.on("slidesInView", (emblaApi) => {
       ease: "elastic.out(1,0.3)",
       webkitTextStrokeWidth: "1rem",
     });
+
+    gsap.to(item.querySelector(".artist__select"), {
+      opacity: 1,
+      y: 0,
+      duration: 0.5,
+      ease: "elastic.out(1,0.3)",
+    });
   });
 
   document.querySelectorAll(".next").forEach((item) => {
@@ -193,6 +206,11 @@ emblaApi.on("slidesInView", (emblaApi) => {
       duration: 1,
       ease: "elastic.out(1,0.3)",
       webkitTextStrokeWidth: "0.5rem",
+    });
+
+    gsap.to(item.querySelector(".artist__select"), {
+      opacity: 0,
+      y: 50,
     });
   });
 });

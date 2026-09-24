@@ -1,26 +1,182 @@
 ---
 import BaseLayout from './Layout.astro';
+import Icons from '../components/Icons.astro';
 const { frontmatter } = Astro.props;
 const videos = import.meta.glob('../assets/videos/*.webm', {eager: true})
 const videoPath = videos[`../assets/videos/${frontmatter.video}`]?.default
 ---
-<BaseLayout pageTitle={frontmatter.title}>
-    <p>Published on {frontmatter.pubDate.toString().slice(0,10)}</p>
-
-    <video autoplay controls>
-        <source src={videoPath} type="video/webm" />
-    </video>
-
-    <p><em>{frontmatter.description}</em></p>
-    <p>Written by {frontmatter.author}</p>
-
-    <div class="tags">
+<BaseLayout>
+    <div class="flex flex-row h-full">
+        <side class="flex-1 tab-panels">
+            <div id="tabPanel-1-side" class=" relative p-2 bg-daintree-1000 video-clip pointer-events-none" role="tabpanel" tabindex="0" aria-labelledby="tab-1">
+                <div class="absolute bg-winter-sky-600 mix-blend-overlay z-10 top-2 right-2 bottom-2 w-full video-clip"></div>
+                <video muted autoplay loop class="w-full object-cover object-top h-full video-clip">
+                    <source src={videoPath} type="video/webm" />
+                </video>
+            </div>
+            <div id="tabPanel-2-side" hidden role="tabpanel" tabindex="0" aria-labelledby="tab-2"></div>
+            <div id="tabPanel-3" hidden role="tabpanel" tabindex="0" aria-labelledby="tab-3"></div>
+        </side>
+        <main class=" flex-1 flex flex-col">
+            <div class="flex flex-row gap-2 mt-16 mb-8 -ml-16">
+                <h1 class="font-display text-daintree-100 pb-4 text-8xl relative z-30" data-text={frontmatter.name}>{frontmatter.name}</h1>
+                <div class="flex flex-col justify-center h-full">
+                    <div class="bg-daintree-600 border-daintree-900 border-4 px-4 rounded-md text-daintree-100 font-bold uppercase z-20 origin-left -rotate-3">{frontmatter.pronouns}</div>
+                    <div class="bg-daintree-700 border-daintree-900 border-4 px-4 rounded-md text-daintree-100 font-bold uppercase z-10 origin-left -mt-1">{frontmatter.languages[0]}</div>
+                    <div class="bg-daintree-800 border-daintree-900 border-4 px-4 rounded-md text-daintree-100 font-bold uppercase z-0 origin-left rotate-3 -mt-1">{frontmatter.languages[1]}</div>
+                </div>
+            </div>
+            <div role="tablist" aria-labelledby={frontmatter.name} class="flex flex-row flex-wrap relative max-w-68 -skew-3 -ml-10">
+                <button id="tab-1" role="tab" aria-controls="tabPanel-1" aria-selected="true" tabindex="0">BIO</button>
+                <button id="tab-2" role="tab" aria-controls="tabPanel-2" aria-selected="false" tabindex="-1">FAQ</button>
+                <button id="tab-3" role="tab" aria-controls="tabPanel-3" aria-selected="false" tabindex="-1">PORTFOLIO</button>
+                <div role="tab">Booking</div>
+                <div class="flex flex-row">
+                    <a href={`mailto:${frontmatter.mail}`} role="tab"><Icons size={32} classes={} icon="Letter" /></a>
+                    <a href={frontmatter.instagram} target="_blank" role="tab"><Icons size={32} classes={} icon="Instagram" /></a>
+                </div>
+            </div>
+            <div class="tab-panels relative max-w-2/3 -mt-2 pr-4 pb-8 pt-8 -ml-16 -z-20">
+                <div id="tabPanel-1" role="tabpanel" tabindex="0" aria-labelledby="tab-1">
+                    <div class="text-box-shape float-left h-[calc(1.5rem*1.625*5)] w-1/3 -ml-4"></div>
+                    <p class="xl: text-2xl font-bold leading-relaxed shape max-w-[48ch]">{frontmatter.biography}</p>
+                </div>
+                <div id="tabPanel-2" hidden role="tabpanel" tabindex="0" aria-labelledby="tab-2">
+                    <div class="text-box-shape float-left h-[calc(1.5rem*1.625*5)] w-1/3 -ml-4"></div>
+                    <p class="xl: text-2xl font-bold leading-relaxed shape max-w-[48ch]">FAQ Answer</p>
+                </div>
+                <div id="tabPanel-3" hidden role="tabpanel" tabindex="0" aria-labelledby="tab-3">
+                    <div class="text-box-shape float-left h-[calc(1.5rem*1.625*5)] w-1/3 -ml-4"></div>
+                    <p>The Portfolio</p>
+                </div>
+                <div class="absolute w-full h-full bg-daintree-100 -skew-x-8 top-0 left-0 -z-10 border-daintree-1000 border-4 rounded-md"></div>
+            </div>
+            <div>
+                Tags
+            </div>
+        </main>
+    </div>
+    
+    <!--<div class="tags">
         {frontmatter.tags.map((tag: string) => (
             <a class="tag" href={`/tags/${tag}`}>{tag}</a>
-        ))}</div>
-
-    <img src={frontmatter.image.url} width="300" alt={frontmatter.image.alt} />
-
-    <div style="height:1px; background-color:grey;"></div>
-    <slot />
+        ))}</div> -->
 </BaseLayout>
+
+<style>
+    h1::after {
+        content: attr(data-text);
+        position: absolute;
+        left: 0;
+        transform: translate(6px, 6px);
+        z-index: -1;
+        -webkit-text-stroke: 2rem black;
+        font-size: ;
+    }
+
+    .text-box-shape {
+        clip-path: polygon(0% 0%, 23% 0%, 6% 100%, 0% 100%);
+        shape-outside: polygon(0% 0%, 23% 0%, 6% 100%, 0% 100%);
+    }
+
+    .video-clip {
+        clip-path: polygon(0% 0%, 100% 0%, 85% 100%, 0% 100%);
+    }
+
+    [role="tablist"] {
+        position: relative;
+    }
+
+    [role="tab"] {
+        color: var(--color-winter-sky-50);
+        background: var(--color-winter-sky-1000);
+        font-size: var(--text-lg);
+        padding: 0.5rem 1em;
+        border-radius: var(--radius-md);
+        border: solid 4px var(--color-winter-sky-1000);
+        font: var(--font-body);
+        text-transform: uppercase;
+        font-weight: 600;
+        cursor: pointer;
+    }
+
+    [role="tab"][aria-selected="true"] {
+        background: var(--color-winter-sky-600);
+        color: var(--color-winter-sky-900)
+    }
+</style>
+
+<script>
+const tabsContainer = document.querySelector("[role=tablist]");
+const tabButtons = tabsContainer.querySelectorAll("[role=tab]");
+const tabPanels = document.querySelectorAll("[role=tabpanel]");
+
+tabsContainer.addEventListener("click", (e) => {
+  const clickedTab = e.target.closest("button");
+  const currentTab = tabsContainer.querySelector('[aria-selected="true"]');
+
+  if (!clickedTab || clickedTab === currentTab) return;
+
+  switchTab(clickedTab);
+});
+
+tabsContainer.addEventListener("keydown", (e) => {
+  switch (e.key) {
+    case "ArrowLeft":
+      moveLeft();
+      break;
+    case "ArrowRight":
+      moveRight();
+      break;
+    case "Home":
+      e.preventDefault();
+      switchTab(tabButtons[0]);
+      break;
+    case "End":
+      e.preventDefault();
+      switchTab(tabButtons[tabButtons.length - 1]);
+      break;
+  }
+});
+
+function moveLeft() {
+  const currentTab = document.activeElement;
+
+  if (!currentTab.previousElementSibling) {
+    tabButtons.item(tabButtons.length - 1).focus();
+  } else {
+    currentTab.previousElementSibling.focus();
+  }
+}
+
+function moveRight() {
+  const currentTab = document.activeElement;
+  if (!currentTab.nextElementSibling) {
+    tabButtons.item(0).focus();
+  } else {
+    currentTab.nextElementSibling.focus();
+  }
+}
+
+function switchTab(newTab) {
+  const activePanelId = newTab.getAttribute("aria-controls");
+  const activePanel = tabsContainer.nextElementSibling.querySelector(
+    "#" + CSS.escape(activePanelId)
+  );
+  tabButtons.forEach((button) => {
+    button.setAttribute("aria-selected", false);
+    button.setAttribute("tabindex", "-1");
+  });
+
+  tabPanels.forEach((panel) => {
+    panel.setAttribute("hidden", true);
+  });
+
+  activePanel.removeAttribute("hidden", false);
+
+  newTab.setAttribute("aria-selected", true);
+  newTab.setAttribute("tabindex", "0");
+  newTab.focus();
+}
+
+</script>

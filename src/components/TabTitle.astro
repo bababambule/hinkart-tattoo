@@ -1,0 +1,39 @@
+---
+interface props {
+	slot: string;
+	id: string;
+	href: string;
+	title: string;
+}
+
+const { slot, id, href, title } = Astro.props;
+---
+
+<li slot={slot} class="flex-1 flex">
+	<a id={id} href={href} class="w-full text-center bg-daintree-1000 border-4 border-daintree-1000 px-12 py-4 -skew-x-6 relative rounded-md"
+		><span class="text-3xl uppercase text-daintree-100 font-bold w-fit relative">{title}</span></a
+	>
+</li>
+
+<style>
+	[aria-selected='false'] {
+		transition: background-color 0.5s;
+	}
+	[aria-selected='false'] span {
+		transition: color 0.2s;
+	}
+	[aria-selected='true'] {
+		background: var(--color-tree-poppy-600);
+	}
+
+	[aria-selected='true'] span {
+		color: var(--color-tree-poppy-1000);
+	}
+
+	[aria-selected='true'] span::after {
+		content: '*';
+		position: absolute;
+		right: -0.6rem;
+		top: -0.3rem;
+	}
+</style>

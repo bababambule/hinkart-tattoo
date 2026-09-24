@@ -1,0 +1,24 @@
+---
+interface props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<div
+  class="font-kanji text-7xl text-winter-sky-600 relative tracking-tighter kanji-outline z-10 -rotate-3 -mt-20 mb-16 ml-64"
+  data-title={title}
+  id="kanjiTitle"
+>
+  {title}
+</div>
+
+<script src="../scripts/kanjiTitle.js"></script>
+
+<style>
+  .kanji-outline {
+    -webkit-text-stroke: 0.6rem var(--color-winter-sky-800);
+    paint-order: stroke fill;
+  }
+</style>

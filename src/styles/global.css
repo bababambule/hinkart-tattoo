@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@plugin "./longshadow.plugin.js";
 
 @font-face {
   font-family: Gore;
@@ -52,6 +53,10 @@
   -webkit-text-stroke: 1rem black;
 }
 
+@utility shape-outside-* {
+  shape-outside: --value([ "absolute-size"]);
+}
+
 @theme {
   --color-daintree-100: oklab(from hsla(180, 3%, 97%, 1) l a b);
   --color-daintree-200: oklab(from hsla(180, 7%, 95%, 1) l a b);
@@ -86,6 +91,18 @@
   --color-winter-sky-800: oklab(from hsla(331, 100%, 25%, 1) l a b);
   --color-winter-sky-900: oklab(from hsla(331, 100%, 8%, 1) l a b);
   --color-winter-sky-1000: oklab(from hsla(332, 100%, 5%, 1) l a b);
+
+  --color-rose-bud-cherry-50: oklab(from hsla(320, 27%, 96%, 1) l a b);
+  --color-rose-bud-cherry-100: oklab(from hsla(313, 27%, 87%, 1) l a b);
+  --color-rose-bud-cherry-200: oklab(from hsla(312, 26%, 75%, 1) l a b);
+  --color-rose-bud-cherry-300: oklab(from hsla(312, 26%, 62%, 1) l a b);
+  --color-rose-bud-cherry-400: oklab(from hsla(311, 27%, 49%, 1) l a b);
+  --color-rose-bud-cherry-500: oklab(from hsla(311, 46%, 36%, 1) l a b);
+  --color-rose-bud-cherry-600: oklab(from hsla(311, 85%, 24%, 1) l a b);
+  --color-rose-bud-cherry-700: oklab(from hsla(311, 86%, 19%, 1) l a b);
+  --color-rose-bud-cherry-800: oklab(from hsla(311, 86%, 12%, 1) l a b);
+  --color-rose-bud-cherry-900: oklab(from hsla(311, 89%, 4%, 1) l a b);
+  --color-rose-bud-cherry-1000: oklab(from hsla(312, 100%, 2%, 1) l a b);
 
   --color-regal-blue-100: oklab(from hsla(197, 30%, 95%, 1) l a b);
   --color-regal-blue-200: oklab(from hsla(196, 28%, 87%, 1) l a b);

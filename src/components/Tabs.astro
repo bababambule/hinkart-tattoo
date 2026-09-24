@@ -1,0 +1,11 @@
+<div class="tabs-container flex flex-col h-full">
+	<ul aria-labelledby="tabs-title" class="flex list-none">
+		<slot name="titles" />
+	</ul>
+
+	<div class="tabs__panels flow flex-1">
+		<slot name="panels" />
+	</div>
+</div>
+
+<script src="../scripts/tabs.ts"></script>

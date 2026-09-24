@@ -1,5 +1,107 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import Heading from '../components/Heading.astro';
+import KanjiTitle from '../components/KanjiTitle.astro';
+import Tabs from '../components/Tabs.astro';
+import TabTitle from '../components/TabTitle.astro';
+import TabPanel from '../components/TabPanel.astro';
+import { Image } from 'astro:assets';
+import aftercareImage from '../assets/images/aftercare.webp';
+import FollowCursor from '../components/FollowCursor.astro';
+import soap from '../assets/images/memes/thats-not-enough-soap-saturday-night.gif';
+import towel from '../assets/images/memes/sonic-mmm.gif';
+import ointment from '../assets/images/memes/you-got-this.gif';
+import touch from '../assets/images/memes/social-distancing-no-touching.gif';
+import scratch from '../assets/images/memes/nothing-is-worse-than-having-an-itch-you-can-never-scratch-brion-james.gif';
+import bandaid from '../assets/images/memes/bandaid.gif';
+import bath from '../assets/images/memes/cat-love-bath.gif';
+import tanning from '../assets/images/memes/tan-sunburned.gif';
+import sunlight from '../assets/images/memes/good-morning-sunshine.gif';
+import sunblock from '../assets/images/memes/sunblock-sun-screen.gif';
+import review from '../assets/images/memes/nailed-it-high-five.gif';
 ---
+
 <Layout>
+	<div class="flex flex-col h-full">
+		<div class="flex flex-row flex-1">
+			<div class="flex-1">
+				<Image src={aftercareImage} alt="The Hinkart Tattoo Studio team" class="h-full object-right object-cover" />
+			</div>
+			<div class="flex-1 flex flex-col pr-16 xl:pt-24">
+				<div class="-ml-32">
+					<Heading title="Aftercare" />
+					<KanjiTitle title="アフターケア" />
+				</div>
+
+				<div class="text-daintree-100 -ml-64 flex-1 xl:text-2xl">
+					<div class="h-full w-1/5 invisible float-left shape-outside"></div>
+
+					<p class="text-4xl leading-normal mb-4">
+						During tattooing, the skin breaks, causing a wound. If you take good care of the tattoo, it will take about six weeks for this wound to
+						heal.
+					</p>
+					<p class="mb-4 leading-relaxed max-w-[75ch]">
+						If the tattoo is covered with self adhesive second-skin, you can remove it in 24 hours. If the tattoo is covered with a sterile compress
+						or cling film, you can remove it after 3 to 5 hours. You can take a shower with a tattoo.
+					</p>
+				</div>
+			</div>
+		</div>
+		<div class="flex-1 ml-96 -mt-10">
+			<Tabs>
+				<TabTitle slot="titles" id="tab-1" href="#uncovered-tattoo" title="Uncovered tattoo" />
+				<TabPanel slot="panels" id="uncovered-tattoo" target="tab-1">
+					<div class="flex flex-col">
+						<FollowCursor
+							text="Wash the tattoo twice a day with a mild unscented soap (unicura or neutral)"
+							image={soap}
+							alt="That is not enough soap"
+						/>
+						<FollowCursor text="Pat the tattoo dry with a clean towel after washing" image={towel} alt="Sonic mmm" />
+						<FollowCursor
+							text="Smear the wound with an ointment that the tattoo artist gave you or recommends you (bepanthene baby ointment)"
+							image={ointment}
+							alt="You got this"
+						/>
+					</div>
+				</TabPanel>
+				<TabTitle slot="titles" id="tab-2" href="#during-healing" title="During Healing" />
+				<TabPanel slot="panels" id="during-healing" target="tab-2">
+					<div class="flex flex-col">
+						<FollowCursor
+							text="Touch the tattoo wound as little as possible (wash your hands before using the wound care)"
+							image={touch}
+							alt="No touching"
+						/>
+						<FollowCursor text="Do not scratch the tattoo wound" image={scratch} alt="Sonic mmm" />
+						<FollowCursor text="Do not cover the tattoo wound with bandages, band-aids, tight or dirty clothing" image={bandaid} alt="You got this" />
+						<FollowCursor text="Avoid (bubble) baths, swimming, saunas and steam baths" image={bath} alt="You got this" />
+						<FollowCursor text="Do not expose the tattoo wound to sunlight or a tanning bed" image={tanning} alt="You got this" />
+					</div>
+				</TabPanel>
+				<TabTitle slot="titles" id="tab-3" href="#fully-healed" title="Fully Healed" />
+				<TabPanel slot="panels" id="fully-healed" target="tab-3">
+					<div class="flex flex-col">
+						<FollowCursor
+							text="The tattooed skin remains very sensitive to sunlight even after healing."
+							image={sunlight}
+							alt="Good morning sunshine"
+						/>
+						<FollowCursor text="Always lubricate your tattoo with sunscreen when it’s healed." image={sunblock} alt="Marge humming" />
+						<FollowCursor
+							text="Thank you for trusting us with your tattoo! Don’t forget to leave us a review!"
+							image={review}
+							alt="Nailed it high five"
+						/>
+					</div>
+				</TabPanel>
+			</Tabs>
+		</div>
+	</div>
+
+	<style>
+		.shape-outside {
+			shape-outside: polygon(0% 0%, 100% 0%, 80% 100%, 0% 100%);
+		}
+	</style>
 </Layout>

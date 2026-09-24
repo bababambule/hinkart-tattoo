@@ -1,5 +1,53 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import Heading from '../components/Heading.astro';
+import KanjiTitle from '../components/KanjiTitle.astro';
+import PrideFlag from '../components/PrideFlag.astro';
+import { Image } from 'astro:assets';
+import aboutImage from '../assets/images/about.webp';
 ---
+
 <Layout>
+	<div class="flex flex-row h-full">
+		<div class="flex-1 h-full">
+			<Image src={aboutImage} alt="The Hinkart Tattoo Studio team" class="h-full object-right object-cover" />
+		</div>
+
+		<div class="flex-1 h-full flex flex-col pr-16 xl:pt-24">
+			<div class="-ml-32">
+				<Heading title="Hinkart" />
+				<KanjiTitle title="じこしょうかい" />
+			</div>
+
+			<div class="text-daintree-100 -ml-64 flex-1 xl:text-2xl">
+				<div class="h-full w-1/5 invisible float-left shape-outside"></div>
+
+				<p class="text-4xl leading-normal mb-4">
+					<span class="hidden">Hinkart</span>is a <strong>creative tattoo studio</strong> based in <strong>Groningen, Netherlands.</strong> Home to several
+					international artists— each with their own unique style and vision. Together, we form a vibrant and inclusive space where art, identity, and personal
+					stories can come to life.
+				</p>
+				<p class="mb-4 leading-relaxed max-w-[75ch]">
+					At Hinkart you’ll find a studio that celebrates individuality. Whether you’re looking for expressive anime, black horror work, colorful
+					realism, or something completely custom, our Artists with their several years of experience, bring diverse perspectives, and high-quality
+					tattooing.
+				</p>
+				<PrideFlag />
+				<p class="mb-4 leading-relaxed max-w-[75ch]">
+					We are proudly queer-friendly and committed to providing a safe, welcoming environment for everyone. Your comfort, boundaries, and creative
+					expression matter to us.
+				</p>
+				<div class="flex flex-row gap-4">
+					<p class="font-bold">Come as you are. Leave with something uniquely yours.</p>
+					<a href="artists">Discover the artists</a>
+				</div>
+			</div>
+		</div>
+	</div>
 </Layout>
+
+<style>
+	.shape-outside {
+		shape-outside: polygon(0% 0%, 100% 0%, 66% 100%, 0% 100%);
+	}
+</style>

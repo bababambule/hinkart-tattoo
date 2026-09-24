@@ -1,0 +1,43 @@
+---
+interface props {
+	text: string;
+	image: ImageMetadata;
+	alt: string;
+}
+
+const { text, image, alt } = Astro.props;
+
+import { Image } from 'astro:assets';
+---
+
+<div class="hoverContainer py-2">
+	{text}
+	<div class="hoverElement">
+		<Image src={image} alt={alt} class="w-full h-auto" />
+	</div>
+</div>
+
+<style>
+	.hoverContainer {
+		cursor: pointer;
+		touch-action: none;
+		position: relative;
+	}
+
+	.hoverElement {
+		position: absolute;
+		width: 12.5rem;
+		top: 0;
+		left: 0;
+		border-radius: 8px;
+		backface-visibility: hidden;
+		pointer-events: none;
+		opacity: 1;
+		z-index: 3;
+		display: flex;
+		align-items: center;
+		border: solid 1px white;
+	}
+</style>
+
+<script src="../scripts/followCursor.ts"></script>
