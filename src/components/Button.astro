@@ -1,0 +1,81 @@
+---
+const { icon, href, label, kanji, id } = Astro.props;
+
+let Tag;
+
+if (href == '') {
+	Tag = 'button';
+} else {
+	Tag = 'a';
+}
+
+import Icons from './Icons.astro';
+---
+
+<Tag href={href} target="_self" id={id} class="button group relative isolate inline-flex items-center gap-3 self-center min-w-12 min-h-16 pr-8">
+	<div class="flex flex-row justify-center items-center pointer-events-none">
+		<div class="z-10 ml-1.5 text-winter-sky-1000 group-hover:text-tree-poppy-100">
+			<Icons icon={icon} size={48} classes="rotate-3 -translate-y-2 icon-shadow" />
+		</div>
+		<div
+			class="text-tree-poppy-100 group-hover:text-tree-poppy-1000 long-shadow-xs [--ls-from:var(--color-tree-poppy-1000)] [--ls-to:var(--color-tree-poppy-1000)] group-hover:[--ls-from:var(--color-tree-poppy-100)] group-hover:[--ls-to:var(--color-tree-poppy-100)] -rotate-3 origin-top-left"
+		>
+			<p class="text-2xl font-bold uppercase text-button-stroke-tree-poppy-1000 group-hover:text-button-stroke-tree-poppy-100">{label}</p>
+		</div>
+	</div>
+	<div id="Mask" class="absolute size-full kanji-mask flex flex-row items-end justify-end -z-10 opacity-40 pointer-events-none">
+		<div class="text-tree-poppy-100 text-right -rotate-24">
+			<p class="font-kanji text-4xl">
+				{kanji}
+			</p>
+		</div>
+	</div>
+	<svg
+		class="absolute inset-0 -z-20 size-full overflow-visible pointer-events-none"
+		viewBox="0 0 100 100"
+		preserveAspectRatio="none"
+		aria-hidden="true"
+	>
+		<filter id="displacementShadow" x="-30%" y="-30%" width="160%" height="160%">
+			<feTurbulence type="turbulence" baseFrequency="0.01" numOctaves="2" result="turbulence"></feTurbulence>
+			<feDisplacementMap in2="turbulence" in="SourceGraphic" scale="2" xChannelSelector="R" yChannelSelector="G" result="displaced"
+			></feDisplacementMap>
+
+			<feDropShadow in="displaced" dx="4" dy="8" stdDeviation="0" flood-color="var(--color-tree-poppy-1000)" flood-opacity="1" result="shadow3"
+			></feDropShadow>
+			<feDropShadow in="displaced" dx="2" dy="4" stdDeviation="0" flood-color="var(--color-tree-poppy-1000)" flood-opacity="1" result="shadow2"
+			></feDropShadow>
+			<feDropShadow in="displaced" dx="1" dy="2" stdDeviation="0" flood-color="var(--color-tree-poppy-1000)" flood-opacity="1" result="shadow1"
+			></feDropShadow>
+
+			<feMerge>
+				<feMergeNode in="shadow3"></feMergeNode>
+				<feMergeNode in="shadow2"></feMergeNode>
+				<feMergeNode in="shadow1"></feMergeNode>
+				<feMergeNode in="displaced"></feMergeNode>
+			</feMerge>
+		</filter>
+		<polygon
+			x="0"
+			y="0"
+			points="0,6 99,0 97,92 0,86"
+			stroke-width="2"
+			stroke="var(--color-tree-poppy-1000)"
+			width=" 100%"
+			height="100%"
+			fill="var(--color-winter-sky-600)"
+			filter="url(#displacementShadow)"></polygon>
+	</svg>
+</Tag>
+
+<style>
+	.icon-shadow {
+		filter: drop-shadow(var(--color-tree-poppy-600) 8px 8px 4px);
+	}
+
+	.kanji-mask {
+		clip-path: polygon(0 6%, 99% 0, 97% 92%, 0 86%);
+	}
+</style>
+
+<script src="../scripts/button.ts"></script>

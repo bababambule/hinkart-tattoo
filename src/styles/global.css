@@ -1,124 +1,129 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 @plugin "./longshadow.plugin.js";
 
 @font-face {
-  font-family: Gore;
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url("../assets/GoreRegular.woff") format("woff");
+	font-family: Gore;
+	font-style: normal;
+	font-weight: 400;
+	font-display: swap;
+	src: url('../assets/GoreRegular.woff') format('woff');
 }
 
 @font-face {
-  font-family: Atkinson;
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url("../assets/AtkinsonHyperlegible-Regular.ttf");
+	font-family: Atkinson;
+	font-style: normal;
+	font-weight: 400;
+	font-display: swap;
+	src: url('../assets/AtkinsonHyperlegible-Regular.ttf');
 }
 
 @font-face {
-  font-family: Atkinson;
-  font-style: italic;
-  font-weight: 400;
-  font-display: swap;
-  src: url("../assets/AtkinsonHyperlegible-Italic.ttf");
+	font-family: Atkinson;
+	font-style: italic;
+	font-weight: 400;
+	font-display: swap;
+	src: url('../assets/AtkinsonHyperlegible-Italic.ttf');
 }
 
 @font-face {
-  font-family: Atkinson;
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  src: url("../assets/AtkinsonHyperlegible-Bold.ttf");
+	font-family: Atkinson;
+	font-style: normal;
+	font-weight: 700;
+	font-display: swap;
+	src: url('../assets/AtkinsonHyperlegible-Bold.ttf');
 }
 
 @font-face {
-  font-family: Atkinson;
-  font-style: italic;
-  font-weight: 700;
-  font-display: swap;
-  src: url("../assets/AtkinsonHyperlegible-BoldItalic.ttf");
+	font-family: Atkinson;
+	font-style: italic;
+	font-weight: 700;
+	font-display: swap;
+	src: url('../assets/AtkinsonHyperlegible-BoldItalic.ttf');
 }
 
 @font-face {
-  font-family: NotoSansJP;
-  font-style: normal;
-  font-weight: 900;
-  font-display: swap;
-  src: url("../assets/NotoSansJP-VariableFont_wght.ttf");
+	font-family: NotoSansJP;
+	font-style: normal;
+	font-weight: 900;
+	font-display: swap;
+	src: url('../assets/NotoSansJP-VariableFont_wght.ttf');
 }
 
 @utility text-stroke-1 {
-  -webkit-text-stroke: 1rem black;
+	-webkit-text-stroke: 1rem black;
 }
 
 @utility shape-outside-* {
-  shape-outside: --value([ "absolute-size"]);
+	shape-outside: --value([ 'absolute-size']);
+}
+
+@utility text-button-stroke-* {
+	-webkit-text-stroke: 0.3rem --value(--color-*);
+	paint-order: stroke fill;
 }
 
 @theme {
-  --color-daintree-100: oklab(from hsla(180, 3%, 97%, 1) l a b);
-  --color-daintree-200: oklab(from hsla(180, 7%, 95%, 1) l a b);
-  --color-daintree-300: oklab(from hsla(180, 8%, 84%, 1) l a b);
-  --color-daintree-400: oklab(from hsla(185, 8%, 69%, 1) l a b);
-  --color-daintree-500: oklab(from hsla(183, 8%, 54%, 1) l a b);
-  --color-daintree-600: oklab(from hsla(183, 12%, 38%, 1) l a b);
-  --color-daintree-700: oklab(from hsla(184, 26%, 23%, 1) l a b);
-  --color-daintree-800: oklab(from hsla(184, 50%, 12%, 1) l a b);
-  --color-daintree-900: oklab(from hsla(183, 95%, 7%, 1) l a b);
-  --color-daintree-1000: oklab(from hsla(186, 100%, 2%, 1) l a b);
+	--color-daintree-100: oklab(from hsla(180, 3%, 97%, 1) l a b);
+	--color-daintree-200: oklab(from hsla(180, 7%, 95%, 1) l a b);
+	--color-daintree-300: oklab(from hsla(180, 8%, 84%, 1) l a b);
+	--color-daintree-400: oklab(from hsla(185, 8%, 69%, 1) l a b);
+	--color-daintree-500: oklab(from hsla(183, 8%, 54%, 1) l a b);
+	--color-daintree-600: oklab(from hsla(183, 12%, 38%, 1) l a b);
+	--color-daintree-700: oklab(from hsla(184, 26%, 23%, 1) l a b);
+	--color-daintree-800: oklab(from hsla(184, 50%, 12%, 1) l a b);
+	--color-daintree-900: oklab(from hsla(183, 95%, 7%, 1) l a b);
+	--color-daintree-1000: oklab(from hsla(186, 100%, 2%, 1) l a b);
 
-  --color-tree-poppy-100: oklab(from hsla(35, 86%, 97%, 1) l a b);
-  --color-tree-poppy-200: oklab(from hsla(36, 95%, 92%, 1) l a b);
-  --color-tree-poppy-300: oklab(from hsla(36, 97%, 85%, 1) l a b);
-  --color-tree-poppy-400: oklab(from hsla(36, 97%, 77%, 1) l a b);
-  --color-tree-poppy-500: oklab(from hsla(36, 97%, 62%, 1) l a b);
-  --color-tree-poppy-600: oklab(from hsla(36, 97%, 62%, 1) l a b);
-  --color-tree-poppy-700: oklab(from hsla(36, 83%, 45%, 1) l a b);
-  --color-tree-poppy-800: oklab(from hsla(36, 83%, 27%, 1) l a b);
-  --color-tree-poppy-900: oklab(from hsla(35, 83%, 9%, 1) l a b);
-  --color-tree-poppy-1000: oklab(from hsla(35, 85%, 5%, 1) l a b);
+	--color-tree-poppy-100: oklab(from hsla(35, 86%, 97%, 1) l a b);
+	--color-tree-poppy-200: oklab(from hsla(36, 95%, 92%, 1) l a b);
+	--color-tree-poppy-300: oklab(from hsla(36, 97%, 85%, 1) l a b);
+	--color-tree-poppy-400: oklab(from hsla(36, 97%, 77%, 1) l a b);
+	--color-tree-poppy-500: oklab(from hsla(36, 97%, 62%, 1) l a b);
+	--color-tree-poppy-600: oklab(from hsla(36, 97%, 62%, 1) l a b);
+	--color-tree-poppy-700: oklab(from hsla(36, 83%, 45%, 1) l a b);
+	--color-tree-poppy-800: oklab(from hsla(36, 83%, 27%, 1) l a b);
+	--color-tree-poppy-900: oklab(from hsla(35, 83%, 9%, 1) l a b);
+	--color-tree-poppy-1000: oklab(from hsla(35, 85%, 5%, 1) l a b);
 
-  --color-winter-sky-50: oklab(from hsla(332, 100%, 97%, 1) l a b);
-  --color-winter-sky-100: oklab(from hsla(331, 100%, 92%, 1) l a b);
-  --color-winter-sky-200: oklab(from hsla(331, 100%, 83%, 1) l a b);
-  --color-winter-sky-300: oklab(from hsla(331, 100%, 75%, 1) l a b);
-  --color-winter-sky-400: oklab(from hsla(331, 100%, 67%, 1) l a b);
-  --color-winter-sky-500: oklab(from hsla(331, 100%, 58%, 1) l a b);
-  --color-winter-sky-600: oklab(from hsla(331, 100%, 50%, 1) l a b);
-  --color-winter-sky-700: oklab(from hsla(331, 100%, 42%, 1) l a b);
-  --color-winter-sky-800: oklab(from hsla(331, 100%, 25%, 1) l a b);
-  --color-winter-sky-900: oklab(from hsla(331, 100%, 8%, 1) l a b);
-  --color-winter-sky-1000: oklab(from hsla(332, 100%, 5%, 1) l a b);
+	--color-winter-sky-50: oklab(from hsla(332, 100%, 97%, 1) l a b);
+	--color-winter-sky-100: oklab(from hsla(331, 100%, 92%, 1) l a b);
+	--color-winter-sky-200: oklab(from hsla(331, 100%, 83%, 1) l a b);
+	--color-winter-sky-300: oklab(from hsla(331, 100%, 75%, 1) l a b);
+	--color-winter-sky-400: oklab(from hsla(331, 100%, 67%, 1) l a b);
+	--color-winter-sky-500: oklab(from hsla(331, 100%, 58%, 1) l a b);
+	--color-winter-sky-600: oklab(from hsla(331, 100%, 50%, 1) l a b);
+	--color-winter-sky-700: oklab(from hsla(331, 100%, 42%, 1) l a b);
+	--color-winter-sky-800: oklab(from hsla(331, 100%, 25%, 1) l a b);
+	--color-winter-sky-900: oklab(from hsla(331, 100%, 8%, 1) l a b);
+	--color-winter-sky-1000: oklab(from hsla(332, 100%, 5%, 1) l a b);
 
-  --color-rose-bud-cherry-50: oklab(from hsla(320, 27%, 96%, 1) l a b);
-  --color-rose-bud-cherry-100: oklab(from hsla(313, 27%, 87%, 1) l a b);
-  --color-rose-bud-cherry-200: oklab(from hsla(312, 26%, 75%, 1) l a b);
-  --color-rose-bud-cherry-300: oklab(from hsla(312, 26%, 62%, 1) l a b);
-  --color-rose-bud-cherry-400: oklab(from hsla(311, 27%, 49%, 1) l a b);
-  --color-rose-bud-cherry-500: oklab(from hsla(311, 46%, 36%, 1) l a b);
-  --color-rose-bud-cherry-600: oklab(from hsla(311, 85%, 24%, 1) l a b);
-  --color-rose-bud-cherry-700: oklab(from hsla(311, 86%, 19%, 1) l a b);
-  --color-rose-bud-cherry-800: oklab(from hsla(311, 86%, 12%, 1) l a b);
-  --color-rose-bud-cherry-900: oklab(from hsla(311, 89%, 4%, 1) l a b);
-  --color-rose-bud-cherry-1000: oklab(from hsla(312, 100%, 2%, 1) l a b);
+	--color-rose-bud-cherry-50: oklab(from hsla(320, 27%, 96%, 1) l a b);
+	--color-rose-bud-cherry-100: oklab(from hsla(313, 27%, 87%, 1) l a b);
+	--color-rose-bud-cherry-200: oklab(from hsla(312, 26%, 75%, 1) l a b);
+	--color-rose-bud-cherry-300: oklab(from hsla(312, 26%, 62%, 1) l a b);
+	--color-rose-bud-cherry-400: oklab(from hsla(311, 27%, 49%, 1) l a b);
+	--color-rose-bud-cherry-500: oklab(from hsla(311, 46%, 36%, 1) l a b);
+	--color-rose-bud-cherry-600: oklab(from hsla(311, 85%, 24%, 1) l a b);
+	--color-rose-bud-cherry-700: oklab(from hsla(311, 86%, 19%, 1) l a b);
+	--color-rose-bud-cherry-800: oklab(from hsla(311, 86%, 12%, 1) l a b);
+	--color-rose-bud-cherry-900: oklab(from hsla(311, 89%, 4%, 1) l a b);
+	--color-rose-bud-cherry-1000: oklab(from hsla(312, 100%, 2%, 1) l a b);
 
-  --color-regal-blue-100: oklab(from hsla(197, 30%, 95%, 1) l a b);
-  --color-regal-blue-200: oklab(from hsla(196, 28%, 87%, 1) l a b);
-  --color-regal-blue-300: oklab(from hsla(197, 29%, 74%, 1) l a b);
-  --color-regal-blue-400: oklab(from hsla(198, 29%, 61%, 1) l a b);
-  --color-regal-blue-500: oklab(from hsla(198, 30%, 48%, 1) l a b);
-  --color-regal-blue-600: oklab(from hsla(198, 52%, 36%, 1) l a b);
-  --color-regal-blue-700: oklab(from hsla(198, 97%, 23%, 1) l a b);
-  --color-regal-blue-800: oklab(from hsla(198, 97%, 23%, 1) l a b);
-  --color-regal-blue-900: oklab(from hsla(198, 97%, 23%, 1) l a b);
+	--color-regal-blue-100: oklab(from hsla(197, 30%, 95%, 1) l a b);
+	--color-regal-blue-200: oklab(from hsla(196, 28%, 87%, 1) l a b);
+	--color-regal-blue-300: oklab(from hsla(197, 29%, 74%, 1) l a b);
+	--color-regal-blue-400: oklab(from hsla(198, 29%, 61%, 1) l a b);
+	--color-regal-blue-500: oklab(from hsla(198, 30%, 48%, 1) l a b);
+	--color-regal-blue-600: oklab(from hsla(198, 52%, 36%, 1) l a b);
+	--color-regal-blue-700: oklab(from hsla(198, 97%, 23%, 1) l a b);
+	--color-regal-blue-800: oklab(from hsla(198, 97%, 23%, 1) l a b);
+	--color-regal-blue-900: oklab(from hsla(198, 97%, 23%, 1) l a b);
 
-  --font-display: "Gore", sans-serif;
-  --font-body: "Atkinson", sans-serif;
-  --font-kanji: "NotoSansJP", sans-serif;
+	--font-display: 'Gore', sans-serif;
+	--font-body: 'Atkinson', sans-serif;
+	--font-kanji: 'NotoSansJP', sans-serif;
 }
 
 html {
-  font-family: "Atkinson", sans-serif;
+	font-family: 'Atkinson', sans-serif;
 }
