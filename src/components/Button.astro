@@ -1,7 +1,8 @@
 ---
-const { icon, href, label, kanji, id } = Astro.props;
+const { icon, href, label, kanji, id, target } = Astro.props;
 
 let Tag;
+let Destination;
 
 if (href == '') {
 	Tag = 'button';
@@ -9,10 +10,16 @@ if (href == '') {
 	Tag = 'a';
 }
 
+if (target != '') {
+	Destination = target;
+} else {
+	Destination = '_self';
+}
+
 import Icons from './Icons.astro';
 ---
 
-<Tag href={href} target="_self" id={id} class="button group relative isolate inline-flex items-center gap-3 self-center min-w-12 min-h-16 pr-8">
+<Tag href={href} target={Destination} id={id} class="button group relative isolate inline-flex items-center gap-3 self-center min-w-12 min-h-16 pr-8">
 	<div class="flex flex-row justify-center items-center pointer-events-none">
 		<div class="z-10 ml-1.5 text-winter-sky-1000 group-hover:text-tree-poppy-100">
 			<Icons icon={icon} size={48} classes="rotate-3 -translate-y-2 icon-shadow" />
