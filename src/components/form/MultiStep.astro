@@ -1,0 +1,12 @@
+---
+interface props {
+	name: string;
+	step: number;
+}
+
+const { name, step } = Astro.props;
+---
+
+<div data-step-name={name} data-step={step} class="flex flex-col gap-8">
+	<slot />
+</div>

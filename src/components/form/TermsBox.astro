@@ -1,0 +1,65 @@
+---
+interface props {
+	title: string;
+	text: Text;
+	name: string;
+	disabled: boolean;
+}
+const { title, text, name, disabled = true } = Astro.props;
+---
+
+<div class="relative" id=`terms${name}Wrapper` data-disabled={disabled}>
+	<svg class="size-full overflow-visible absolute -z-10">
+		<filter id="rough">
+			<feTurbulence type="turbulence" baseFrequency="0.01" numOctaves="2" result="turbulence"></feTurbulence>
+			<feDisplacementMap in2="turbulence" in="SourceGraphic" scale="2" xChannelSelector="R" yChannelSelector="G" result="displaced"
+			></feDisplacementMap>
+		</filter>
+		<rect
+			x="0"
+			y="0"
+			width="100%"
+			height="100%"
+			fill="var(--color-daintree-600)"
+			stroke="var(--color-daintree-1000)"
+			stroke-width="4"
+			filter="url(#rough)"></rect>
+	</svg>
+	<div>
+		<h2 class="relative text-button-stroke-daintree-1000 text-daintree-100 self-start max-w-fit -rotate-3">
+			<svg class="size-full overflow-visible absolute -z-10">
+				<filter id="rough" x="-30%" y="-30%" width="160%" height="160%">
+					<feTurbulence type="turbulence" baseFrequency="0.01" numOctaves="2" result="turbulence"></feTurbulence>
+					<feDisplacementMap in2="turbulence" in="SourceGraphic" scale="2" xChannelSelector="R" yChannelSelector="G" result="displaced"
+					></feDisplacementMap>
+				</filter>
+				<rect
+					x="0"
+					y="0"
+					width="100%"
+					height="100%"
+					fill="var(--color-daintree-100)"
+					stroke="var(--color-daintree-1000)"
+					stroke-width="4"
+					filter="url(#rough)"></rect>
+			</svg>
+			<span class="uppercase text-2xl font-bold px-4 py-2 leading-relaxed">{title}</span>
+		</h2>
+		<p class="text-daintree-100 px-4 py-4 max-w-[75ch] text-lg">
+			{text}
+		</p>
+	</div>
+	<div>
+		<label for="termsProcess" class="flex flex-row gap-2">
+			<input type="checkbox" name="termsProcess" id="termsProcess" required />
+			<p>I understand</p>
+		</label>
+	</div>
+</div>
+
+<style>
+	[data-disabled='true'] {
+		pointer-events: none;
+		opacity: 0.3;
+	}
+</style>

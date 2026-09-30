@@ -62,6 +62,10 @@
 	paint-order: stroke fill;
 }
 
+@utility text-stroke-width-* {
+	-webkit-text-stroke-width: ---value(--font-size-*);
+}
+
 @theme {
 	--color-daintree-100: oklab(from hsla(180, 3%, 97%, 1) l a b);
 	--color-daintree-200: oklab(from hsla(180, 7%, 95%, 1) l a b);
