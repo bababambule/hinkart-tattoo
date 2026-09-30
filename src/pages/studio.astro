@@ -2,6 +2,8 @@
 import Layout from '../layouts/Layout.astro';
 import Button from '../components/Button.astro';
 import example from '../assets/images/studio/studio-example.jpg';
+import halftoneMap from '../assets/images/studio/halftoneMap.jpg';
+import houseDrawing from '../assets/images/studio/house_drawing.webp';
 ---
 
 <Layout>
@@ -26,20 +28,69 @@ import example from '../assets/images/studio/studio-example.jpg';
 						d="M1227.41 731.328V0H1480V731.328H1227.41ZM1335.77 202.977V528.351H1371.83V202.977H1335.77Z"
 						fill="white"
 						filter="url(#displacementFilter)"></path>
+					<path d="M 295,10 315,-60 312,-65 312,-82 375,-86 377,-72 373,-65 404,10 z" fill="white"></path>
+				</mask>
+				<mask id="maskRoofTop" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="305" y="0" width="122" height="118">
+					<path
+						d="M333.639 25.5339C324.164 52.9948 305.215 109.747 305.215 117.07L426.621 112.253L391.452 25.5339V21.1979L394.824 17.8255V0L328.34 2.89062V21.1979L333.639 25.5339Z"
+						fill="black"></path>
+				</mask>
+				<mask id="cloudMask" style="mask-type:alpha" maskUnits="userSpaceOnUse">
+					<path
+						id="cloud"
+						d="
+						M486.844 93.4634
+						C484.435 93.9452 478.654 102.617 481.063 120.443
+						L476.727 150.313
+						L656.427 165.729
+						C657.391 144.21 662.786 101.076 676.661 100.69
+						C694.005 100.208 749.891 93.4634 752.299 91.0547
+						C754.227 89.1277 747.642 85.1129 744.109 83.3464
+						C748.445 83.8281 757.695 83.1536 760.008 76.6014
+						C762.898 68.4111 724.357 61.6667 712.794 64.0755
+						C712.023 47.888 697.378 45.447 690.151 46.25
+						C687.421 42.3958 679.552 34.591 669.917 34.2055
+						C657.872 33.7238 639.565 38.5415 631.857 49.6222
+						C628.966 42.3957 604.878 36.1326 598.133 38.5415
+						C552.846 24.0884 550.919 61.6665 556.219 76.6014
+						C542.729 69.8566 527.312 75.6379 524.904 81.9009
+						C523.137 77.4044 515.943 69.2785 501.297 72.7473
+						C482.99 77.0832 489.253 92.9817 486.844 93.4634Z"
+						fill="white"
+						transform="translate(-21 -92)"></path>
 				</mask>
 			</defs>
-			<!-- <rect width="100%" height="100%" fill="red" mask="url(#letters)"></rect> -->
-			<image width="100%" height="100%" href={example.src} mask="url(#letters)" id="svgImage" />
+			<!-- <g mask="url(#cloudMask)">
+				<image
+					href={houseDrawing.src}
+					id="houseDrawing"
+					class="h-[116%] -rotate-3 origin-top-left -translate-x-28 -translate-y-16 mix-blend-multiply"
+				/>
+			</g> -->
+			<g mask="url(#letters)">
+				<image id="svgImage" y="-90" class="w-full object-cover" preserveAspectRatio="xMaxYMin" />
+				<rect x="0" y="-90" width="100%" id="shapeFill" fill="var(--color-daintree-100)" class="w-full h-[120%]" preserveAspectRatio="xMaxYMin"
+				></rect>
+				<image href={halftoneMap.src} id="halftoneMap" class="w-full object-cover mix-blend-color-burn" />
+				<image
+					href={houseDrawing.src}
+					id="houseDrawing"
+					class="h-[116%] -rotate-3 origin-top-left -translate-x-28 -translate-y-16 mix-blend-multiply"
+				/>
+			</g>
 
 			<path
-				d="M0 0H252.586V202.977H108.355V264.176H252.586V731.328H0V528.351H144.412V467.152H0V0Z"
+				d="M0 0 H252.586 V202.977 H108.355 V264.176 H252.586 V731.328 H0 V528.351 H144.412 V467.152H 0 V0 Z"
 				fill="transparent"
 				id="letterS"
 				stroke="black"
 				stroke-width="4"
 				filter="url(#displacementFilter)"></path>
 			<path
-				d="M274.329 0H526.915V202.977H454.799V731.328H346.445V202.977H274.329V0Z"
+				d="
+					M274.329 0 
+					L 294, 0 L 315, -62 L 310, -65 V -83 L 372, -86 V -68 L 368, -64 L 397, 0
+					H 526.915 V 202.977 H 454.799 V 731.328 H 346.445 V 202.977 H 274.329 V0Z"
 				fill="transparent"
 				id="letterT"
 				filter="url(#displacementFilter)"
@@ -101,7 +152,7 @@ import example from '../assets/images/studio/studio-example.jpg';
 				>
 				</rect>
 			</svg>
-			<div class="flex flex-row gap-8 px-12 pt-8">
+			<div class="flex flex-row gap-8 px-12 pt-8 pointer-events-auto">
 				<div class="flex flex-col text-2xl uppercase text-rose-bud-cherry-600 font-bold min-w-32">
 					<div class="self-start flex flex-row gap-4">
 						<p>Tue</p>
@@ -119,7 +170,7 @@ import example from '../assets/images/studio/studio-example.jpg';
 					<p>Verlengde oosterstraat 2 9711 en groningen</p>
 				</div>
 			</div>
-			<div class="flex flex-row gap-8 pl-6">
+			<div class="flex flex-row gap-8 pl-6 pointer-events-auto">
 				<div class="-rotate-6"><Button href="mailto:info@hinkart.nl" label="Message us" icon="Letter" /></div>
 				<div class="rotate-4">
 					<Button
