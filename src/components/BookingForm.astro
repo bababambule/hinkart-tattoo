@@ -104,7 +104,11 @@ if (artist === '') {
 								maxLength={255}
 								required={true}
 							/>
-							<div class="flex flex-row gap-8 flex-1">
+							<div class="flex flex-row gap-8 flex-1 relative">
+								<div id="uploadReveal" class="absolute bg-tree-poppy-600/75 bg-opacity flex flex-col justify-center gap-4 size-full z-20">
+									<p class="text-center text-2xl font-bold text-tree-poppy-1000">I hereby confirm that I won't upload any AI generated images.</p>
+									<Button href="#" label="confirm" id="uploadRevealButton" kanji="fuck ai" icon="letter" disabled="false" hidden="false" />
+								</div>
 								<div class="flex-1">
 									<FileUpload label="Reference Images" icon="map" id="referenceImages" paramName="reference images" />
 								</div>

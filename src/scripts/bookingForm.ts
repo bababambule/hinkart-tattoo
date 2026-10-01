@@ -58,6 +58,15 @@ ideaInputs.forEach((el) => {
 	});
 });
 
+// upload confirm
+let uploadConfirm = document.querySelector('#uploadReveal');
+let uploadConfirmButton = document.querySelector('#uploadRevealButton');
+
+uploadConfirmButton?.addEventListener('click', (e) => {
+	e.preventDefault();
+	uploadConfirm?.remove();
+});
+
 // Step 3 Artist
 
 // Step 4 Date
