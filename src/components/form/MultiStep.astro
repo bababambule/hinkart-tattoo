@@ -2,11 +2,18 @@
 interface props {
 	name: string;
 	step: number;
+	hidden: boolean;
 }
 
-const { name, step } = Astro.props;
+const { name, step, hidden = true } = Astro.props;
 ---
 
-<div data-step-name={name} data-step={step} class="flex flex-col gap-8">
+<div data-step-name={name} data-step={step} data-hidden={hidden} class="flex flex-col gap-8 h-full">
 	<slot />
 </div>
+
+<style>
+	[data-hidden='true'] {
+		display: none;
+	}
+</style>

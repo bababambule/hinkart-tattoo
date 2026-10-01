@@ -1,4 +1,7 @@
 @import 'tailwindcss';
+@import 'dropzone/dist/basic.css';
+@import 'dropzone/dist/dropzone.css';
+
 @plugin "./longshadow.plugin.js";
 
 @font-face {

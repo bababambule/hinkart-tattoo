@@ -1,0 +1,27 @@
+---
+interface props {
+	label: string;
+	icon: string;
+	size: number;
+}
+const { label, icon, size = 48 } = Astro.props;
+
+import Icons from '../Icons.astro';
+---
+
+<div class="flex flex-row justify-start items-end z-10 relative max-w-fit">
+	<svg viewBox="0 0 100 100" preserveAspectRatio="none" class="absolute w-full h-3/4 overflow-visible left-0 bottom-0 -z-10">
+		<polygon
+			points="2,20 100,-5 95,105 -2,98"
+			fill="var(--color-tree-poppy-600)"
+			stroke="var(--color-tree-poppy-1000)"
+			stroke-width="4"
+			class="size-full"></polygon>
+	</svg>
+	<div class="translate-y-2">
+		<Icons icon={icon} size={size} classes="text-tree-poppy-100 z-10" />
+	</div>
+	<div class="pl-2 pr-6 uppercase font-bold">
+		<p>{label}</p>
+	</div>
+</div>

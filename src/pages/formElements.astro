@@ -1,0 +1,27 @@
+---
+import Layout from '../layouts/Layout.astro';
+import TermsBox from '../components/form/TermsBox.astro';
+import InputField from '../components/form/InputField.astro';
+---
+
+<Layout>
+	<div class="pl-64 flex flex-col gap-12">
+		<TermsBox
+			title="Lorem ipsum"
+			text="Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum
+        sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem.
+        Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. "
+			name="example"
+		/>
+		<TermsBox
+			title="Lorem ipsum"
+			text="Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum
+        sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem.
+        Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. "
+			name="example"
+			disabled="false"
+		/>
+		<InputField name="test" type="text" id="textInput" label="Your Idea" maxLength={255} placeholder="Describe your tattoo idea" />
+		<InputField name="test2" type="text" id="textInput2" label="Your Idea" maxLength={255} placeholder="Describe your tattoo idea" />
+	</div>
+</Layout>

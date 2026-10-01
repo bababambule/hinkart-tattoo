@@ -1,5 +1,16 @@
 ---
-const { icon, href, label, kanji, id, target } = Astro.props;
+interface props {
+	icon: string;
+	href: string;
+	label: string;
+	kanji: string;
+	id: string;
+	target: string;
+	disabled: boolean;
+	hidden: boolean;
+}
+
+const { icon, href, label, kanji, id, target, disabled, hidden = false } = Astro.props;
 
 let Tag;
 let Destination;
@@ -19,7 +30,14 @@ if (target != '') {
 import Icons from './Icons.astro';
 ---
 
-<Tag href={href} target={Destination} id={id} class="button group relative isolate inline-flex items-center gap-3 self-center min-w-12 min-h-16 pr-8">
+<Tag
+	href={href}
+	target={Destination}
+	id={id}
+	class="button group relative isolate inline-flex items-center gap-3 self-center min-w-12 min-h-16 pr-8"
+	data-disabled={disabled}
+	data-hidden={hidden}
+>
 	<div class="flex flex-row justify-center items-center pointer-events-none">
 		<div class="z-10 ml-1.5 text-winter-sky-1000 group-hover:text-tree-poppy-100">
 			<Icons icon={icon} size={48} classes="rotate-3 -translate-y-2 icon-shadow" />
@@ -76,8 +94,14 @@ import Icons from './Icons.astro';
 </Tag>
 
 <style>
-	.icon-shadow {
-		filter: drop-shadow(var(--color-tree-poppy-600) 8px 8px 4px);
+	[data-disabled='true'] {
+		pointer-events: none;
+		filter: grayscale();
+		opacity: 0.6;
+	}
+
+	[data-hidden='true'] {
+		display: none;
 	}
 
 	.kanji-mask {

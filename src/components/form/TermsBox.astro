@@ -1,4 +1,6 @@
 ---
+import { toUpperCase } from 'astro:schema';
+
 interface props {
 	title: string;
 	text: Text;
@@ -8,7 +10,7 @@ interface props {
 const { title, text, name, disabled = true } = Astro.props;
 ---
 
-<div class="relative" id=`terms${name}Wrapper` data-disabled={disabled}>
+<label for=`terms${name}` class="relative cursor-pointer" id=`terms${name}Wrapper` data-disabled={disabled}>
 	<svg class="size-full overflow-visible absolute -z-10">
 		<filter id="rough">
 			<feTurbulence type="turbulence" baseFrequency="0.01" numOctaves="2" result="turbulence"></feTurbulence>
@@ -49,13 +51,11 @@ const { title, text, name, disabled = true } = Astro.props;
 			{text}
 		</p>
 	</div>
-	<div>
-		<label for="termsProcess" class="flex flex-row gap-2">
-			<input type="checkbox" name="termsProcess" id="termsProcess" required />
-			<p>I understand</p>
-		</label>
+	<div class="flex flex-row gap-2">
+		<input type="checkbox" name=`terms${name}` id=`terms${name}` required />
+		<p>I understand</p>
 	</div>
-</div>
+</label>
 
 <style>
 	[data-disabled='true'] {

@@ -11,7 +11,7 @@ let stroke: string;
 let fill: string;
 let opacity: number;
 
-if (active === 'true') {
+if (active === true) {
 	fill = 'var(--color-winter-sky-600)';
 	stroke = 'transparent';
 	opacity = 1;
@@ -20,11 +20,13 @@ if (active === 'true') {
 	stroke = 'var(--color-daintree-100)';
 	opacity = 0.5;
 }
+
+console.log(active);
 ---
 
-<div class=`flex flex-row gap-2 opacity-[${opacity}] cursor-pointer`>
+<div class=`flex flex-row gap-2 cursor-pointer ${active ? 'opacity-100' : 'opacity-50'}` data-form-step={step}>
 	<div class="self-center">
-		<svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+		<svg width="30" height="30" viewBox="0 0 30 30" fill="none">
 			<path
 				d="M13.4355 1.57882C13.8564 0.140467 15.8936 0.140467 16.3145 1.57882L18.6133 9.43917C18.8527 10.2572 19.4925 10.897 20.3105 11.1364L28.1709 13.4353C29.6092 13.8561 29.6092 15.8933 28.1709 16.3142L20.3105 18.613C19.4925 18.8524 18.8527 19.4922 18.6133 20.3103L16.3145 28.1706C15.8936 29.609 13.8564 29.609 13.4355 28.1706L11.1367 20.3103C10.8973 19.4922 10.2575 18.8524 9.43945 18.613L1.5791 16.3142C0.140749 15.8933 0.14075 13.8561 1.5791 13.4353L9.43945 11.1364C10.2575 10.897 10.8973 10.2572 11.1367 9.43917L13.4355 1.57882Z"
 				stroke={stroke}
@@ -37,6 +39,16 @@ if (active === 'true') {
 			<div class="font-display text-base underline">0{step}</div>
 			<div class="font-body uppercase">{label}</div>
 		</div>
-		<div class="font-kanji bg-daintree-800 text-xs self-center px-2 py-1">りようきやく</div>
+		<div class="font-kanji bg-daintree-800 text-xs self-center px-2 py-1">{kanji}</div>
 	</div>
 </div>
+
+<style>
+	[data-form-state='completed'] {
+		transition: opacity;
+		transition-duration: 200ms;
+	}
+	[data-form-state='completed']:hover {
+		opacity: 1;
+	}
+</style>
