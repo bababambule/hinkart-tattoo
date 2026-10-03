@@ -1,0 +1,39 @@
+---
+import InputField from './InputField.astro';
+import FileUpload from './FileUpload.astro';
+import Button from '../Button.astro';
+---
+
+<div class="flex flex-col gap-4 h-full">
+	<InputField type="text" id="tattooIdea" label="Your idea" name="idea" placeholder="Describe your tattoo idea" maxLength={255} required={true} />
+	<InputField
+		type="text"
+		id="tattooPlacement"
+		label="Tattoo placement"
+		name="placement"
+		placeholder="Where do you want your tattoo?"
+		maxLength={255}
+		required={true}
+	/>
+	<InputField
+		type="text"
+		id="tattooSize"
+		label="Tattoo size"
+		name="size"
+		placeholder="What size should the tattoo have?"
+		maxLength={255}
+		required={true}
+	/>
+	<div class="flex flex-row gap-8 flex-1 relative">
+		<div id="uploadReveal" class="absolute bg-tree-poppy-600/75 bg-opacity flex flex-col justify-center gap-4 size-full z-20">
+			<p class="text-center text-2xl font-bold text-tree-poppy-1000">I hereby confirm that I won't upload any AI generated images.</p>
+			<Button href="#" label="confirm" id="uploadRevealButton" kanji="fuck ai" icon="letter" disabled="false" hidden="false" />
+		</div>
+		<div class="flex-1">
+			<FileUpload label="Reference Images" icon="map" id="referenceImages" paramName="reference images" />
+		</div>
+		<div class="flex-1">
+			<FileUpload label="Photos of placement" icon="map" id="positionImages" paramName="position images" />
+		</div>
+	</div>
+</div>

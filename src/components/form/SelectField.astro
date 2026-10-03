@@ -9,24 +9,18 @@ interface props {
 	required: boolean;
 }
 const { type, name, id, label, placeholder, maxLength, required } = Astro.props;
-
-import Icons from '../Icons.astro';
-import Label from './Label.astro';
 ---
 
 <label for={id} id=`${id}Wrapper` class="flex flex-col">
-	<Label icon="map" size={48} label={label} />
 	<div class="-rotate-1 origin-top-left relative">
-		<input
-			type={type}
+		<select
 			name={name}
 			id={id}
 			required={required}
-			placeholder={placeholder}
-			maxlength={maxLength}
 			class="bg-daintree-700 w-full pl-8 pr-20 py-4 text-daintree-100 placeholder:text-daintree-500 hover:bg-daintree-800 rounded-sm transition-colors duration-200"
-		/>
-		<p data-name="inputLength" class="absolute right-0 z-10 top-1/2 -translate-y-1/2 text-daintree-300 text-xs pr-4"></p>
+		>
+			<slot />
+		</select>
 		<svg width="100%" height="4" class="size-full overflow-visible">
 			<line x1="0" y1="2" x2="100%" y2="-6" stroke="black" stroke-width="4"></line>
 		</svg>
@@ -44,21 +38,3 @@ import Label from './Label.astro';
 		stroke: white;
 	}
 </style>
-
-<script>
-	let inputFields = document.querySelectorAll('input[maxlength]');
-
-	inputFields.forEach((field) => {
-		let length;
-		let inputLength = field.nextElementSibling;
-		let inputMaxLength = parseInt(field.getAttribute('maxlength'));
-		console.log(field, inputMaxLength);
-		if (inputMaxLength != NaN) {
-		}
-
-		field.addEventListener('keyup', () => {
-			length = field.value.length;
-			inputLength.textContent = `${length} / ${inputMaxLength}`;
-		});
-	});
-</script>

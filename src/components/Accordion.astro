@@ -1,0 +1,53 @@
+---
+interface props {
+	question: string;
+	answer: string;
+	group: string;
+	open: boolean;
+}
+const { question, answer, group, open = false } = Astro.props;
+
+import Icons from './Icons.astro';
+---
+
+<details
+	name={group}
+	class="text-daintree-100"
+	open={open}
+	class:list={[
+		'lg:text-lg',
+		'details-content:block-0',
+		'details-content:overflow-hidden',
+		'details-content:transition-all',
+		'details-content:duration-300',
+		'details-content:transition-discrete',
+		'open:details-content:block-auto',
+	]}
+>
+	<summary
+		class="flex flex-row gap-2 cursor-pointer text-daintree-100 border-b-2 border-daintree-1000 p-2 mb-4"
+		class:list={['in-open:bg-daintree-900', 'in-open:border-2', 'in-open:border-daintree-1000', 'in-open:mb-0']}
+	>
+		<div
+			class="opacity-0 -translate-x-full block-0 transition-all duration-200"
+			class:list={['in-open:opacity-100', 'in-open:translate-x-0', 'in-open:text-winter-sky-600']}
+		>
+			<Icons icon="TriangleRightFilled" size={24} />
+		</div>
+		<span class="-translate-x-8" class:list={['in-open:translate-x-0']}>
+			{question}
+		</span>
+	</summary>
+	<p class="text-daintree-100 px-10 py-3" class:list={[]}>
+		{answer}
+	</p>
+</details>
+
+<style>
+	details {
+		interpolate-size: allow-keywords;
+	}
+	details summary::marker {
+		content: '';
+	}
+</style>

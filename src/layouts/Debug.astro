@@ -1,6 +1,4 @@
 ---
-import Sidebar from '../components/Sidebar.astro';
-import Footer from '../components/Footer.astro';
 import '../styles/global.css';
 ---
 
@@ -16,11 +14,9 @@ import '../styles/global.css';
 		<title>Hinkart Tattoo Studio</title>
 	</head>
 	<body class="bg-daintree-800 max-w-dvw xl:max-h-dvh xl:overflow-clip">
-		<Sidebar />
-		<main class="pt-8" class:list={['xl:h-screen', 'xl:pl-[10dvw]', 'xl:pb-24', 'xl:pr-12']}>
+		<main class="xl:h-screen xl:pl-[10dvw] pt-8 pb-24 xl:pr-12">
 			<slot />
 		</main>
-		<Footer />
 	</body>
 </html>
 

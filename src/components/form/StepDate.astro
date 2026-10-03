@@ -1,0 +1,52 @@
+---
+import Label from './Label.astro';
+import RadioButton from './RadioButton.astro';
+import InputField from './InputField.astro';
+import SelectField from './SelectField.astro';
+import ToggleField from './ToggleField.astro';
+---
+
+<div class="relative">
+	<div>
+		<Label label="Preferred Day" icon="map" />
+		<div class="flex flex-row flex-wrap">
+			<!--Hier muss eine Mehrfachauswahl rein -->
+			<RadioButton name="daySelection" value="Monday" id="DayMonday" label="Mon" color="white" />
+			<RadioButton name="daySelection" value="Tuesday" id="DayTuesday" label="Tue" color="white" />
+			<RadioButton name="daySelection" value="Wednesday" id="DayWednesday" label="Wed" color="white" />
+			<RadioButton name="daySelection" value="Thursday" id="DayThursday" label="Thu" color="white" />
+			<RadioButton name="daySelection" value="Friday" id="DayFriday" label="Fri" color="white" />
+			<RadioButton name="daySelection" value="Saturday" id="DaySaturday" label="Sat" color="white" />
+		</div>
+	</div>
+	<div>
+		<div>
+			<InputField
+				type="text"
+				name="dateNotes"
+				label="Availability Notes"
+				id="dateNotes"
+				placeholder="Anything we should consider for your appointment?"
+				maxLength="255"
+			/>
+		</div>
+	</div>
+	<div>
+		<div>
+			<Label label="Your first tattoo?" icon="map" />
+			<ToggleField />
+		</div>
+		<div>
+			<Label label="How did you hear about us?" icon="map" />
+			<SelectField name="dateNotes" id="dateNotes">
+				<option value="google">Instagram</option>
+				<option value="google">Tiktok</option>
+				<option value="google">Google</option>
+				<option value="google">Reddit</option>
+				<option value="google">Recommendation</option>
+				<option value="google">Other</option>
+			</SelectField>
+			<!-- Insert Toggle Switch -->
+		</div>
+	</div>
+</div>

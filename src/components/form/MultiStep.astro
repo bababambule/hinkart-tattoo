@@ -8,10 +8,32 @@ interface props {
 const { name, step, hidden = true } = Astro.props;
 ---
 
-<div data-step-name={name} data-step={step} data-hidden={hidden} class="flex flex-col gap-8 h-full">
+<div
+	data-step-name={name}
+	data-step={step}
+	data-hidden={hidden}
+	class="flex flex-col gap-8 h-full relative p-4 pb-20"
+	class:list={['xl:p-10', 'xl:pb-20']}
+>
+	<svg class="absolute top-0 left-0 right-0 bottom-0 size-full -z-10 overflow-visible">
+		<filter id="rough" x="-30%" y="-30%" width="160%" height="160%">
+			<feTurbulence type="turbulence" baseFrequency="0.01" numOctaves="2" result="turbulence"></feTurbulence>
+			<feDisplacementMap in2="turbulence" in="SourceGraphic" scale="2" xChannelSelector="R" yChannelSelector="G" result="displaced"
+			></feDisplacementMap>
+		</filter>
+		<rect
+			x="0"
+			y="0"
+			width="100%"
+			height="100%"
+			fill="var(--color-daintree-700)"
+			stroke="var(--color-daintree-1000)"
+			stroke-width="4"
+			filter="url(#rough)"
+			class="bg-daintree-700"></rect>
+	</svg>
 	<slot />
 </div>
-
 <style>
 	[data-hidden='true'] {
 		display: none;

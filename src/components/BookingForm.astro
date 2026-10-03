@@ -2,9 +2,13 @@
 import BookingStep from '../components/BookingStepIndicator.astro';
 import Button from '../components/Button.astro';
 import MultiStep from './form/MultiStep.astro';
-import TermsBox from './form/TermsBox.astro';
-import InputField from './form/InputField.astro';
-import FileUpload from './form/FileUpload.astro';
+
+// Steps
+import StepTerms from './form/StepTerms.astro';
+import StepIdea from './form/StepIdea.astro';
+import StepArtists from './form/StepArtists.astro';
+import StepDate from './form/StepDate.astro';
+import StepPersonal from './form/StepPersonal.astro';
 
 interface props {
 	artist: string;
@@ -13,18 +17,20 @@ interface props {
 const { artist } = Astro.props;
 let stepCounter: number;
 let totalSteps: number;
-
-if (artist === '') {
-} else {
-}
 ---
 
-<div class="w-full h-full grid grid-cols-[1fr_calc(1/3*100%)] grid-rows-[max-content] gap-8 pl-80">
-	<div class="col-start-1 w-full relative">
+<div class="flex flex-col gap-4 px-4">
+	<div class="w-full relative">
 		<svg class="size-full overflow-visible absolute -z-10">
 			<filter id="rough" x="-30%" y="-30%" width="160%" height="160%">
 				<feTurbulence type="turbulence" baseFrequency="0.01" numOctaves="2" result="turbulence"></feTurbulence>
-				<feDisplacementMap in2="turbulence" in="SourceGraphic" scale="2" xChannelSelector="R" yChannelSelector="G" result="displaced"
+				<feDisplacementMap
+					in2="turbulence"
+					in="SourceGraphic"
+					scale="2"
+					xChannelSelector="R"
+					yChannelSelector="G"
+					result="displaced"
 				></feDisplacementMap>
 			</filter>
 			<defs>
@@ -33,15 +39,34 @@ if (artist === '') {
 					<stop offset="55%" stop-color="var(--color-daintree-900)"></stop>
 				</linearGradient>
 			</defs>
-			<rect x="0" y="0" width="100%" height="100%" fill="url(#gradient-1)" stroke="var(--color-daintree-1000)" stroke-width="4" filter="url(#rough)"
+			<rect
+				x="0"
+				y="0"
+				width="100%"
+				height="100%"
+				fill="url(#gradient-1)"
+				stroke="var(--color-daintree-1000)"
+				stroke-width="4"
+				filter="url(#rough)"
 			></rect>
 		</svg>
+
 		<div class="font-display text-daintree-100 flex flex-col justify-center items-center pt-4">
-			<div class="text-6xl leading-none">Book your</div>
-			<div class="font-kanji text-winter-sky-600 text-6xl -my-8 z-10 text-button-stroke-winter-sky-900">よやく</div>
-			<div class="text-8xl leading-none">Appointment</div>
+			<div class="text-[clamp(1.5rem,6vw+1rem,2rem)] leading-none" class:list={['xl:text-6xl']}>
+				Book your
+			</div>
+			<div
+				class="text-[clamp(1.5rem,6vw+1rem,2rem)] -my-5 font-kanji text-winter-sky-600 z-10 text-button-stroke-winter-sky-900"
+				class:list={['xl:text-6xl', 'xl:-my-8']}
+			>
+				よやく
+			</div>
+			<div class="text-[clamp(2rem,8vw+1rem,2.5rem)] leading-none" class:list={['xl:text-8xl']}>
+				Appointment
+			</div>
 		</div>
-		<div id="stepList" class="flex flex-row justify-evenly text-daintree-100 pb-4">
+
+		<div id="stepList" class="flex flex-row flex-wrap justify-evenly text-daintree-100 pb-4" class:list={[]}>
 			<BookingStep active={true} step={1} label="Terms" kanji="りようきやく" />
 			<BookingStep active={false} step={2} label="Idea" kanji="りようきやく" />
 			<BookingStep active={false} step={3} label="Artist" kanji="りようきやく" />
@@ -49,86 +74,35 @@ if (artist === '') {
 			<BookingStep active={false} step={5} label="Personal" kanji="りようきやく" />
 		</div>
 	</div>
-	<div class="row-span-2 col-start-2">
-		<div class="h-full w-full bg-amber-400">right element</div>
-	</div>
+
 	<div class="col-start-1 w-full">
 		<form action="https://webhooktest.net/webhook/01a0f29d-adc8-78aa-ae75-af6145a2edd4" method="post" class="h-full">
 			<div class="flex flex-col h-full">
 				<div class="flex-1">
 					<MultiStep name="terms" step="1" hidden="false">
-						<TermsBox
-							title="The Process"
-							text="The tattoo artist will send you the design a few days before the appointment, you can ask for small changes. If you want bigger changes on the
-                                    design it is likely that it needs to be rescheduled and therefore you will lose your deposit, so make sure the description is thorough."
-							name="Process"
-							disabled="false"
-						/>
-						<TermsBox
-							title="Payment"
-							text="A deposit must be done to make the design and to confirm your appointment, this will be deducted from the final price."
-							name="Payment"
-						/>
-						<TermsBox
-							title="Appointment"
-							text="If you need to reschedule your appointment please do so at least 1 week before the date, otherwise you will lose your deposit."
-							name="Appointment"
-						/>
+						<StepTerms />
 					</MultiStep>
 					<MultiStep name="idea" step="2" hidden="true">
-						<div class="flex flex-col gap-4 h-full">
-							<InputField
-								type="text"
-								id="tattooIdea"
-								label="Your idea"
-								name="idea"
-								placeholder="Describe your tattoo idea"
-								maxLength={255}
-								required={true}
-							/>
-							<InputField
-								type="text"
-								id="tattooPlacement"
-								label="Tattoo placement"
-								name="placement"
-								placeholder="Where do you want your tattoo?"
-								maxLength={255}
-								required={true}
-							/>
-							<InputField
-								type="text"
-								id="tattooSize"
-								label="Tattoo size"
-								name="size"
-								placeholder="What size should the tattoo have?"
-								maxLength={255}
-								required={true}
-							/>
-							<div class="flex flex-row gap-8 flex-1 relative">
-								<div id="uploadReveal" class="absolute bg-tree-poppy-600/75 bg-opacity flex flex-col justify-center gap-4 size-full z-20">
-									<p class="text-center text-2xl font-bold text-tree-poppy-1000">I hereby confirm that I won't upload any AI generated images.</p>
-									<Button href="#" label="confirm" id="uploadRevealButton" kanji="fuck ai" icon="letter" disabled="false" hidden="false" />
-								</div>
-								<div class="flex-1">
-									<FileUpload label="Reference Images" icon="map" id="referenceImages" paramName="reference images" />
-								</div>
-								<div class="flex-1">
-									<FileUpload label="Photos of placement" icon="map" id="positionImages" paramName="position images" />
-								</div>
-							</div>
-						</div>
+						<StepIdea />
 					</MultiStep>
-					<MultiStep name="artist" step="3" hidden="true"> Pick your Artist</MultiStep>
-					<MultiStep name="date" step="4" hidden="true"> Pick the Date </MultiStep>
-					<MultiStep name="personal" step="5" hidden="true"> Personal Information </MultiStep>
-				</div>
-				<div class="flex flex-row justify-end py-4">
-					<Button id="formContinue" href="#" label="Continue" kanji="つぎへ" icon="Map" disabled="true" />
-					<Button id="formSubmit" href="" label="Book" kanji="つぎへ" icon="Letter" disabled="true" hidden="true" />
+					<MultiStep name="artist" step="3" hidden="true">
+						<StepArtists />
+					</MultiStep>
+					<MultiStep name="date" step="4" hidden="true">
+						<StepDate />
+					</MultiStep>
+					<MultiStep name="personal" step="5" hidden="true">
+						<StepPersonal />
+					</MultiStep>
+
+					<div class="flex flex-row justify-end py-4">
+						<Button id="formContinue" href="#" label="Continue" kanji="つぎへ" icon="Map" disabled="true" />
+						<Button id="formSubmit" href="" label="Book" kanji="つぎへ" icon="Letter" disabled="true" hidden="true" />
+					</div>
 				</div>
 			</div>
 		</form>
 	</div>
-</div>
 
-<script src="../scripts/bookingForm.ts"></script>
+	<script src="../scripts/bookingForm.ts"></script>
+</div>

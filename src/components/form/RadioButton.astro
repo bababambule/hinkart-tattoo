@@ -1,12 +1,15 @@
 ---
-interface astro {
+type Color = 'white' | 'black';
+
+interface props {
 	name: string;
 	id: string;
 	value: string;
 	label: string;
+	color: Color;
 }
 
-const { name, id, value, label } = Astro.props;
+const { name, id, value, label, color } = Astro.props;
 ---
 
 <label for={id} class="relative min-h-16 min-w-16 w-fit flex flex-col justify-center align-middle cursor-pointer" data-input="radio">
@@ -21,7 +24,16 @@ const { name, id, value, label } = Astro.props;
 			stroke-linejoin="round"
 			4></path>
 	</svg>
-	<p class="text-2xl absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2">{label}</p>
+	<p class="text-2xl absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2">
+		<span
+			class="long-shadow-xs"
+			class:list={[
+				color === 'white'
+					? 'text-daintree-100 text-button-stroke-daintree-1000 [--ls-from:var(--color-daintree-1000)] [--ls-to:var(--color-daintree-1000)]'
+					: 'text-daintree-1000 text-button-stroke-daintree-100 [--ls-from:var(--color-daintree-100)] [--ls-to:var(--color-daintree-100)]',
+			]}>{label}</span
+		>
+	</p>
 </label>
 
 <script src="../../scripts/RadioButton.ts"></script>

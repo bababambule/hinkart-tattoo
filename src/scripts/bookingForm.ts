@@ -1,3 +1,5 @@
+import { triggerEvent } from 'astro/virtual-modules/transitions-events.js';
+
 let stepCounter: number = 1;
 let steps = document.querySelectorAll('[data-step]');
 let stepPicker = document.querySelectorAll('[data-form-step]');
@@ -68,9 +70,20 @@ uploadConfirmButton?.addEventListener('click', (e) => {
 });
 
 // Step 3 Artist
+let artistSelectors = document.querySelectorAll('input[name="artistSelection" ]');
+artistSelectors.forEach((artist) => {
+	artist.addEventListener('change', () => {
+		stepButton?.setAttribute('data-disabled', 'false');
+	});
+});
 
 // Step 4 Date
-
+let daySelector = document.querySelectorAll('input[name="daySelection"]');
+daySelector.forEach((day) => {
+	day.addEventListener('change', () => {
+		stepButton?.setAttribute('data-disabled', 'false');
+	});
+});
 // Step 5 Personal
 
 // Logic to either show the step or submit button

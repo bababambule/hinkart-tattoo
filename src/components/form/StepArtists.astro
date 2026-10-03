@@ -1,0 +1,39 @@
+---
+import { getCollection } from 'astro:content';
+
+const artists = (await getCollection('artists')).sort((a, b) => a.data.order - b.data.order);
+---
+
+<div class="grid grid-cols-3 lg:grid-cols-4 gap-2">
+	{
+		artists.map((artist) => (
+			<label for={artist.data.name} class="border-2 aspect-square w-full relative flex justify-center items-end cursor-pointer">
+				<input type="radio" id={artist.data.name} name="artistSelection" value={artist.data.name} class="invisible hidden appearance-none" />
+				<p class=" max-w-full px-2 overflow-x-clip">
+					<span class="font-display text-xl md:text-2xl text-winter-sky-50 text-button-stroke-winter-sky-1000 ">{artist.data.name}</span>
+				</p>
+				<svg
+					class="absolute inset-0 -z-20 size-full overflow-visible pointer-events-none"
+					viewBox="0 0 100 100"
+					preserveAspectRatio="none"
+					aria-hidden="true"
+				>
+					<filter id="displacementShadow" x="-30%" y="-30%" width="160%" height="160%">
+						<feTurbulence type="turbulence" baseFrequency="0.01" numOctaves="2" result="turbulence" />
+						<feDisplacementMap in2="turbulence" in="SourceGraphic" scale="2" xChannelSelector="R" yChannelSelector="G" result="displaced" />
+					</filter>
+					<rect
+						x="0"
+						y="0"
+						width="100%"
+						height="100%"
+						fill="var(--color-winter-sky-600)"
+						filter="url(#displacementShadow)"
+						stroke-width="2"
+						stroke="var(--color-tree-poppy-1000)"
+					/>
+				</svg>
+			</label>
+		))
+	}
+</div>

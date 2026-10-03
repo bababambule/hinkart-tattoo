@@ -14,7 +14,7 @@ export default plugin(({ matchUtilities }) => {
 			'long-box-shadow': (v) => ({ boxShadow: build(Number(v)) }),
 		},
 		{
-			values: { xs: '4', sm: '8', md: '16', lg: '32' },
+			values: { xxs: '2', xs: '4', sm: '8', md: '16', lg: '32' },
 		},
 	);
 });

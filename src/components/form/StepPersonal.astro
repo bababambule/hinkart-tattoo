@@ -1,0 +1,27 @@
+---
+import Label from './Label.astro';
+import RadioButton from './RadioButton.astro';
+import InputField from './InputField.astro';
+import SelectField from './SelectField.astro';
+import ToggleField from './ToggleField.astro';
+---
+
+<div class="relative">
+	<div>
+		<div>
+			<InputField type="text" name="name" label="Your name" id="personalName" placeholder="Given and family name" />
+		</div>
+		<div>
+			<InputField type="text" name="pronouns" label="Preferred Pronouns" id="personalPronouns" placeholder="What are your preferred pronouns?" />
+		</div>
+		<div>
+			<InputField type="email" name="email" label="Email address" id="personalMail" />
+		</div>
+		<div>
+			<InputField type="text" name="instagram" label="Instagram handle" id="personalInstagram" placeholder="If you want to be contacted via IG" />
+		</div>
+		<div>
+			<InputField type="text" name="message" label="Message" id="personalMessage" placeholder="Anything else you wanna share?" />
+		</div>
+	</div>
+</div>
