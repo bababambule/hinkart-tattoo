@@ -5,9 +5,13 @@ import Faq from '../components/FaqSidebar.astro';
 ---
 
 <Layout>
-	<div class="w-full h-full flex flex-row flex-wrap gap-8" class:list={['xl:pl-80']}>
-		<div class="flex-1 xl:flex-2"><BookingForm artist="" /></div>
-		<div class="flex-1 xl:flex-1"><Faq /></div>
+	<div class="flex flex-row flex-wrap gap-8" class:list={['xl:pl-80']}>
+		<div class="flex-1 xl:flex-2">
+			<BookingForm artist="" />
+		</div>
+		<div class="flex-1">
+			<Faq />
+		</div>
 	</div>
 
 	<style>

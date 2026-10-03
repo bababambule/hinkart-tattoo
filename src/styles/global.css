@@ -2,7 +2,7 @@
 @import 'dropzone/dist/basic.css';
 @import 'dropzone/dist/dropzone.css';
 
-@plugin "./longshadow.plugin.js";
+@plugin './longshadow.plugin.js';
 
 @font-face {
 	font-family: Gore;
@@ -67,6 +67,10 @@
 
 @utility text-stroke-width-* {
 	-webkit-text-stroke-width: ---value(--font-size-*);
+}
+
+@utility interpolate {
+	interpolate-size: allow-keywords;
 }
 
 @theme {

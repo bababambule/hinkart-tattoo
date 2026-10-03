@@ -6,59 +6,84 @@ interface props {
 	text: Text;
 	name: string;
 	disabled: boolean;
+	expanded: boolean;
 }
-const { title, text, name, disabled = true } = Astro.props;
+const { title, text, name, disabled = true, expanded = false } = Astro.props;
 
 const checkBoxName = `terms${name}`;
 ---
 
-<label for={checkBoxName} class="relative cursor-pointer" id=`terms${name}Wrapper` data-disabled={disabled}>
-	<svg class="size-full overflow-visible absolute -z-10">
-		<filter id="rough">
-			<feTurbulence type="turbulence" baseFrequency="0.01" numOctaves="2" result="turbulence"></feTurbulence>
-			<feDisplacementMap in2="turbulence" in="SourceGraphic" scale="2" xChannelSelector="R" yChannelSelector="G" result="displaced"
-			></feDisplacementMap>
-		</filter>
-		<rect
-			x="0"
-			y="0"
-			width="100%"
-			height="100%"
-			fill="var(--color-daintree-600)"
-			stroke="var(--color-daintree-1000)"
-			stroke-width="4"
-			filter="url(#rough)"></rect>
-	</svg>
-	<div>
-		<h2 class="relative text-button-stroke-daintree-1000 text-daintree-100 self-start max-w-fit -rotate-3">
-			<svg class="size-full overflow-visible absolute -z-10">
-				<filter id="rough" x="-30%" y="-30%" width="160%" height="160%">
-					<feTurbulence type="turbulence" baseFrequency="0.01" numOctaves="2" result="turbulence"></feTurbulence>
-					<feDisplacementMap in2="turbulence" in="SourceGraphic" scale="2" xChannelSelector="R" yChannelSelector="G" result="displaced"
-					></feDisplacementMap>
-				</filter>
-				<rect
-					x="0"
-					y="0"
-					width="100%"
-					height="100%"
-					fill="var(--color-daintree-100)"
-					stroke="var(--color-daintree-1000)"
-					stroke-width="4"
-					filter="url(#rough)"></rect>
-			</svg>
-			<span class="uppercase text-2xl font-bold px-4 py-2 leading-relaxed">{title}</span>
-		</h2>
-		<p class="text-daintree-100 px-4 py-4 max-w-[75ch] text-lg">
-			{text}
-		</p>
-	</div>
-	<CheckboxField name=`terms${name}` id=`terms${name}` label="I understand" />
-	<!-- <div class="flex flex-row gap-2">
-		<input type="checkbox" name=`terms${name}` id=`terms${name}` required />
-		<p>I understand</p>
-	</div> -->
-</label>
+<div
+	class="relative isolate overflow-hidden basis-20 p-1 group transition-all duration-500 interpolate"
+	class:list={['aria-expanded:basis-auto']}
+	data-form="termbox"
+	aria-expanded={expanded}
+>
+	<label for={checkBoxName} class="relative cursor-pointer" id=`terms${name}Wrapper` data-disabled={disabled}>
+		<svg class="h-full w-[96%] left-[2%] overflow-visible absolute -z-10 invisible" class:list={['group-aria-expanded:visible']}>
+			<filter id="rough">
+				<feTurbulence type="turbulence" baseFrequency="0.01" numOctaves="2" result="turbulence"></feTurbulence>
+				<feDisplacementMap
+					in2="turbulence"
+					in="SourceGraphic"
+					scale="2"
+					xChannelSelector="R"
+					yChannelSelector="G"
+					result="displaced"
+				></feDisplacementMap>
+			</filter>
+			<rect
+				x="0"
+				y="0"
+				width="100%"
+				height="100%"
+				fill="var(--color-daintree-600)"
+				stroke="var(--color-daintree-1000)"
+				stroke-width="4"
+				filter="url(#rough)"
+			></rect>
+		</svg>
+		<div>
+			<div class="flex flex-row justify-between relative" class:list="">
+				<svg class="size-full overflow-visible absolute -z-10">
+					<filter id="rough" x="-30%" y="-30%" width="160%" height="160%">
+						<feTurbulence type="turbulence" baseFrequency="0.01" numOctaves="2" result="turbulence"></feTurbulence>
+						<feDisplacementMap
+							in2="turbulence"
+							in="SourceGraphic"
+							scale="2"
+							xChannelSelector="R"
+							yChannelSelector="G"
+							result="displaced"
+						></feDisplacementMap>
+					</filter>
+					<rect
+						x="0"
+						y="0"
+						width="100%"
+						height="100%"
+						fill="var(--color-daintree-100)"
+						stroke="var(--color-daintree-1000)"
+						stroke-width="4"
+						filter="url(#rough)"
+					></rect>
+				</svg>
+				<h2 class="relative text-button-stroke-daintree-1000 text-daintree-100 self-start max-w-fit -rotate-3">
+					<span class="uppercase text-2xl font-bold px-4 py-2 leading-relaxed">{title}</span>
+				</h2>
+				<div class="-translate-y-2">
+					<CheckboxField name=`terms${name}` id=`terms${name}` />
+				</div>
+			</div>
+			<p
+				class="peer/body invisible size-0 text-daintree-100 px-6 py-4 max-w-[75ch] text-lg"
+				class:list={['group-aria-expanded:visible', 'group-aria-expanded:size-auto']}
+			>
+				{text}
+			</p>
+		</div>
+	</label>
+</div>
 
 <style>
 	[data-disabled='true'] {

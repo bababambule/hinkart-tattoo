@@ -10,6 +10,13 @@ let stepButton = document.getElementById('formContinue');
 let submitButton = document.getElementById('formSubmit');
 
 // Step 1 Terms
+const termBoxes = document.querySelectorAll('[data-form="termbox"]');
+termBoxes.forEach((termbox) => {
+	termbox.addEventListener('change', () => {
+		termbox.setAttribute('aria-expanded', 'false');
+		termbox.nextElementSibling?.setAttribute('aria-expanded', 'true');
+	});
+});
 
 const processBlock = document.getElementById('termsProcessWrapper');
 const processCheckbox = document.getElementById('termsProcess');

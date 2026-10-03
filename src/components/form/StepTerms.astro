@@ -2,19 +2,24 @@
 import TermsBox from './TermsBox.astro';
 ---
 
-<TermsBox
-	title="The Process"
-	text="The tattoo artist will send you the design a few days before the appointment, you can ask for small changes. If you want bigger changes on the design it is likely that it needs to be rescheduled and therefore you will lose your deposit, so make sure the description is thorough."
-	name="Process"
-	disabled="false"
-/>
-<TermsBox
-	title="Payment"
-	text="A deposit must be done to make the design and to confirm your appointment, this will be deducted from the final price."
-	name="Payment"
-/>
-<TermsBox
-	title="Appointment"
-	text="If you need to reschedule your appointment please do so at least 1 week before the date, otherwise you will lose your deposit."
-	name="Appointment"
-/>
+<div class="flex flex-col gap-4 contain-content p-2">
+	<TermsBox
+		title="The Process"
+		text="The tattoo artist will send you the design a few days before the appointment, you can ask for small changes. If you want bigger changes on the design it is likely that it needs to be rescheduled and therefore you will lose your deposit, so make sure the description is thorough."
+		name="Process"
+		disabled="false"
+		expanded="true"
+	/>
+	<TermsBox
+		title="Payment"
+		text="A deposit must be done to make the design and to confirm your appointment, this will be deducted from the final price."
+		name="Payment"
+		expanded="false"
+	/>
+	<TermsBox
+		title="Appointment"
+		text="If you need to reschedule your appointment please do so at least 1 week before the date, otherwise you will lose your deposit."
+		name="Appointment"
+		expanded="false"
+	/>
+</div>

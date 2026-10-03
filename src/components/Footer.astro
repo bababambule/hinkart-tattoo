@@ -3,8 +3,25 @@ import Icons from './Icons.astro';
 import FooterLink from './FooterLink.astro';
 ---
 
-<footer class="hidden lg:block fixed bottom-6 left-auto right-auto flex justify-start w-full text-daintree-100 uppercase text-sm">
-	<div class="flex gap-8 bg-daintree-700 pl-[22.5dvw] h-12 pr-8 rounded-tr-md rounded-br-md border-4 border-solid border-daintree-600">
+<footer
+	class="w-full fixed bottom-0 left-auto right-auto text-daintree-100 uppercase text-sm z-0"
+	class:list={['lg:bottom-6', 'lg:block', 'lg:flex', 'lg:justify-start', 'lg:z-10']}
+>
+	<div
+		class="flex flex-col items-center flex-wrap gap-2 min-h-64 border-solid border-daintree-600 bt-4 pt-4"
+		class:list={[
+			'dark:bg-daintree-700',
+			'lg:pl-[22.5dvw]',
+			'lg:pr-8',
+			'lg:rounded-tr-md',
+			'lg:rounded-br-md',
+			'lg:border-4',
+			'lg:min-h-12',
+			'lg:flex-row',
+			'lg:gap-8',
+			'lg:pt-0',
+		]}
+	>
 		<a
 			href="https://share.here.com/l/53.21432,6.57328,Verlengde%20Oosterstraat%202,%209711%20EN%20Groningen,%20Netherlands?z=19.65&t=normal"
 			target="_blank"
@@ -15,13 +32,13 @@ import FooterLink from './FooterLink.astro';
 			</div>
 			<span class="footer-btn__label">Verlengde Osterstraat 2, 9711 en Groningen</span>
 		</a>
-		<div class="flex gap-4 items-center">
+		<div class="flex flex-wrap gap-4 justify-center order-3 mt-6" class:list={['lg:order-2', 'lg:mt-0']}>
 			<FooterLink url="https://www.instagram.com/hinkarttattoostudio/" label="Instagram" />
 			<FooterLink url="https://www.tiktok.com/@hinkarttattoostudio" label="Tiktok" />
 			<FooterLink url="#" label="Legal Notice" />
 			<FooterLink url="#" label="Data Privacy" />
 		</div>
-		<a href="mailto:info@hinkart.nl" class="inline-flex items-center gap-3 footer-btn">
+		<a href="mailto:info@hinkart.nl" class="inline-flex items-center gap-3 footer-btn order-2" class:list={['lg:order-3']}>
 			<div class="-rotate-3 footer-btn__icon">
 				<Icons icon="Letter" size={32} />
 			</div>

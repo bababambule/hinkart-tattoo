@@ -19,7 +19,7 @@ let stepCounter: number;
 let totalSteps: number;
 ---
 
-<div class="flex flex-col gap-4 px-4">
+<div class="flex flex-col gap-4">
 	<div class="w-full relative">
 		<svg class="size-full overflow-visible absolute -z-10">
 			<filter id="rough" x="-30%" y="-30%" width="160%" height="160%">
@@ -55,6 +55,7 @@ let totalSteps: number;
 			<div class="text-[clamp(1.5rem,6vw+1rem,2rem)] leading-none" class:list={['xl:text-6xl']}>
 				Book your
 			</div>
+
 			<div
 				class="text-[clamp(1.5rem,6vw+1rem,2rem)] -my-5 font-kanji text-winter-sky-600 z-10 text-button-stroke-winter-sky-900"
 				class:list={['xl:text-6xl', 'xl:-my-8']}
@@ -65,8 +66,7 @@ let totalSteps: number;
 				Appointment
 			</div>
 		</div>
-
-		<div id="stepList" class="flex flex-row flex-wrap justify-evenly text-daintree-100 pb-4" class:list={[]}>
+		<div id="stepList" class="@container flex flex-row justify-evenly pb-2 text-daintree-100" class:list={[]}>
 			<BookingStep active={true} step={1} label="Terms" kanji="りようきやく" />
 			<BookingStep active={false} step={2} label="Idea" kanji="りようきやく" />
 			<BookingStep active={false} step={3} label="Artist" kanji="りようきやく" />
@@ -74,35 +74,35 @@ let totalSteps: number;
 			<BookingStep active={false} step={5} label="Personal" kanji="りようきやく" />
 		</div>
 	</div>
+</div>
 
-	<div class="col-start-1 w-full">
-		<form action="https://webhooktest.net/webhook/01a0f29d-adc8-78aa-ae75-af6145a2edd4" method="post" class="h-full">
-			<div class="flex flex-col h-full">
-				<div class="flex-1">
-					<MultiStep name="terms" step="1" hidden="false">
-						<StepTerms />
-					</MultiStep>
-					<MultiStep name="idea" step="2" hidden="true">
-						<StepIdea />
-					</MultiStep>
-					<MultiStep name="artist" step="3" hidden="true">
-						<StepArtists />
-					</MultiStep>
-					<MultiStep name="date" step="4" hidden="true">
-						<StepDate />
-					</MultiStep>
-					<MultiStep name="personal" step="5" hidden="true">
-						<StepPersonal />
-					</MultiStep>
+<div class="col-start-1 w-full">
+	<form action="https://webhooktest.net/webhook/01a0f29d-adc8-78aa-ae75-af6145a2edd4" method="post" class="h-full">
+		<div class="flex flex-col h-full">
+			<div class="flex-1">
+				<MultiStep name="terms" step="1" hidden="false">
+					<StepTerms />
+				</MultiStep>
+				<MultiStep name="idea" step="2" hidden="true">
+					<StepIdea />
+				</MultiStep>
+				<MultiStep name="artist" step="3" hidden="true">
+					<StepArtists />
+				</MultiStep>
+				<MultiStep name="date" step="4" hidden="true">
+					<StepDate />
+				</MultiStep>
+				<MultiStep name="personal" step="5" hidden="true">
+					<StepPersonal />
+				</MultiStep>
 
-					<div class="flex flex-row justify-end py-4">
-						<Button id="formContinue" href="#" label="Continue" kanji="つぎへ" icon="Map" disabled="true" />
-						<Button id="formSubmit" href="" label="Book" kanji="つぎへ" icon="Letter" disabled="true" hidden="true" />
-					</div>
+				<div class="flex flex-row justify-end py-4">
+					<Button id="formContinue" href="#" label="Continue" kanji="つぎへ" icon="Map" disabled="true" />
+					<Button id="formSubmit" href="" label="Book" kanji="つぎへ" icon="Letter" disabled="true" hidden="true" />
 				</div>
 			</div>
-		</form>
-	</div>
-
-	<script src="../scripts/bookingForm.ts"></script>
+		</div>
+	</form>
 </div>
+
+<script src="../scripts/bookingForm.ts"></script>

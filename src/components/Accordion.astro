@@ -12,7 +12,7 @@ import Icons from './Icons.astro';
 
 <details
 	name={group}
-	class="text-daintree-100"
+	class="text-daintree-100 interpolate"
 	open={open}
 	class:list={[
 		'lg:text-lg',
@@ -44,9 +44,6 @@ import Icons from './Icons.astro';
 </details>
 
 <style>
-	details {
-		interpolate-size: allow-keywords;
-	}
 	details summary::marker {
 		content: '';
 	}

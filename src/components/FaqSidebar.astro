@@ -5,14 +5,28 @@ import Accordion from './Accordion.astro';
 const elements = await getCollection('generalFaq');
 ---
 
-<div class="relative px-6 py-4 h-full">
+<div class="relative px-4 py-6 h-full max-w-full">
+	<h2
+		class="absolute select-none top-0 left-0 -rotate-6 -translate-y-3 text-button-stroke-daintree-1000 long-shadow-xs [--ls-from:black] [--ls-to:black] font-display text-3xl text-daintree-900"
+		class:list={['dark:text-daintree-100']}
+	>
+		FAQ
+	</h2>
 	<div class="flex flex-col gap-2">
-		{elements.map((item) => <Accordion name={item.data.group} question={item.data.question} answer={item.data.answer} />)}
+		{elements.map((item) => (
+			<Accordion name={item.data.group} question={item.data.question} answer={item.data.answer} />
+		))}
 	</div>
 	<svg class="w-full h-full absolute -z-10 top-0 left-0 overflow-visible">
 		<filter id="displacementShadow" x="-30%" y="-30%" width="160%" height="160%">
 			<feTurbulence type="turbulence" baseFrequency="0.01" numOctaves="2" result="turbulence"></feTurbulence>
-			<feDisplacementMap in2="turbulence" in="SourceGraphic" scale="2" xChannelSelector="R" yChannelSelector="G" result="displaced"
+			<feDisplacementMap
+				in2="turbulence"
+				in="SourceGraphic"
+				scale="2"
+				xChannelSelector="R"
+				yChannelSelector="G"
+				result="displaced"
 			></feDisplacementMap>
 		</filter>
 		<rect
@@ -23,6 +37,7 @@ const elements = await getCollection('generalFaq');
 			fill="var(--color-daintree-700)"
 			stroke="var(--color-daintree-1000)"
 			stroke-width="4"
-			filter="url(#displacementShadow)"></rect>
+			filter="url(#displacementShadow)"
+		></rect>
 	</svg>
 </div>
