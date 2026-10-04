@@ -2,6 +2,7 @@
 layout: ../../layouts/Artist.astro
 name: Ioana
 order: 4
+image: '../../assets/artists/ioana/Ioanna.webp'
 video: Ioana.webm
 pronouns: 'She/Her'
 languages: ['Portugese', 'English']

@@ -2,6 +2,7 @@
 layout: ../../layouts/Artist.astro
 name: Han
 order: 7
+image: '../../assets/artists/han/Han.webp'
 video: Han.webm
 pronouns: 'She/Her'
 languages: ['Portugese', 'English']

@@ -2,6 +2,7 @@
 layout: ../../layouts/Artist.astro
 name: Joey
 order: 5
+image: '../../assets/artists/joey/Joey.webp'
 video: Joey.webm
 pronouns: 'She/Her'
 languages: ['Portugese', 'English']

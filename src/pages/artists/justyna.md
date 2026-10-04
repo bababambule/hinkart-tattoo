@@ -2,6 +2,7 @@
 layout: ../../layouts/Artist.astro
 name: Justyna
 order: 2
+image: '../../assets/artists/justyna/Justyna.webp'
 video: Justyna.webm
 pronouns: 'She/Her'
 languages: ['Portugese', 'English']

@@ -10,18 +10,19 @@ import { z } from 'astro/zod';
 // 4. define a 'loader' and 'schema' for each collection
 const artists = defineCollection({
 	loader: glob({ base: './src/pages/artists', pattern: '**/*.md' }),
-	schema: z.object({
-		name: z.string().min(2),
-		order: z.number(),
-		//image: z.file(),
-		video: z.string(),
-		pronouns: z.string(),
-		languages: z.array(z.string()),
-		biography: z.string(),
-		tags: z.array(z.string()),
-		mail: z.email(),
-		instagram: z.url(),
-	}),
+	schema: ({ image }) =>
+		z.object({
+			name: z.string().min(2),
+			order: z.number(),
+			image: image(),
+			video: z.string(),
+			pronouns: z.string(),
+			languages: z.array(z.string()),
+			biography: z.string(),
+			tags: z.array(z.string()),
+			mail: z.email(),
+			instagram: z.url(),
+		}),
 });
 
 const generalFaq = defineCollection({

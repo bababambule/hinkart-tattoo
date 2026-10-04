@@ -2,6 +2,7 @@
 layout: ../../layouts/Artist.astro
 name: David
 order: 6
+image: '../../assets/artists/david/David.webp'
 video: David.webm
 pronouns: 'She/Her'
 languages: ['Portugese', 'English']

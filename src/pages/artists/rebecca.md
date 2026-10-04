@@ -2,6 +2,7 @@
 layout: ../../layouts/Artist.astro
 name: Rebecca
 order: 3
+image: '../../assets/artists/rebecca/Rebecca.webp'
 video: Rebecca.webm
 pronouns: 'She/Her'
 languages: ['Portugese', 'English']
