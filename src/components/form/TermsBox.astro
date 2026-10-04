@@ -14,13 +14,16 @@ const checkBoxName = `terms${name}`;
 ---
 
 <div
-	class="relative isolate overflow-hidden basis-20 p-1 group transition-all duration-500 interpolate"
+	class="relative isolate overflow-hidden basis-20 px-1 py-2 group transition-all duration-500 interpolate"
 	class:list={['aria-expanded:basis-auto']}
 	data-form="termbox"
 	aria-expanded={expanded}
 >
 	<label for={checkBoxName} class="relative cursor-pointer" id=`terms${name}Wrapper` data-disabled={disabled}>
-		<svg class="h-full w-[96%] left-[2%] overflow-visible absolute -z-10 invisible" class:list={['group-aria-expanded:visible']}>
+		<svg
+			class="h-full w-[96%] left-[2%] overflow-visible absolute -z-10 invisible"
+			class:list={['group-aria-expanded:visible', 'xl:w-[98%]', 'xl:left-[1%]']}
+		>
 			<filter id="rough">
 				<feTurbulence type="turbulence" baseFrequency="0.01" numOctaves="2" result="turbulence"></feTurbulence>
 				<feDisplacementMap
@@ -35,6 +38,7 @@ const checkBoxName = `terms${name}`;
 			<rect
 				x="0"
 				y="0"
+				rx="4"
 				width="100%"
 				height="100%"
 				fill="var(--color-daintree-600)"
@@ -71,7 +75,7 @@ const checkBoxName = `terms${name}`;
 				<h2 class="relative text-button-stroke-daintree-1000 text-daintree-100 self-start max-w-fit -rotate-3">
 					<span class="uppercase text-2xl font-bold px-4 py-2 leading-relaxed">{title}</span>
 				</h2>
-				<div class="-translate-y-2">
+				<div class="-translate-y-3 -translate-x-3 -rotate-3">
 					<CheckboxField name=`terms${name}` id=`terms${name}` />
 				</div>
 			</div>

@@ -11,8 +11,7 @@ import Label from './Label.astro';
 	id={id}
 	data-dropzone={paramName}
 	class="dropzone relative p-8 grid grid-cols-2 border-4! border-dashed border-daintree-1000 bg-daintree-700 gap-2"
->
-</div>
+></div>
 
 <script src="../../scripts/fileupload.ts"></script>
 
@@ -54,7 +53,7 @@ import Label from './Label.astro';
 	.dz-button {
 		font-family: var(--font-display) !important;
 		text-align: center;
-		font-size: var(--text-6xl) !important;
+		font-size: clamp(3rem, 4vw + 1rem, 6rem) !important;
 		line-height: 100% !important;
 		color: var(--color-daintree-500) !important;
 	}

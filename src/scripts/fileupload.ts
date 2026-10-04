@@ -9,7 +9,6 @@ const options: DropzoneOptions = {
 	maxFiles: 4,
 	acceptedFiles: 'image/*',
 	addRemoveLinks: true,
-	capture: 'image/*',
 };
 
 let dropzones = document.querySelectorAll('[data-dropzone]');

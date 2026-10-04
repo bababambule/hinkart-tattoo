@@ -16,7 +16,7 @@ const { name, value, checked, id, label, labelColor = 'white' } = Astro.props;
 <label class="relative inline-block cursor-pointer select-none pl-14 group">
 	<input type="checkbox" name={name} value={value} checked={checked} id={id} class="absolute opacity-0 h-0 w-0 peer" />
 	<span
-		class="absolute top-0 left-0 w-12 h-12 bg-daintree-700 border-4 border-daintree-1000 rounded-md"
+		class="absolute top-0 left-0 w-14 h-14 bg-daintree-700 border-4 border-daintree-1000 rounded-md"
 		class:list={[
 			'group-hover:bg-daintree-500',
 			'peer-checked:bg-winter-sky-600',
@@ -24,14 +24,17 @@ const { name, value, checked, id, label, labelColor = 'white' } = Astro.props;
 			'after:absolute',
 			'peer-not-checked:after:hidden',
 			'peer-checked:after:block',
-			'after:left-3',
+			'after:left-4',
 			'after:top-1',
 			'after:w-4',
-			'after:h-6',
+			'after:h-7',
 			'after:border-b-5',
 			'after:border-r-5',
 			'after:border-daintree-100',
 			'after:rotate-45',
-		]}></span>
-	<span class="block pt-3" class:list={labelColor === 'white' ? 'text-daintree-100' : 'text-daintree-1000'}>{label}</span>
+		]}
+	></span>
+	<span class="block pt-3" class:list={labelColor === 'white' ? 'text-daintree-100' : 'text-daintree-1000'}>
+		{label}
+	</span>
 </label>
