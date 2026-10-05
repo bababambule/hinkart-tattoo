@@ -91,7 +91,22 @@ daySelector.forEach((day) => {
 		stepButton?.setAttribute('data-disabled', 'false');
 	});
 });
+
 // Step 5 Personal
+let userName = document.querySelector('#personalName');
+let userMail = document.querySelector('#personalMail');
+
+userName?.addEventListener('change', () => {
+	if (userName.value.length > 1 && userMail.value.length > 1) {
+		submitButton?.setAttribute('data-disabled', 'false');
+	}
+});
+
+userMail?.addEventListener('change', () => {
+	if (userName.value.length > 1 && userMail.value.length > 1) {
+		submitButton?.setAttribute('data-disabled', 'false');
+	}
+});
 
 // Logic to either show the step or submit button
 stepButton?.addEventListener('click', (e) => {
