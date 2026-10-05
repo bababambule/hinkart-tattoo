@@ -1,4 +1,6 @@
 ---
+import { multipleOf } from 'astro:schema';
+
 type Color = 'white' | 'black';
 
 interface props {
@@ -7,13 +9,21 @@ interface props {
 	value: string;
 	label: string;
 	color: Color;
+	multi: boolean;
 }
 
-const { name, id, value, label, color } = Astro.props;
+const { name, id, value, label, color, multi = false } = Astro.props;
+
+let multiTag: string = multi === true ? 'checkbox' : 'radio';
 ---
 
-<label for={id} class="relative min-h-16 min-w-16 w-fit flex flex-col justify-center align-middle cursor-pointer" data-input="radio">
-	<input type="radio" name={name} id={id} value={value} />
+<label
+	for={id}
+	class="relative min-h-16 min-w-16 w-fit flex flex-col justify-center align-middle cursor-pointer"
+	data-input="radio"
+	data-form-element="circleSelector"
+>
+	<input type={multiTag} class="sr-only" name={name} id={id} value={value} aria-multiselectable={multi} />
 	<svg width="83" height="53" viewBox="0 0 83 53" fill="none" xmlns="http://www.w3.org/2000/svg" class="">
 		<path
 			class=`${name}svg`
@@ -22,7 +32,8 @@ const { name, id, value, label, color } = Astro.props;
 			stroke-width="4"
 			stroke-linecap="round"
 			stroke-linejoin="round"
-			4></path>
+			4
+		></path>
 	</svg>
 	<p class="text-2xl absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2">
 		<span
@@ -31,16 +42,11 @@ const { name, id, value, label, color } = Astro.props;
 				color === 'white'
 					? 'text-daintree-100 text-button-stroke-daintree-1000 [--ls-from:var(--color-daintree-1000)] [--ls-to:var(--color-daintree-1000)]'
 					: 'text-daintree-1000 text-button-stroke-daintree-100 [--ls-from:var(--color-daintree-100)] [--ls-to:var(--color-daintree-100)]',
-			]}>{label}</span
+			]}
 		>
+			{label}
+		</span>
 	</p>
 </label>
 
 <script src="../../scripts/RadioButton.ts"></script>
-
-<style>
-	input[type='radio'] {
-		position: absolute;
-		opacity: 0;
-	}
-</style>

@@ -4,21 +4,35 @@ import { DrawSVGPlugin } from 'gsap/all';
 
 gsap.registerPlugin(DrawSVGPlugin, MotionPathPlugin);
 
-let radios = document.querySelectorAll('input[type="radio"]');
+let radios = document.querySelectorAll('[data-form-element="circleSelector"]');
 
 radios.forEach((radio) => {
-	let inputName = radio.getAttribute('name');
+	let input = radio.querySelector('input');
+	let inputName = input?.getAttribute('name');
+	let svg = radio.querySelector('svg');
+	let svgPath = svg?.querySelector('path');
+
 	let allMarkers = document.querySelectorAll(`.${inputName}svg`);
-	let marker = radio.nextElementSibling?.firstChild;
+	//let marker = radio.nextElementSibling?.firstChild;
 
-	gsap.set(marker, { drawSVG: '0%' });
+	gsap.set(allMarkers, { drawSVG: '0%' });
 
-	radio.addEventListener('change', (event) => {
-		gsap.set(allMarkers, { drawSVG: '0%' });
-		gsap.to(marker, {
-			duration: 0.25,
-			drawSVG: '100%',
-			ease: 'power1.inOut',
-		});
+	radio.addEventListener('change', (e) => {
+		if (input?.getAttribute('aria-multiselectable') === 'false') {
+			gsap.set(allMarkers, { drawSVG: '0%' });
+		}
+		if (e.target.checked) {
+			gsap.to(svgPath, {
+				duration: 0.25,
+				drawSVG: '100%',
+				ease: 'power1.inOut',
+			});
+		} else {
+			gsap.to(svgPath, {
+				duration: 0.25,
+				drawSVG: '0%',
+				ease: 'power1.inOut',
+			});
+		}
 	});
 });

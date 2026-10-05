@@ -8,16 +8,17 @@ const artists = (await getCollection('artists')).sort((a, b) => a.data.order - b
 	{artists.map((artist) => (
 		<label for={artist.data.name} class="group/label border-2 aspect-square w-full relative flex justify-center items-end cursor-pointer">
 			<input type="radio" id={artist.data.name} name="artistSelection" value={artist.data.name} class="group/input sr-only" />
-			<p class="max-w-full px-2 overflow-x-clip">
+			<p class="max-w-full px-2 overflow-x-clip relative z-10">
 				<span class="font-display text-xl md:text-2xl text-winter-sky-50 text-button-stroke-winter-sky-1000">{artist.data.name}</span>
 			</p>
 			<svg
-				class="absolute inset-0 -z-20 size-full overflow-visible pointer-events-none"
+				class="absolute inset-0 size-full overflow-visible pointer-events-none"
 				viewBox="0 0 100 100"
 				preserveAspectRatio="none"
 				aria-hidden="true"
+				xmlns="http://www.w3.org/2000/svg"
 			>
-				<filter id="displacementShadow" x="-30%" y="-30%" width="160%" height="160%">
+				<filter id="artistFilter" x="-30%" y="-30%" width="160%" height="160%">
 					<feTurbulence type="turbulence" baseFrequency="0.01" numOctaves="2" result="turbulence" />
 					<feDisplacementMap in2="turbulence" in="SourceGraphic" scale="2" xChannelSelector="R" yChannelSelector="G" result="displaced" />
 				</filter>
@@ -27,7 +28,7 @@ const artists = (await getCollection('artists')).sort((a, b) => a.data.order - b
 					width="100%"
 					height="100%"
 					href={artist.data.image.src}
-					filter="url(#displacementShadow)"
+					filter="url(#artistFilter)"
 					stroke-width="2"
 					stroke="var(--color-tree-poppy-1000)"
 				/>
