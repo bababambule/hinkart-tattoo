@@ -102,6 +102,7 @@ const arraySizeButton = ['Expand'];
 	const volumeArray = Array.from(volumeIcons);
 	const fullscreenButton = document.querySelector('#full-button');
 	const supportsFullscreen = !!video.webkitRequestFullscreen;
+	let fullscreenToggle = false;
 
 	let isVideoReady = false;
 
@@ -115,31 +116,19 @@ const arraySizeButton = ['Expand'];
 		if (!isVideoReady) isVideoReady = true;
 	});
 
-	fullscreenButton.addEventListener('click', async () => {
-		if (!supportsFullscreen) {
-			alert('Fullscreen not supported on this browser.');
-			return;
-		}
-
-		if (!isVideoReady) {
-			alert('Video is still loading. Please try again.');
-			return;
-		}
-
-		try {
-			// Play video first (optional but improves UX)
-			await video.play();
-			// Request fullscreen
-			video.webkitRequestFullscreen();
-		} catch (err) {
-			console.error('Fullscreen failed:', err);
-			alert('Could not enter fullscreen. Please tap the video to play.');
-		}
-	});
-
 	play.addEventListener('click', handlePlayButton);
 	volume.addEventListener('click', handleVolButton);
 	fullscreenButton.addEventListener('click', openFullscreen);
+
+	video.addEventListener('fullscreenchange', (e) => {
+		if (fullscreenToggle === false) {
+			fullscreenToggle = true;
+			video.classList.remove('clip-path');
+		} else {
+			fullscreenToggle = false;
+			video.classList.add('clip-path');
+		}
+	});
 
 	function toggleButton(playing) {
 		if (playing) {
@@ -186,14 +175,19 @@ const arraySizeButton = ['Expand'];
 	}
 
 	function openFullscreen() {
-		if (video.requestFullscreen) {
-			video.requestFullscreen();
-		} else if (video.webkitRequestFullscreen) {
-			/* Safari */
-			video.webkitRequestFullscreen();
-		} else if (video.msRequestFullscreen) {
-			/* IE11 */
-			video.msRequestFullscreen();
+		if (!supportsFullscreen) {
+			alert('Fullscreen not supported on this browser.');
+			return;
+		} else {
+			if (video.requestFullscreen) {
+				video.requestFullscreen();
+			} else if (video.webkitRequestFullscreen) {
+				/* Safari */
+				video.webkitRequestFullscreen();
+			} else if (video.msRequestFullscreen) {
+				/* IE11 */
+				video.msRequestFullscreen();
+			}
 		}
 	}
 </script>
