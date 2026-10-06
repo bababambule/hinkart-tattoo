@@ -92,9 +92,7 @@ const arraySizeButton = ['Expand'];
 
 	play.addEventListener('click', handlePlayButton);
 	volume.addEventListener('click', handleVolButton);
-	fullscreenButton.addEventListener('click', () => {
-		video.requestFullscreen();
-	});
+	fullscreenButton.addEventListener('click', openFullscreen);
 
 	function toggleButton(playing) {
 		if (playing) {
@@ -137,6 +135,18 @@ const arraySizeButton = ['Expand'];
 		} else {
 			video.muted = true;
 			toggleVolButton(true);
+		}
+	}
+
+	function openFullscreen() {
+		if (video.requestFullscreen) {
+			video.requestFullscreen();
+		} else if (video.webkitRequestFullscreen) {
+			/* Safari */
+			video.webkitRequestFullscreen();
+		} else if (video.msRequestFullscreen) {
+			/* IE11 */
+			video.msRequestFullscreen();
 		}
 	}
 </script>
