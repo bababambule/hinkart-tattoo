@@ -1,30 +1,29 @@
 {
-  "name": "",
-  "type": "module",
-  "version": "0.0.1",
-  "engines": {
-    "node": ">=22.12.0"
-  },
-  "scripts": {
-    "dev": "astro dev",
-    "build": "astro build",
-    "preview": "astro preview",
-    "astro": "astro",
-    "prettier-watch": "onchange \"**/*\" -- prettier --write --ignore-unknown {{changed}}"
-  },
-  "dependencies": {
-    "@astrojs/node": "^11.1.6",
-    "@tailwindcss/vite": "^4.3.3",
-    "astro": "^7.3.3",
-    "dropzone": "^6.3.5",
-    "embla-carousel": "^8.6.0",
-    "embla-carousel-class-names": "^8.6.0",
-    "gsap": "^3.15.0",
-    "tailwindcss": "^4.3.3"
-  },
-  "devDependencies": {
-    "prettier": "^3.9.9",
-    "prettier-plugin-astro": "^1.1.0",
-    "prettier-plugin-tailwindcss": "^0.8.1"
-  }
+	"name": "hinkart",
+	"type": "module",
+	"version": "0.0.1",
+	"engines": {
+		"node": ">=22.12.0"
+	},
+	"scripts": {
+		"dev": "astro dev",
+		"build": "astro build",
+		"preview": "astro preview",
+		"astro": "astro",
+		"prettier-watch": "onchange \"**/*\" -- prettier --write --ignore-unknown {{changed}}"
+	},
+	"dependencies": {
+		"@tailwindcss/vite": "^4.3.3",
+		"astro": "^7.3.3",
+		"dropzone": "^6.3.5",
+		"embla-carousel": "^8.6.0",
+		"embla-carousel-class-names": "^8.6.0",
+		"gsap": "^3.15.0",
+		"tailwindcss": "^4.3.3"
+	},
+	"devDependencies": {
+		"prettier": "^3.9.9",
+		"prettier-plugin-astro": "^1.1.0",
+		"prettier-plugin-tailwindcss": "^0.8.1"
+	}
 }
