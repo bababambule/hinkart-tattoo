@@ -13,7 +13,7 @@ const arraySizeButton = ['Expand'];
 
 <Layout>
 	<div class:list={['index-wrapper relative h-full flex-1 flex flex-col']}>
-		<div class:list={['index-bg absolute top-0 left-0 size-full']}>
+		<div class:list={['index-bg absolute top-0 left-0 size-full z-10']}>
 			<svg
 				xmlns:xlink="http://www.w3.org/1999/xlink"
 				width="100%"
@@ -24,20 +24,32 @@ const arraySizeButton = ['Expand'];
 				xmlns="http://www.w3.org/2000/svg"
 				class="size-full overflow-visible"
 			>
+				<filter id="videoBorder" x="-30%" y="-30%" width="160%" height="160%">
+					<feTurbulence type="turbulence" baseFrequency="0.01" numOctaves="2" result="turbulence"></feTurbulence>
+					<feDisplacementMap
+						in2="turbulence"
+						in="SourceGraphic"
+						scale="1"
+						xChannelSelector="R"
+						yChannelSelector="G"
+						result="displaced"
+					></feDisplacementMap>
+				</filter>
 				<polygon
 					x="0"
 					y="0"
 					points="0,0 100,0 100,90 0,100"
 					width="100%"
 					height="100%"
-					fill="white"
+					fill="transparent"
 					stroke="black"
 					stroke-width="4"
 					vector-effect="non-scaling-stroke"
+					filter="url(#videoBorder)"
 				></polygon>
 			</svg>
 		</div>
-		<div class="relative z-10 p-0.5 flex-1 h-full flex flex-col">
+		<div class="relative flex-1 h-full flex flex-col">
 			<div class="absolute bottom-10 right-4 z-10 flex flex-row gap-4 -skew-y-8 origin-bottom-right scale-75">
 				<IconButton id="play-button" label="Pause" icon={arrayPlayButton} />
 				<IconButton id="vol-button" label="Unmute" icon={arrayVolumeButton} />
@@ -89,6 +101,41 @@ const arraySizeButton = ['Expand'];
 	const volumeIcons = volume.querySelectorAll('svg');
 	const volumeArray = Array.from(volumeIcons);
 	const fullscreenButton = document.querySelector('#full-button');
+	const supportsFullscreen = !!video.webkitRequestFullscreen;
+
+	let isVideoReady = false;
+
+	video.addEventListener('loadedmetadata', () => {
+		isVideoReady = true;
+		fullscreenButton.disabled = false; // Enable button
+	});
+
+	// Fallback: If metadata takes too long, use 'canplay'
+	video.addEventListener('canplay', () => {
+		if (!isVideoReady) isVideoReady = true;
+	});
+
+	fullscreenButton.addEventListener('click', async () => {
+		if (!supportsFullscreen) {
+			alert('Fullscreen not supported on this browser.');
+			return;
+		}
+
+		if (!isVideoReady) {
+			alert('Video is still loading. Please try again.');
+			return;
+		}
+
+		try {
+			// Play video first (optional but improves UX)
+			await video.play();
+			// Request fullscreen
+			video.webkitRequestFullscreen();
+		} catch (err) {
+			console.error('Fullscreen failed:', err);
+			alert('Could not enter fullscreen. Please tap the video to play.');
+		}
+	});
 
 	play.addEventListener('click', handlePlayButton);
 	volume.addEventListener('click', handleVolButton);
