@@ -1,0 +1,170 @@
+---
+import halftone from '../assets/images/studio/halftone.png';
+---
+
+<svg id="hinkartLogo" width="110" height="216" viewBox="0 0 110 216" fill="none" xmlns="http://www.w3.org/2000/svg" class:list={['overflow-visible']}>
+	<defs>
+		<mask id="logoShape">
+			<path
+				d="M34.2608 190.207V0C29.8756 16.3664 17.843 23.9897 3.99604 25.1906C1.79517 25.3814 0 27.1518 0 29.3609V215.568H11.4609C34.2608 215.568 34.2608 190.207 34.2608 190.207Z"
+				fill="white"
+			/>
+			<path
+				d="M75.2289 190.207V0C80.0314 17.9234 94.0053 25.3609 109.49 25.3609V215.568H98.0288C75.2289 215.568 75.2289 190.207 75.2289 190.207Z"
+				fill="white"
+			/>
+			<path
+				d="M75.7141 110.782C75.7141 121.119 68.1446 136.314 54.743 136.314C41.3414 136.314 33.772 121.368 33.772 110.782C33.772 98.9494 54.743 83.1316 54.743 66.8156C54.743 83.1316 75.7141 98.9494 75.7141 110.782Z"
+				fill="white"
+			/>
+		</mask>
+		<filter id="logoDisplacement" x="-30%" y="-30%" width="160%" height="160%" color-interpolation-filters="sRGB">
+			<feTurbulence type="turbulence" baseFrequency="0.01" numOctaves="2" result="turbulence"></feTurbulence>
+			<feDisplacementMap
+				in2="turbulence"
+				in="SourceGraphic"
+				scale="2"
+				xChannelSelector="R"
+				yChannelSelector="G"
+				result="displaced"
+			></feDisplacementMap>
+			<feDropShadow
+				in="displaced"
+				dx="11"
+				dy="12"
+				stdDeviation="0"
+				flood-color="var(--color-rose-bud-cherry-1000)"
+				flood-opacity="1"
+				result="shadow6"
+			></feDropShadow>
+			<feDropShadow
+				in="displaced"
+				dx="9"
+				dy="10"
+				stdDeviation="0"
+				flood-color="var(--color-rose-bud-cherry-1000)"
+				flood-opacity="1"
+				result="shadow5"
+			></feDropShadow>
+			<feDropShadow
+				in="displaced"
+				dx="7"
+				dy="8"
+				stdDeviation="0"
+				flood-color="var(--color-rose-bud-cherry-1000)"
+				flood-opacity="1"
+				result="shadow4"
+			></feDropShadow>
+			<feDropShadow
+				in="displaced"
+				dx="5"
+				dy="6"
+				stdDeviation="0"
+				flood-color="var(--color-rose-bud-cherry-1000)"
+				flood-opacity="1"
+				result="shadow3"
+			></feDropShadow>
+			<feDropShadow
+				in="displaced"
+				dx="3"
+				dy="4"
+				stdDeviation="0"
+				flood-color="var(--color-rose-bud-cherry-1000)"
+				flood-opacity="1"
+				result="shadow2"
+			></feDropShadow>
+			<feDropShadow
+				in="displaced"
+				dx="1"
+				dy="2"
+				stdDeviation="0"
+				flood-color="var(--color-rose-bud-cherry-1000)"
+				flood-opacity="1"
+				result="shadow1"
+			></feDropShadow>
+
+			<feMerge>
+				<feMergeNode in="shadow6"></feMergeNode>
+				<feMergeNode in="shadow5"></feMergeNode>
+				<feMergeNode in="shadow4"></feMergeNode>
+				<feMergeNode in="shadow3"></feMergeNode>
+				<feMergeNode in="shadow2"></feMergeNode>
+				<feMergeNode in="shadow1"></feMergeNode>
+				<feMergeNode in="displaced"></feMergeNode>
+			</feMerge>
+		</filter>
+	</defs>
+	<circle
+		fill="var(--color-rose-bud-cherry-100)"
+		stroke="var(--color-rose-bud-cherry-1000)"
+		stroke-width="4"
+		x="0"
+		y="0"
+		cx="55%"
+		cy="55%"
+		r="55%"
+		vector-effect="non-scaling-stroke"
+		filter="url(#logoDisplacement)"
+	></circle>
+	<image
+		x="0"
+		y="0"
+		viewBox=`0 0 ${halftone.width} ${halftone.height}`
+		height="133%"
+		href={halftone.src}
+		preserveAspectRatio="xMinYMin"
+		mask="url(#logoShape)"
+		transform="translate(24 24)"
+		class="mix-blend-multiply"
+	/>
+	<g id="logo" filter="url(#logoDisplacement)">
+		<path
+			id="dropShadow"
+			d="M75.7141 110.782C75.7141 121.119 68.1446 136.314 54.743 136.314C41.3414 136.314 33.772 121.368 33.772 110.782C33.772 98.9494 54.743 83.1316 54.743 66.8156C54.743 83.1316 75.7141 98.9494 75.7141 110.782Z"
+			fill="var(--color-daintree-1000)"
+			stroke="var(--color-rose-bud-cherry-1000)"
+			stroke-width="8"
+			stroke-linejoin="round"
+			vector-effect="non-scaling-stroke"
+		/>
+		<path
+			id="left"
+			d="M34.2608 190.207V0C29.8756 16.3664 17.843 23.9897 3.99604 25.1906C1.79517 25.3814 0 27.1518 0 29.3609V215.568H11.4609C34.2608 215.568 34.2608 190.207 34.2608 190.207Z"
+			fill="var(--color-rose-bud-cherry-600)"
+			stroke="var(--color-rose-bud-cherry-1000)"
+			stroke-width="8"
+			stroke-linejoin="round"
+			paint-order="stroke"
+			vector-effect="non-scaling-stroke"
+		/>
+		<path
+			id="right"
+			d="M75.2289 190.207V0C80.0314 17.9234 94.0053 25.3609 109.49 25.3609V215.568H98.0288C75.2289 215.568 75.2289 190.207 75.2289 190.207Z"
+			fill="var(--color-rose-bud-cherry-600)"
+			stroke="var(--color-rose-bud-cherry-1000)"
+			stroke-width="8"
+			stroke-linejoin="round"
+			paint-order="stroke"
+			vector-effect="non-scaling-stroke"
+		/>
+		<path
+			id="drop"
+			d="M75.7141 110.782C75.7141 121.119 68.1446 136.314 54.743 136.314C41.3414 136.314 33.772 121.368 33.772 110.782C33.772 98.9494 54.743 83.1316 54.743 66.8156C54.743 83.1316 75.7141 98.9494 75.7141 110.782Z"
+			fill="var(--color-rose-bud-cherry-600)"
+			vector-effect="non-scaling-stroke"
+		/>
+		<image
+			x="0"
+			y="0"
+			viewBox=`0 0 ${halftone.width} ${halftone.height}`
+			height="133%"
+			href={halftone.src}
+			preserveAspectRatio="xMinYMin"
+			mask="url(#logoShape)"
+			opacity="0.25"
+			class="mix-blend-multiply"
+		/>
+	</g>
+</svg>
+
+<script src="../scripts/logo.ts"></script>

@@ -1,4 +1,6 @@
 ---
+import Header from '../components/Header.astro';
+import Main from '../components/Main.astro';
 import Sidebar from '../components/Sidebar.astro';
 import Footer from '../components/Footer.astro';
 import '../styles/global.css';
@@ -15,14 +17,13 @@ import '../styles/global.css';
 		<meta name="generator" content={Astro.generator} />
 		<title>Hinkart Tattoo Studio</title>
 	</head>
-	<body class="max-w-dvw" class:list={['bg-daintree-100', 'dark:bg-daintree-800', 'xl:overflow-clip', 'xl:max-h-dvh']}>
-		<Sidebar />
-		<main
-			class="pt-4 pb-8 px-3 min-h-[110dvh] bg-daintree-100 relative z-10 mb-64"
-			class:list={['lg:mb-0', 'xl:pt-8', 'xl:px-0', 'xl:h-screen', 'xl:pl-[10dvw]', 'xl:pb-24', 'xl:pr-12', 'dark:bg-daintree-800', 'lg:pb-0']}
-		>
-			<slot />
-		</main>
+	<body class:list={['max-w-dvw', 'bg-daintree-100 dark:bg-daintree-800', 'xl:overflow-clip', 'xl:max-h-dvh']}>
+		<div class="min-h-screen flex flex-col mb-64">
+			<Header />
+			<Main>
+				<slot />
+			</Main>
+		</div>
 		<Footer />
 	</body>
 </html>

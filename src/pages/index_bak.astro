@@ -1,55 +1,14 @@
 ---
-import Layout from '../layouts/LayoutNew.astro';
-import Navigation from '../components/Navigation.astro';
-
+import Layout from '../layouts/Layout.astro';
 import heroVideo from '../assets/hinkart-hero-fast1080pSource-modified-rf50-128audio.webm';
-import heroVideoAlt from '../assets/videos/hero-video_720p-x265-rf40.mp4';
 import IconButton from '../components/IconButton.astro';
 
 const arrayPlayButton = ['Pause', 'Play'];
 const arrayVolumeButton = ['SpeakerHighOff', 'SpeakerHigh'];
-const arraySizeButton = ['Expand'];
 ---
 
 <Layout>
-	<div class:list={['index-wrapper relative h-full flex-1 flex flex-col']}>
-		<div class:list={['index-bg absolute top-0 left-0 size-full']}>
-			<svg
-				xmlns:xlink="http://www.w3.org/1999/xlink"
-				width="100%"
-				height="100%"
-				viewBox="0 0 100 100"
-				preserveAspectRatio="none"
-				fill="none"
-				xmlns="http://www.w3.org/2000/svg"
-				class="size-full overflow-visible"
-			>
-				<polygon
-					x="0"
-					y="0"
-					points="0,0 100,0 100,90 0,100"
-					width="100%"
-					height="100%"
-					fill="white"
-					stroke="black"
-					stroke-width="4"
-					vector-effect="non-scaling-stroke"
-				></polygon>
-			</svg>
-		</div>
-		<div class="relative z-10 p-0.5 flex-1 h-full flex flex-col">
-			<div class="absolute bottom-10 right-4 z-10 flex flex-row gap-4 -skew-y-8 origin-bottom-right scale-75">
-				<IconButton id="play-button" label="Pause" icon={arrayPlayButton} />
-				<IconButton id="vol-button" label="Unmute" icon={arrayVolumeButton} />
-				<IconButton id="full-button" label="Fullscreen" icon={arraySizeButton} />
-			</div>
-			<video class="flex-1 h-full object-cover clip-path" id="heroVideo" autoplay playsinline loading="eager" muted loop>
-				<source src={heroVideo} type="video/webm" />
-				<source src={heroVideoAlt} type="video/mp4" />
-			</video>
-		</div>
-	</div>
-	<!-- <div class="trapezoid-outline h-full relative">
+	<div class="trapezoid-outline h-full relative">
 		<div class="absolute bottom-7 right-[calc(5%+1.5rem)] z-50 flex flex-row gap-4" id="videoControls">
 			<IconButton id="play-button" label="Pause" icon={arrayPlayButton} />
 			<IconButton id="vol-button" label="Unmute" icon={arrayVolumeButton} />
@@ -57,18 +16,13 @@ const arraySizeButton = ['Expand'];
 		<video autoplay playsinline loading="eager" muted loop class="trapezoid h-full object-cover" id="heroVideo">
 			<source src={heroVideo} type="video/webm" />
 		</video>
-	</div> -->
+	</div>
 </Layout>
 
 <style>
 	:root {
 		--clip-shape: polygon(0% 0%, 100% 0%, 95% 100%, 0% 100%);
 	}
-
-	.clip-path {
-		clip-path: polygon(0% 0%, 100% 0%, 100% 90%, 0% 100%);
-	}
-
 	.trapezoid {
 		clip-path: var(--clip-shape);
 	}
@@ -88,13 +42,9 @@ const arraySizeButton = ['Expand'];
 	const volume = document.getElementById('vol-button');
 	const volumeIcons = volume.querySelectorAll('svg');
 	const volumeArray = Array.from(volumeIcons);
-	const fullscreenButton = document.querySelector('#full-button');
 
 	play.addEventListener('click', handlePlayButton);
 	volume.addEventListener('click', handleVolButton);
-	fullscreenButton.addEventListener('click', () => {
-		video.requestFullscreen();
-	});
 
 	function toggleButton(playing) {
 		if (playing) {
