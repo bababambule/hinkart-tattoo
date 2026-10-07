@@ -23,4 +23,5 @@ gsap.to(feDisplacementMap, {
 		scale: gsap.utils.random(1, 5, 1),
 	},
 	repeat: -1,
+	yoyo: true,
 });

@@ -1,8 +1,22 @@
 ---
+interface Props {
+	height: number;
+	width: number | null;
+}
+const { height, width } = Astro.props;
+
 import halftone from '../assets/images/studio/halftone.png';
 ---
 
-<svg id="hinkartLogo" width="110" height="216" viewBox="0 0 110 216" fill="none" xmlns="http://www.w3.org/2000/svg" class:list={['overflow-visible']}>
+<svg
+	id="hinkartLogo"
+	width={width}
+	height={height}
+	viewBox="0 0 110 216"
+	fill="none"
+	xmlns="http://www.w3.org/2000/svg"
+	class:list={['overflow-visible']}
+>
 	<defs>
 		<mask id="logoShape">
 			<path

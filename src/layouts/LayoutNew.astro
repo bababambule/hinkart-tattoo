@@ -18,12 +18,11 @@ import '../styles/global.css';
 		<title>Hinkart Tattoo Studio</title>
 	</head>
 	<body class:list={['max-w-dvw', 'bg-daintree-100 dark:bg-daintree-800', 'xl:overflow-clip', 'xl:max-h-dvh']}>
-		<div class="min-h-screen flex flex-col mb-64">
-			<Header />
-			<Main>
-				<slot />
-			</Main>
-		</div>
+		<Header />
+		<Main>
+			<slot />
+		</Main>
+
 		<Footer />
 	</body>
 </html>

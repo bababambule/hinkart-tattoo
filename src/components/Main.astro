@@ -1,6 +1,12 @@
 ---
 ---
 
-<main class:list={['flex-1 px-3 pb-12 mt-1 relative z-10 bg-daintree-800', 'flex flex-col']}>
+<main
+	class:list={[
+		'flex-1 px-4 pt-10 pb-8 mt-1 relative z-10 bg-daintree-800',
+		'min-h-screen h-full flex flex-col',
+		'bg-linear-to-b from-daintree-800 from-80% to-daintree-1000 to-80%',
+	]}
+>
 	<slot />
 </main>

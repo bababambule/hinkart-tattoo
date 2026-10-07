@@ -1,6 +1,6 @@
 ---
-interface props {
-	icon: string;
+interface Props {
+	icon: string | null;
 	href: string;
 	label: string;
 	kanji: string;
@@ -8,9 +8,10 @@ interface props {
 	target: string;
 	disabled: boolean;
 	hidden: boolean;
+	popovertarget: string;
 }
 
-const { icon, href, label, kanji, id, target, disabled, hidden = false } = Astro.props;
+const { icon, href, label, kanji, id, target, disabled, hidden = false, popovertarget } = Astro.props;
 
 let Tag;
 let Destination;
@@ -34,25 +35,25 @@ import Icons from './Icons.astro';
 	href={href}
 	target={Destination}
 	id={id}
-	class="button group relative isolate inline-flex items-center gap-3 self-center min-w-12 min-h-16 pr-8"
+	class="button group relative isolate inline-flex items-center gap-3 self-center min-w-12 min-h-16 px-4 lg:px-6 data-icon:pl-0"
+	data-icon={icon}
 	data-disabled={disabled}
 	data-hidden={hidden}
+	popovertarget={popovertarget}
 >
 	<div class="flex flex-row justify-center items-center pointer-events-none">
-		<div class="z-10 ml-1.5 text-winter-sky-1000 group-hover:text-tree-poppy-100">
-			<Icons icon={icon} size={48} classes="rotate-3 -translate-y-2 icon-shadow" />
-		</div>
-		<div
-			class="text-tree-poppy-100 group-hover:text-tree-poppy-1000 long-shadow-xs [--ls-from:var(--color-tree-poppy-1000)] [--ls-to:var(--color-tree-poppy-1000)] group-hover:[--ls-from:var(--color-tree-poppy-100)] group-hover:[--ls-to:var(--color-tree-poppy-100)] -rotate-3 origin-top-left"
-		>
+		{icon && (
+			<div class="z-10 ml-1.5 text-winter-sky-1000 group-hover:text-tree-poppy-100">
+				<Icons icon={icon} size={48} classes="rotate-3 -translate-y-2 icon-shadow" />
+			</div>
+		)}
+		<div class="text-tree-poppy-100 group-hover:text-tree-poppy-1000 long-shadow-xs [--ls-from:var(--color-tree-poppy-1000)] [--ls-to:var(--color-tree-poppy-1000)] group-hover:[--ls-from:var(--color-tree-poppy-100)] group-hover:[--ls-to:var(--color-tree-poppy-100)] -rotate-3 origin-top-left">
 			<p class="text-2xl font-bold uppercase text-button-stroke-tree-poppy-1000 group-hover:text-button-stroke-tree-poppy-100">{label}</p>
 		</div>
 	</div>
 	<div id="Mask" class="absolute size-full kanji-mask flex flex-row items-end justify-end -z-10 opacity-40 pointer-events-none">
 		<div class="text-tree-poppy-100 text-right -rotate-24">
-			<p class="font-kanji text-4xl">
-				{kanji}
-			</p>
+			<p class="font-kanji text-4xl">{kanji}</p>
 		</div>
 	</div>
 	<svg
@@ -63,14 +64,41 @@ import Icons from './Icons.astro';
 	>
 		<filter id="displacementShadow" x="-30%" y="-30%" width="160%" height="160%">
 			<feTurbulence type="turbulence" baseFrequency="0.01" numOctaves="2" result="turbulence"></feTurbulence>
-			<feDisplacementMap in2="turbulence" in="SourceGraphic" scale="2" xChannelSelector="R" yChannelSelector="G" result="displaced"
+			<feDisplacementMap
+				in2="turbulence"
+				in="SourceGraphic"
+				scale="2"
+				xChannelSelector="R"
+				yChannelSelector="G"
+				result="displaced"
 			></feDisplacementMap>
 
-			<feDropShadow in="displaced" dx="4" dy="8" stdDeviation="0" flood-color="var(--color-tree-poppy-1000)" flood-opacity="1" result="shadow3"
+			<feDropShadow
+				in="displaced"
+				dx="4"
+				dy="8"
+				stdDeviation="0"
+				flood-color="var(--color-tree-poppy-1000)"
+				flood-opacity="1"
+				result="shadow3"
 			></feDropShadow>
-			<feDropShadow in="displaced" dx="2" dy="4" stdDeviation="0" flood-color="var(--color-tree-poppy-1000)" flood-opacity="1" result="shadow2"
+			<feDropShadow
+				in="displaced"
+				dx="2"
+				dy="4"
+				stdDeviation="0"
+				flood-color="var(--color-tree-poppy-1000)"
+				flood-opacity="1"
+				result="shadow2"
 			></feDropShadow>
-			<feDropShadow in="displaced" dx="1" dy="2" stdDeviation="0" flood-color="var(--color-tree-poppy-1000)" flood-opacity="1" result="shadow1"
+			<feDropShadow
+				in="displaced"
+				dx="1"
+				dy="2"
+				stdDeviation="0"
+				flood-color="var(--color-tree-poppy-1000)"
+				flood-opacity="1"
+				result="shadow1"
 			></feDropShadow>
 
 			<feMerge>
@@ -89,7 +117,8 @@ import Icons from './Icons.astro';
 			width=" 100%"
 			height="100%"
 			fill="var(--color-winter-sky-600)"
-			filter="url(#displacementShadow)"></polygon>
+			filter="url(#displacementShadow)"
+		></polygon>
 	</svg>
 </Tag>
 

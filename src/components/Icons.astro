@@ -1,4 +1,9 @@
 ---
+interface Props {
+	icon: string;
+	size: number;
+	classes: string | null;
+}
 const { icon, size, classes } = Astro.props;
 
 const allIcons = import.meta.glob('./icons/*.astro', { eager: true });

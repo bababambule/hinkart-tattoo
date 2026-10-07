@@ -1,11 +1,33 @@
 ---
-import Icons from './Icons.astro';
 const { name, slug, video, index } = Astro.props;
+import Icons from './Icons.astro';
+import Button from './Button.astro';
+
 const videos = import.meta.glob('../assets/videos/*.webm', { eager: true });
 const videoPath = videos[`../assets/videos/${video}`]?.default;
 ---
 
-<div class="embla__slide h-full relative flex items-center min-w-1/5" data-slide-index={index}>
+<div class="embla__slide grow shrink-0 basis-full relative flex items-center min-w-1/5" data-slide-index={index}>
+	<div class="video__wrapper relative bg-daintree-1000 p-2">
+		<div class="video__overlay"></div>
+		<video muted loop class="object-cover origin-center h-full">
+			<source src={videoPath} />
+		</video>
+	</div>
+	<div class="absolute z-10 bottom-1/4 mx-auto w-full flex justify-center">
+		<p class="artist__name font-display text-daintree-600 text-4xl -rotate-3" data-name={name}>
+			{name}
+		</p>
+		<p class="artist__name--shadow font-display text-daintree-600 text-4xl -rotate-3 absolute" data-name={name}>
+			{name}
+		</p>
+	</div>
+	<div class="absolute bottom-8 flex justify-center w-full">
+		<Button label="Select" icon={null} href={slug} />
+	</div>
+</div>
+
+<!-- <div class="embla__slide h-full relative flex items-center min-w-1/5" data-slide-index={index}>
 	<div class="video__wrapper relative bg-daintree-1000 p-2">
 		<div class="video__overlay"></div>
 		<video muted loop class="object-cover origin-center h-full">
@@ -29,7 +51,7 @@ const videoPath = videos[`../assets/videos/${video}`]?.default;
 			<div class="artist__select-bg bg-tree-poppy-600 absolute w-40 h-12 top-0 -z-10 left-0 -rotate-3"></div>
 		</a>
 	</div>
-</div>
+</div> -->
 
 <style>
 	.embla__slide {
@@ -46,11 +68,7 @@ const videoPath = videos[`../assets/videos/${video}`]?.default;
 		mix-blend-mode: hard-light;
 	}
 
-	.artist__select-bg {
-		clip-path: polygon(0% 15%, 100% 0%, 95% 90%, 2.5% 100%);
-	}
-
 	.text-stroke {
-		-webkit-text-stroke: 0.4rem var(--color-tree-poppy-1000);
+		-webkit-text-stroke: 0.2rem var(--color-tree-poppy-1000);
 	}
 </style>

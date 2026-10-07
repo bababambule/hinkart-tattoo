@@ -1,9 +1,9 @@
 const video = document.querySelector('video');
 const play = document.getElementById('play-button');
-const playIcons = play.querySelectorAll('svg');
+const playIcons = play?.querySelectorAll('svg');
 const playArray = Array.from(playIcons);
 const volume = document.getElementById('vol-button');
-const volumeIcons = volume.querySelectorAll('svg');
+const volumeIcons = volume?.querySelectorAll('svg');
 const volumeArray = Array.from(volumeIcons);
 const fullscreenButton = document.querySelector('#full-button');
 const supportsFullscreen = !!video.webkitRequestFullscreen;
@@ -84,16 +84,13 @@ function openFullscreen() {
 		alert('Fullscreen not supported on this browser.');
 		return;
 	} else { */
-	if (video.webkitEnterFullscreen) {
-		video.webkitEnterFullscreen();
-	} else if (video.requestFullscreen) {
-		video.requestFullscreen();
-	} else if (video.webkitRequestFullscreen) {
+	if (video?.webkitEnterFullscreen) {
+		video?.webkitEnterFullscreen();
+	} else if (video?.requestFullscreen) {
+		video?.requestFullscreen();
+	} else if (video?.webkitRequestFullscreen) {
 		/* Safari */
-		video.webkitRequestFullscreen();
-	} else if (video.msRequestFullscreen) {
-		/* IE11 */
-		video.msRequestFullscreen();
+		video?.webkitRequestFullscreen();
 	}
 	/* } */
 }

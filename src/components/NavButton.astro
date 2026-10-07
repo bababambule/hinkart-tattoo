@@ -39,8 +39,6 @@ const posYMap: Record<string, string> = {
 
 const currentPath = Astro.url.pathname;
 const isActive = currentPath === url || currentPath.startsWith(`${url}/`);
-
-console.log(skewXMap[skewX]);
 ---
 
 <a
@@ -50,7 +48,7 @@ console.log(skewXMap[skewX]);
 		'box relative font-black px-8 py-4 w-fit nav-btn rounded-sm',
 		'text-3xl lg:text-5xl',
 		'bg-daintree-1000 text-daintree-100',
-		'origin-left cursor-pointer',
+		'origin-left cursor-pointer pointer-events-auto',
 		skewXMap[skewX],
 		skewYMap[skewY],
 		posXMap[posX],

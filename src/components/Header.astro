@@ -1,43 +1,36 @@
 ---
 import Logo from './Logo.astro';
+import Button from './Button.astro';
+import NavButton from './NavButton.astro';
+import Navigation from './Navigation.astro';
 ---
 
-<header class:list={['w-full h-16 relative mt-4 z-20']}>
-	<div class:list={['header-bg h-12 absolute top-0 left-0 size-full translate-y-2.5 px-2']}>
-		<svg id="header-bg" height="100%" preserveAspectRatio="none" viewBox="0 0 100 20" class="overflow-visible w-[98%]">
-			<defs>
-				<filter id="headerFilter" x="-30%" y="-30%" width="160%" height="160%" color-interpolation-filters="sRGB">
-					<feTurbulence type="turbulence" baseFrequency="0.01" numOctaves="2" result="turbulence"></feTurbulence>
-					<feDisplacementMap
-						in2="turbulence"
-						in="SourceGraphic"
-						scale="2"
-						xChannelSelector="R"
-						yChannelSelector="G"
-						result="displaced"
-					></feDisplacementMap>
-				</filter>
-			</defs>
-			<rect
-				x="0"
-				y="0"
-				rx="2"
-				ry="2"
-				width="100%"
-				height="100%"
-				fill="var(--color-rose-bud-cherry-50)"
-				stroke="var(--color-rose-bud-cherry-1000)"
-				stroke-width="3"
-				filter="url(#headerFilter)"
-				vector-effect="non-scaling-stroke"
-			></rect>
-		</svg>
-	</div>
-	<div class:list={['header-main', 'relative z-10 h-16', 'flex flex-row justify-center items-center']}>
-		<a href="/" class:list={['scale-35']}>
-			<Logo />
+<header class:list={['w-full top-4 fixed z-20']}>
+	<div class:list={['header-main', 'relative z-10 h-16', 'flex flex-row justify-between items-center']}>
+		<a href="/" class="flex justify-center pl-10">
+			<Logo height={80} />
 		</a>
+		<div class="w-24 h-16 flex justify-end flex-1 pr-1 *:aria-expanded:z-50">
+			<Button label="Menu" id="menuBtn" popovertarget="menu" kanji="menu" href="" icon={null} target="" disabled={false} hidden={false} />
+		</div>
+		<nav
+			id="menu"
+			popover
+			class:list={['fixed inset-y-0 right-0 left-auto m-0 h-screen w-3/4 bg-transparent p-6 backdrop:bg-daintree-1000/66 pointer-events-none']}
+			aria-expanded="false"
+		>
+			<menu class="flex flex-col gap-2 justify-center h-full">
+				<NavButton url="/artists" text="Artists" kanji="アーティスト" skewX="-6" skewY="-3" posX="0" />
+				<NavButton url="/studio" text="Studio" kanji="スタジオ" skewX="-12" skewY="0" posX="0" posY="-3" />
+				<NavButton url="/about" text="About" kanji="じこしょうかい" skewX="-6" skewY="-3" posX="0" />
+				<NavButton url="/booking" text="Booking" kanji="よやく" skewX="-6" skewY="-6" posX="0" />
+				<NavButton url="/aftercare" text="Aftercare" kanji="アフターケア" skewX="-12" skewY="0" posX="0" posY="-2" />
+				<NavButton url="/giftcards" text="Giftcards" kanji="ギフトカード" skewX="-3" skewY="-3" posX="0" posY="1" />
+			</menu>
+		</nav>
 	</div>
+	<!-- class:list={['open:fixed open:right-0 open:top-0 open:h-screen open:w-screen flex items-center overflow-clip']} -->
 </header>
 
 <script src="../scripts/header.ts"></script>
+<script src="../scripts/menu.ts"></script>

@@ -29,10 +29,10 @@ buttons.forEach((button) => {
 		0,
 	);
 
-	button?.addEventListener('mouseenter', () => {
+	button?.addEventListener('pointerenter', (e) => {
 		tl.play();
 	});
-	button?.addEventListener('mouseleave', () => {
+	button?.addEventListener('pointerleave', () => {
 		tl.reverse();
 	});
 });
