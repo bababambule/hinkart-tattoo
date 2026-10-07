@@ -10,7 +10,7 @@ const videoPath = videos[`../assets/videos/${video}`]?.default;
 <div class="embla__slide grow shrink-0 basis-full relative flex items-center min-w-1/5" data-slide-index={index}>
 	<div class="video__wrapper relative bg-daintree-1000 p-2">
 		<div class="video__overlay"></div>
-		<video muted loop class="object-cover origin-center h-full">
+		<video playsinline muted loop class="object-cover origin-center h-full">
 			<source src={videoPath} />
 		</video>
 	</div>
