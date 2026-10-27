@@ -34,5 +34,16 @@ const generalFaq = defineCollection({
 	}),
 });
 
+const reviews = defineCollection({
+	loader: glob({ base: './src/data/reviews', pattern: '*.md' }),
+	schema: z.object({
+		name: z.string(),
+		date: z.date(),
+		styles: z.array(z.string()),
+		artist: z.string(),
+		review: z.string().min(40),
+	}),
+});
+
 // 5. export a single 'collections' object to register your collection(s)
-export const collections = { artists, generalFaq };
+export const collections = { artists, generalFaq, reviews };

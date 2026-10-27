@@ -1,7 +1,12 @@
 ---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
 import Sidebar from '../components/Sidebar.astro';
 import Footer from '../components/Footer.astro';
-import '../styles/global.css';
+import Newsletter from '../components/Newsletter.astro';
+import Reviews from '../components/Reviews.astro';
+import SvgFilter from '../components/SvgFilter.astro';
+import { ClientRouter } from 'astro:transitions';
 ---
 
 <!doctype html>
@@ -11,19 +16,26 @@ import '../styles/global.css';
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="icon" href="/favicon.ico" />
-
 		<meta name="generator" content={Astro.generator} />
 		<title>Hinkart Tattoo Studio</title>
+		<ClientRouter />
 	</head>
-	<body class="max-w-dvw" class:list={['bg-daintree-100', 'dark:bg-daintree-800', 'xl:overflow-clip', 'xl:max-h-dvh']}>
-		<Sidebar />
+	<body
+		class="bg-daintree-900 flex flex-col min-h-dvh
+			lg:flex-row lg:max-w-dvw lg:overflow-clip lg:max-h-dvh"
+	>
+		<Header />
 		<main
-			class="pt-4 pb-8 px-3 min-h-[110dvh] bg-daintree-100 relative z-10 mb-64"
-			class:list={['lg:mb-0', 'xl:pt-8', 'xl:px-0', 'xl:h-screen', 'xl:pl-[10dvw]', 'xl:pb-24', 'xl:pr-12', 'dark:bg-daintree-800', 'lg:pb-0']}
+			transition:animate="fade"
+			class="flex-1 relative z-10 px-2 pt-12
+				lg:pt-8 lg:pr-12 lg:pb-8 lg:pl-[10dvw] lg:w-full lg:h-screen"
 		>
 			<slot />
 		</main>
+		<Newsletter />
+		<Reviews />
 		<Footer />
+		<SvgFilter />
 	</body>
 </html>
 

@@ -1,12 +1,11 @@
 ---
-type Size = 'large' | 'small';
-
-interface props {
+interface Props {
 	title: string;
 	size: string;
+	yPos: number;
 }
 
-const { title = 'Hinkart' } = Astro.props;
+const { title = 'Hinkart', size = 'text-9xl', yPos = 110 } = Astro.props;
 ---
 
 <svg width="100%" class="long-shadow-sm [--ls-from:black] [--ls-to:black]">
@@ -16,9 +15,9 @@ const { title = 'Hinkart' } = Astro.props;
 	</filter>
 	<text
 		x="0"
-		y="110"
+		y={yPos}
 		lengthAdjust="spacingAndGlyphs"
-		class:list={['font-display text-9xl']}
+		class:list={['font-display', size]}
 		fill="var(--color-daintree-200)"
 		filter="url(#displacementFilter)"
 		stroke-width="8"

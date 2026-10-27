@@ -1,36 +1,87 @@
 ---
-import Logo from './Logo.astro';
+import NavLogo from './NavLogo.astro';
 import Button from './Button.astro';
-import NavButton from './NavButton.astro';
 import Navigation from './Navigation.astro';
 ---
 
-<header class:list={['w-full top-4 fixed z-20']}>
-	<div class:list={['header-main', 'relative z-10 h-16', 'flex flex-row justify-between items-center']}>
-		<a href="/" class="flex justify-center pl-10">
-			<Logo height={80} />
-		</a>
-		<div class="w-24 h-16 flex justify-end flex-1 pr-1 *:aria-expanded:z-50">
-			<Button label="Menu" id="menuBtn" popovertarget="menu" kanji="menu" href="" icon={null} target="" disabled={false} hidden={false} />
-		</div>
-		<nav
-			id="menu"
-			popover
-			class:list={['fixed inset-y-0 right-0 left-auto m-0 h-screen w-3/4 bg-transparent p-6 backdrop:bg-daintree-1000/66 pointer-events-none']}
-			aria-expanded="false"
-		>
-			<menu class="flex flex-col gap-2 justify-center h-full">
-				<NavButton url="/artists" text="Artists" kanji="アーティスト" skewX="-6" skewY="-3" posX="0" />
-				<NavButton url="/studio" text="Studio" kanji="スタジオ" skewX="-12" skewY="0" posX="0" posY="-3" />
-				<NavButton url="/about" text="About" kanji="じこしょうかい" skewX="-6" skewY="-3" posX="0" />
-				<NavButton url="/booking" text="Booking" kanji="よやく" skewX="-6" skewY="-6" posX="0" />
-				<NavButton url="/aftercare" text="Aftercare" kanji="アフターケア" skewX="-12" skewY="0" posX="0" posY="-2" />
-				<NavButton url="/giftcards" text="Giftcards" kanji="ギフトカード" skewX="-3" skewY="-3" posX="0" posY="1" />
-			</menu>
-		</nav>
-	</div>
-	<!-- class:list={['open:fixed open:right-0 open:top-0 open:h-screen open:w-screen flex items-center overflow-clip']} -->
+<header
+	transition:persist
+	transition:name="site-header"
+	transition:animate="none"
+	class="flex flex-row justify-between px-4 group pt-4 items-end fixed z-50 w-dvw left-0 right-0 top-0
+		lg:w-1/5 lg:h-screen lg:flex-col lg:left-0"
+>
+	<NavLogo />
+	<!-- Change menu to hide at 1280 (breakpoint xl or alternatively use a container query) -->
+	<input type="checkbox" id="sidebar-active" class="sr-only lg:hidden" />
+	<label
+		for="sidebar-active"
+		class="w-fit overflow-hidden
+		lg:hidden"
+	>
+		<Button
+			href=""
+			label="Menu"
+			id="sidebarOpenBtn"
+			popovertarget={null}
+			kanji="メニュー"
+			href=""
+			icon={null}
+			target=""
+			disabled={false}
+			hidden={false}
+		/>
+	</label>
+	<label for="sidebar-active" id="sidebar-backdrop" class="lg:hidden sr-only"></label>
+	<Navigation />
+	<div
+		class="absolute left-0 top-0 right-0 h-dvw w-26 -z-10 -rotate-90 origin-top-left
+		bg-[url(../assets/sidebar-bgx2.webp)] bg-right bg-no-repeat bg-cover -scale-x-100
+		sm:w-32
+		md:w-40 md:-rotate-90
+		lg:scale-x-100 lg:bg-right lg:h-screen lg:-rotate-0 lg:w-full"
+	></div>
 </header>
+
+<script>
+	const menuCheckbox = document.getElementById('sidebar-active');
+	const menuOpenBtn = document.getElementById('sidebarOpenBtn');
+	const menuCloseBtn = document.getElementById('sidebarCloseBtn');
+	const menuBackdrop = document.getElementById('sidebar-backdrop');
+	const navBtns = document.querySelectorAll('.nav-btn');
+	const headerHome = document.getElementById('headerLogoLink');
+
+	if (menuCheckbox instanceof HTMLInputElement) {
+		const checkbox = menuCheckbox;
+
+		menuOpenBtn?.addEventListener('click', (e) => {
+			e.preventDefault();
+			checkboxToggle();
+		});
+
+		menuCloseBtn?.addEventListener('click', (e) => {
+			e.preventDefault();
+			checkboxToggle();
+		});
+
+		navBtns.forEach((btn) => {
+			btn.addEventListener('click', (e) => {
+				checkboxToggle();
+			});
+		});
+		headerHome?.addEventListener('click', (e) => {
+			if (checkbox.checked) {
+				checkboxToggle();
+			}
+		});
+
+		function checkboxToggle() {
+			checkbox.checked = !checkbox.checked;
+		}
+
+		checkbox.checked = false;
+	}
+</script>
 
 <script src="../scripts/header.ts"></script>
 <script src="../scripts/menu.ts"></script>

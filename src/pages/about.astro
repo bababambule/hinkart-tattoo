@@ -3,43 +3,52 @@ import Layout from '../layouts/Layout.astro';
 import Heading from '../components/Heading.astro';
 import KanjiTitle from '../components/KanjiTitle.astro';
 import PrideFlag from '../components/PrideFlag.astro';
+import Button from '../components/Button.astro';
 import { Image } from 'astro:assets';
 import aboutImage from '../assets/images/about.webp';
 ---
 
 <Layout>
-	<div class="flex flex-row h-full">
-		<div class="flex-1 h-full">
-			<Image src={aboutImage} alt="The Hinkart Tattoo Studio team" class="h-full object-right object-cover" />
+	<div class="flex flex-col max-w-dvw overflow-x-clip lg:flex-row lg:h-full lg:overflow-x-visible">
+		<div
+			class="mx-auto w-[calc(100%-2rem)] h-80 md:h-[28rem] bg-daintree-300 border-x-4 border-b-4 border-daintree-1000
+				lg:mx-0 lg:w-auto lg:flex-1 lg:h-full lg:bg-transparent lg:border-0"
+		>
+			<Image src={aboutImage} alt="The Hinkart Tattoo Studio team" class="size-full object-cover object-[50%_30%] lg:object-right" />
 		</div>
 
-		<div class="flex-1 h-full flex flex-col pr-16 xl:pt-24">
-			<div class="-ml-32">
-				<Heading title="Hinkart" />
-				<KanjiTitle title="じこしょうかい" />
+		<div class="flex flex-col lg:flex-1 lg:h-full lg:pr-16 xl:pt-24">
+			<div class="-rotate-3 px-2 -mt-8 md:-mt-14 lg:rotate-0 lg:px-0 lg:mt-0 lg:-ml-32">
+				<div class="md:hidden">
+					<Heading title="Hinkart" size="text-6xl" yPos={58} />
+				</div>
+				<div class="hidden md:block">
+					<Heading title="Hinkart" />
+				</div>
+				<KanjiTitle title="じこしょうかい" size="text-3xl md:text-5xl xl:text-7xl" classes="-mt-24 mr-2 text-right md:-mt-12 md:mr-8 lg:mt-0 lg:mr-0 lg:text-left" />
 			</div>
 
-			<div class="text-daintree-100 -ml-64 flex-1 xl:text-2xl">
-				<div class="h-full w-1/5 invisible float-left shape-outside"></div>
+			<div class="text-daintree-100 flex-1 px-4 pt-4 pb-12 md:px-8 md:text-lg lg:px-0 lg:pt-0 lg:pb-0 lg:-ml-64 xl:text-2xl">
+				<div class="hidden lg:block h-full w-1/5 invisible float-left shape-outside"></div>
 
-				<p class="text-4xl leading-normal mb-4">
-					<span class="hidden">Hinkart</span>is a <strong>creative tattoo studio</strong> based in <strong>Groningen, Netherlands.</strong> Home to several
+				<p class="text-2xl md:text-3xl lg:text-4xl leading-snug md:leading-normal mb-6 lg:mb-4">
+					<span class="sr-only">Hinkart </span>is a <strong>creative tattoo studio</strong> based in <strong>Groningen, Netherlands.</strong> Home to several
 					international artists— each with their own unique style and vision. Together, we form a vibrant and inclusive space where art, identity, and personal
 					stories can come to life.
 				</p>
-				<p class="mb-4 leading-relaxed max-w-[75ch]">
+				<p class="mb-6 lg:mb-4 leading-relaxed max-w-[75ch]">
 					At Hinkart you’ll find a studio that celebrates individuality. Whether you’re looking for expressive anime, black horror work, colorful
 					realism, or something completely custom, our Artists with their several years of experience, bring diverse perspectives, and high-quality
 					tattooing.
 				</p>
 				<PrideFlag />
-				<p class="mb-4 leading-relaxed max-w-[75ch]">
+				<p class="mb-6 lg:mb-4 leading-relaxed max-w-[75ch]">
 					We are proudly queer-friendly and committed to providing a safe, welcoming environment for everyone. Your comfort, boundaries, and creative
 					expression matter to us.
 				</p>
-				<div class="flex flex-row gap-4">
-					<p class="font-bold">Come as you are. Leave with something uniquely yours.</p>
-					<a href="artists">Discover the artists</a>
+				<div class="clear-both flex flex-col items-start gap-4 pt-4 md:flex-row md:items-center md:gap-8 lg:clear-none">
+					<p class="font-bold text-xl md:text-lg xl:text-2xl">Come as you are. Leave with something uniquely yours.</p>
+					<Button label="Discover the artists" icon={null} href="/artists" kanji="アーティスト" />
 				</div>
 			</div>
 		</div>

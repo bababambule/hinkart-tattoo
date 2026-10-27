@@ -4,15 +4,19 @@ import Icons from './Icons.astro';
 import FooterLink from './FooterLink.astro';
 ---
 
-<footer class:list={['bg-daintree-1000 w-full text-daintree-100 uppercase text-sm z-0 pl-4 py-8 lg:bottom-6 lg:flex lg:justify-start lg:z-10']}>
+<footer
+	transition:persist
+	class="bg-linear-177 from-daintree-900 from-15% to-daintree-1000 to-15% w-full text-daintree-100 uppercase text-sm z-0 pl-4 py-8
+		lg:bottom-6 lg:flex lg:justify-start lg:z-10"
+>
 	<div
-		class:list={[
-			'grid grid-cols-[1fr,max-content] gap-2',
-			'lg:flex lg:pl-[22.5dvw] lg:pr-8 lg:rounded-tr-md lg:rounded-br-md lg:border-4 lg:min-h-12 lg:flex-row lg:gap-8 lg:pt-0',
-		]}
+		class="grid grid-cols-[1fr,max-content] gap-2
+			lg:flex lg:pl-[22.5dvw] lg:pr-8 lg:rounded-tr-md lg:rounded-br-md lg:border-4 lg:min-h-12 lg:flex-row lg:gap-8 lg:pt-0"
 	>
 		<a href="/" target="_self" class="col-start-1 col-span-1 pl-11">
-			<Logo height={80} width={null} />
+			<div class="w-12">
+				<Logo />
+			</div>
 			<span class="block mt-4 font-bold">Hinkart Tattoo Studio</span>
 		</a>
 		<a

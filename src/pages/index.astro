@@ -1,94 +1,79 @@
 ---
-import Layout from '../layouts/LayoutNew.astro';
-import Navigation from '../components/Navigation.astro';
-
+import { getImage } from 'astro:assets';
+import Layout from '../layouts/Layout.astro';
 import heroVideo from '../assets/hinkart-hero-fast1080pSource-modified-rf50-128audio.webm';
 import heroVideoAlt from '../assets/videos/hero-video_720p-x265-rf40.mp4';
+import heroPosterSrc from '../assets/hero-poster.jpg';
 import IconButton from '../components/IconButton.astro';
 
 const arrayPlayButton = ['Pause', 'Play'];
 const arrayVolumeButton = ['SpeakerHighOff', 'SpeakerHigh'];
 const arraySizeButton = ['Expand'];
+
+// One value drives both the clip and the outline: on mobile the right edge is shortened, from lg the bottom edge.
+const SLANT = 0.95;
+const clipShapeMobile = `polygon(0% 0%, 100% 0%, 100% ${SLANT * 100}%, 0% 100%)`;
+const clipShape = `polygon(0% 0%, 100% 0%, ${SLANT * 100}% 100%, 0% 100%)`;
+const heroPoster = await getImage({ src: heroPosterSrc, format: 'webp', width: 1280 });
 ---
 
 <Layout>
-	<div class:list={['index-wrapper relative h-full flex-1 flex flex-col']}>
-		<div class:list={['index-bg absolute top-0 left-0 size-full z-10']}>
+	<div
+		class="index-wrapper relative h-[calc(100dvh-4rem)] flex-1 flex flex-col
+			lg:h-[calc(100dvh-var(--footer-desktop-h))]"
+		style={`--clip-shape-mobile: ${clipShapeMobile}; --clip-shape: ${clipShape}`}
+	>
+		<div class="index-bg absolute top-0 left-0 size-full z-10 pointer-events-none">
 			<svg
-				xmlns:xlink="http://www.w3.org/1999/xlink"
+				id="video-outline"
+				data-slant={SLANT}
 				width="100%"
 				height="100%"
-				viewBox="0 0 100 100"
-				preserveAspectRatio="none"
 				fill="none"
 				xmlns="http://www.w3.org/2000/svg"
 				class="size-full overflow-visible"
+				aria-hidden="true"
 			>
-				<filter id="videoBorder" x="-30%" y="-30%" width="160%" height="160%">
-					<feTurbulence type="turbulence" baseFrequency="0.01" numOctaves="2" result="turbulence"></feTurbulence>
-					<feDisplacementMap
-						in2="turbulence"
-						in="SourceGraphic"
-						scale="1"
-						xChannelSelector="R"
-						yChannelSelector="G"
-						result="displaced"
-					></feDisplacementMap>
+				<filter id="video-boil" x="-5%" y="-5%" width="110%" height="110%">
+					<feTurbulence type="turbulence" baseFrequency="0.015" numOctaves="2" seed="0" result="noise"></feTurbulence>
+					<feDisplacementMap in="SourceGraphic" in2="noise" scale="3" xChannelSelector="R" yChannelSelector="G"></feDisplacementMap>
 				</filter>
 				<polygon
-					x="0"
-					y="0"
-					points="0,0 100,0 100,90 0,100"
-					width="100%"
-					height="100%"
-					fill="transparent"
+					points="0,0 100,0 95,100 0,100"
 					stroke="black"
 					stroke-width="4"
+					stroke-linejoin="round"
 					vector-effect="non-scaling-stroke"
-					filter="url(#videoBorder)"
+					filter="url(#video-boil)"
 				></polygon>
 			</svg>
 		</div>
 		<div class="relative flex-1 h-full flex flex-col">
-			<div class="absolute bottom-10 right-4 z-10 flex flex-row gap-4 -skew-y-8 origin-bottom-right scale-75">
+			<div
+				class="absolute bottom-4 right-4 z-20 flex flex-row gap-4 -skew-y-5 origin-bottom-right scale-75
+					lg:skew-y-0 lg:scale-100 lg:right-10 lg:bottom-10"
+			>
 				<IconButton id="play-button" label="Pause" icon={arrayPlayButton} />
 				<IconButton id="vol-button" label="Unmute" icon={arrayVolumeButton} />
 				<IconButton id="full-button" label="Fullscreen" icon={arraySizeButton} />
 			</div>
-			<video class="flex-1 h-full object-cover clip-path" id="heroVideo" autoplay playsinline muted loop>
+			<video class="flex-1 h-full object-cover clip-path" id="heroVideo" poster={heroPoster.src} preload="metadata" autoplay playsinline muted loop>
 				<source src={heroVideo} type="video/webm" />
 				<source src={heroVideoAlt} type="video/mp4" />
 			</video>
 		</div>
 	</div>
-	<!-- <div class="trapezoid-outline h-full relative">
-		<div class="absolute bottom-7 right-[calc(5%+1.5rem)] z-50 flex flex-row gap-4" id="videoControls">
-			<IconButton id="play-button" label="Pause" icon={arrayPlayButton} />
-			<IconButton id="vol-button" label="Unmute" icon={arrayVolumeButton} />
-		</div>
-		<video autoplay playsinline loading="eager" muted loop class="trapezoid h-full object-cover" id="heroVideo">
-			<source src={heroVideo} type="video/webm" />
-		</video>
-	</div> -->
 </Layout>
 
 <style>
-	:root {
-		--clip-shape: polygon(0% 0%, 100% 0%, 95% 100%, 0% 100%);
-	}
-
 	.clip-path {
-		clip-path: polygon(0% 0%, 100% 0%, 100% 90%, 0% 100%);
+		clip-path: var(--clip-shape-mobile);
 	}
 
-	.trapezoid {
-		clip-path: var(--clip-shape);
-	}
-
-	.trapezoid-outline {
-		background: black;
-		padding: 0.5rem;
-		clip-path: var(--clip-shape);
+	@media (width >= 64rem) {
+		.clip-path {
+			clip-path: var(--clip-shape);
+		}
 	}
 </style>
 

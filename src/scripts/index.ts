@@ -1,96 +1,121 @@
-const video = document.querySelector('video');
-const play = document.getElementById('play-button');
-const playIcons = play?.querySelectorAll('svg');
-const playArray = Array.from(playIcons);
-const volume = document.getElementById('vol-button');
-const volumeIcons = volume?.querySelectorAll('svg');
-const volumeArray = Array.from(volumeIcons);
-const fullscreenButton = document.querySelector('#full-button');
-const supportsFullscreen = !!video.webkitRequestFullscreen;
-let fullscreenToggle = false;
+import { boilFilter } from './hinkartLogoAnimations';
 
-let isVideoReady = false;
+type WebkitVideo = HTMLVideoElement & {
+	webkitEnterFullscreen?: () => void;
+	webkitRequestFullscreen?: () => void;
+};
 
-video.addEventListener('loadedmetadata', () => {
-	isVideoReady = true;
-	fullscreenButton.disabled = false; // Enable button
-});
+let cleanup: (() => void) | null = null;
 
-// Fallback: If metadata takes too long, use 'canplay'
-video.addEventListener('canplay', () => {
-	if (!isVideoReady) isVideoReady = true;
-});
+function init() {
+	cleanup?.();
+	const video = document.querySelector<WebkitVideo>('#heroVideo');
+	if (!video) return;
 
-play.addEventListener('click', handlePlayButton);
-volume.addEventListener('click', handleVolButton);
-fullscreenButton.addEventListener('click', openFullscreen);
+	const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+	const controller = new AbortController();
+	const { signal } = controller;
 
-video.addEventListener('fullscreenchange', (e) => {
-	if (fullscreenToggle === false) {
-		fullscreenToggle = true;
-		video.classList.remove('clip-path');
-	} else {
-		fullscreenToggle = false;
-		video.classList.add('clip-path');
-	}
-});
+	/* Outline: keep the polygon in pixel space so the boil noise isn't stretched */
+	const outline = document.querySelector<SVGSVGElement>('#video-outline');
+	const polygon = outline?.querySelector('polygon');
+	const filter = outline?.querySelector('filter');
+	const slant = Number(outline?.dataset.slant ?? 1);
+	const desktop = window.matchMedia('(width >= 64rem)'); // Tailwind lg, matches the clip-path in index.astro
 
-function toggleButton(playing) {
-	if (playing) {
-		playArray[0].classList.remove('hidden');
-		playArray[1].classList.add('hidden');
-		play.setAttribute('aria-label', 'Pause');
-	} else {
-		playArray[0].classList.add('hidden');
-		playArray[1].classList.remove('hidden');
-		play.setAttribute('aria-label', 'Play');
-	}
+	let size = { w: 0, h: 0 };
+	const drawOutline = () => {
+		const { w, h } = size;
+		const corner = desktop.matches ? `${w * slant},${h}` : `${w},${h * slant}`;
+		polygon?.setAttribute('points', `0,0 ${w},0 ${corner} 0,${h}`);
+	};
+	const resizeObserver = new ResizeObserver(([entry]) => {
+		size = { w: entry.contentRect.width, h: entry.contentRect.height };
+		drawOutline();
+	});
+	desktop.addEventListener('change', drawOutline, { signal });
+	if (outline) resizeObserver.observe(outline);
+
+	const boil = filter ? boilFilter(filter) : null;
+
+	/* Buttons reflect the video's state, whatever changed it */
+	const play = document.getElementById('play-button');
+	const volume = document.getElementById('vol-button');
+	const fullscreen = document.getElementById('full-button');
+	const [pauseIcon, playIcon] = Array.from(play?.querySelectorAll('svg') ?? []);
+	const [mutedIcon, soundIcon] = Array.from(volume?.querySelectorAll('svg') ?? []);
+
+	const syncPlay = () => {
+		pauseIcon?.classList.toggle('hidden', video.paused);
+		playIcon?.classList.toggle('hidden', !video.paused);
+		play?.setAttribute('aria-label', video.paused ? 'Play' : 'Pause');
+	};
+	const syncVolume = () => {
+		mutedIcon?.classList.toggle('hidden', !video.muted);
+		soundIcon?.classList.toggle('hidden', video.muted);
+		volume?.setAttribute('aria-label', video.muted ? 'Unmute' : 'Mute');
+	};
+
+	video.addEventListener('play', syncPlay, { signal });
+	video.addEventListener('pause', syncPlay, { signal });
+	video.addEventListener('volumechange', syncVolume, { signal });
+
+	play?.addEventListener(
+		'click',
+		() => {
+			if (video.paused) video.play().catch(() => syncPlay());
+			else video.pause();
+		},
+		{ signal },
+	);
+	volume?.addEventListener('click', () => (video.muted = !video.muted), { signal });
+	fullscreen?.addEventListener(
+		'click',
+		() => {
+			if (video.webkitEnterFullscreen) video.webkitEnterFullscreen(); // iOS
+			else if (video.requestFullscreen) video.requestFullscreen();
+			else video.webkitRequestFullscreen?.(); // older Safari
+		},
+		{ signal },
+	);
+
+	// The clip would cut into the fullscreen video, so drop it while fullscreen
+	const syncFullscreen = () => video.classList.toggle('clip-path', document.fullscreenElement !== video);
+	document.addEventListener('fullscreenchange', syncFullscreen, { signal });
+	document.addEventListener('webkitfullscreenchange', syncFullscreen, { signal });
+
+	// Save battery while the tab is hidden; only resume what we paused
+	let pausedByVisibility = false;
+	document.addEventListener(
+		'visibilitychange',
+		() => {
+			if (document.hidden) {
+				boil?.pause();
+				if (!video.paused) {
+					video.pause();
+					pausedByVisibility = true;
+				}
+			} else {
+				boil?.resume();
+				if (pausedByVisibility) video.play().catch(() => {});
+				pausedByVisibility = false;
+			}
+		},
+		{ signal },
+	);
+
+	if (reducedMotion) video.pause();
+	else if (video.paused) video.play().catch(() => {}); // autoplay can be blocked; buttons stay in sync either way
+	syncPlay();
+	syncVolume();
+
+	cleanup = () => {
+		controller.abort();
+		resizeObserver.disconnect();
+		boil?.kill();
+		cleanup = null;
+	};
 }
 
-function toggleVolButton(muted) {
-	if (muted) {
-		volumeArray[0].classList.remove('hidden');
-		volumeArray[1].classList.add('hidden');
-		volume.setAttribute('aria-label', 'Unmute');
-	} else {
-		volumeArray[0].classList.add('hidden');
-		volumeArray[1].classList.remove('hidden');
-		volume.setAttribute('aria-label', 'Mute');
-	}
-}
-
-function handlePlayButton() {
-	if (video.paused) {
-		video.play();
-		toggleButton(true);
-	} else {
-		video.pause();
-		toggleButton(false);
-	}
-}
-
-function handleVolButton() {
-	if (video.muted) {
-		video.muted = false;
-		toggleVolButton(false);
-	} else {
-		video.muted = true;
-		toggleVolButton(true);
-	}
-}
-
-function openFullscreen() {
-	/* if (!supportsFullscreen) {
-		alert('Fullscreen not supported on this browser.');
-		return;
-	} else { */
-	if (video?.webkitEnterFullscreen) {
-		video?.webkitEnterFullscreen();
-	} else if (video?.requestFullscreen) {
-		video?.requestFullscreen();
-	} else if (video?.webkitRequestFullscreen) {
-		/* Safari */
-		video?.webkitRequestFullscreen();
-	}
-	/* } */
-}
+document.addEventListener('astro:page-load', init);
+document.addEventListener('astro:before-swap', () => cleanup?.());

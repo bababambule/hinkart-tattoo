@@ -10,6 +10,6 @@
 	"arrowParens": "always",
 	"endOfLine": "lf",
 	"plugins": ["prettier-plugin-astro", "prettier-plugin-tailwindcss"],
-  	"overrides": [{ "files": "*.astro", "options": { "parser": "astro" } }],
+	"overrides": [{ "files": "*.astro", "options": { "parser": "astro" } }],
 	"tailwindStylesheet": "./src/styles/global.css"
 }

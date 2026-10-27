@@ -1,24 +1,26 @@
 ---
-interface props {
-  title: string;
+interface Props {
+	title: string;
+	size: string;
+	classes: string;
 }
 
-const { title } = Astro.props;
+const { title = 'カンジ', size = 'text-3xl xl:text-7xl', classes } = Astro.props;
 ---
 
 <div
-  class="font-kanji text-7xl text-winter-sky-600 relative tracking-tighter kanji-outline z-10 -rotate-3 -mt-20 mb-16 ml-64"
-  data-title={title}
-  id="kanjiTitle"
+	class:list={['font-kanji text-winter-sky-600 relative tracking-tighter kanji-outline z-10 -rotate-3', size, classes]}
+	data-title={title}
+	id="kanjiTitle"
 >
-  {title}
+	{title}
 </div>
 
 <script src="../scripts/kanjiTitle.js"></script>
 
 <style>
-  .kanji-outline {
-    -webkit-text-stroke: 0.6rem var(--color-winter-sky-800);
-    paint-order: stroke fill;
-  }
+	.kanji-outline {
+		-webkit-text-stroke: 0.6rem var(--color-winter-sky-800);
+		paint-order: stroke fill;
+	}
 </style>

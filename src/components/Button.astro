@@ -1,14 +1,14 @@
 ---
 interface Props {
 	icon: string | null;
-	href: string;
+	href: string | null;
 	label: string;
 	kanji: string;
 	id: string;
 	target: string;
 	disabled: boolean;
 	hidden: boolean;
-	popovertarget: string;
+	popovertarget: string | null;
 }
 
 const { icon, href, label, kanji, id, target, disabled, hidden = false, popovertarget } = Astro.props;
@@ -16,7 +16,7 @@ const { icon, href, label, kanji, id, target, disabled, hidden = false, popovert
 let Tag;
 let Destination;
 
-if (href == '') {
+if (href == '' && href == null) {
 	Tag = 'button';
 } else {
 	Tag = 'a';

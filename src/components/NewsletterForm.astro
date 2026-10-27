@@ -1,0 +1,16 @@
+---
+import InputField from './form/InputField.astro';
+import Button from './Button.astro';
+---
+
+<form
+	action="https://f1e00844.sibforms.com/serve/MUIFAK4cAQElbBRlLyLr46FENOFX_wEEBoNed_b2zO_cKW_ZgvB8-HLYvE3by9A7gaESfnXpA-gbotMnhKF9yTzpwpKgSu6RMkngYW4zo6Ab-NVcGP6eVLLkLNYjSsbCGV2rcsKRsocySbvZbjX_vom-Y-MPS68D10aImyvcIOvCgjT-x8D8pAybvY1h5d_k8csC3HDumeFO1FxFWQ=="
+	method="post"
+	class="flex flex-col gap-4"
+>
+	<InputField type="text" name="name" id="newsletterName" label="Name" placeholder="Name" maxLength={255} required />
+	<InputField type="email" name="email" id="newsletterEmail" label="Email" placeholder="Email address" maxLength={255} required />
+	<div class="self-start">
+		<Button icon="map" href="" label="Join the List" kanji="りすとにさんか" id="newsletterSubmit" />
+	</div>
+</form>

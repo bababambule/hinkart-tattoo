@@ -65,8 +65,13 @@
 	paint-order: stroke fill;
 }
 
+@utility stroke-color-* {
+	-webkit-text-stroke-color: --value(--color-*);
+}
+
 @utility text-stroke-width-* {
-	-webkit-text-stroke-width: ---value(--font-size-*);
+	-webkit-text-stroke-width: --value([length]);
+	paint-order: stroke fill;
 }
 
 @utility interpolate {
@@ -135,6 +140,16 @@
 	--font-kanji: 'NotoSansJP', sans-serif;
 }
 
+:root {
+	--footer-desktop-h: 12rem;
+}
+
 html {
 	font-family: 'Atkinson', sans-serif;
+}
+
+/* View transitions render snapshots in their own layer, ignoring regular z-index.
+   Keep the persisted header's snapshot above the animating main content. */
+::view-transition-group(site-header) {
+	z-index: 100;
 }

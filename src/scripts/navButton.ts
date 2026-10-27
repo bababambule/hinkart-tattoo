@@ -1,31 +1,27 @@
 import { gsap } from "./gsap";
 
+const ease = "elastic.out(1,0.3)";
+
+// overwrite: true kills any running hover tween on the same element,
+// so enter/leave/reset never fight each other
+function hoverIn(btn: HTMLElement) {
+  gsap.to(btn.querySelector(".label"), { y: -10, duration: 0.5, ease, overwrite: true });
+  gsap.to(btn.querySelector(".bar"), { opacity: 1, scaleY: 1, duration: 0.8, ease, overwrite: true });
+}
+
+function hoverOut(btn: HTMLElement, instant = false) {
+  gsap.to(btn.querySelector(".label"), { y: 0, duration: instant ? 0 : 0.5, ease, overwrite: true });
+  gsap.to(btn.querySelector(".bar"), { opacity: 0, scaleY: 0, duration: instant ? 0 : 0.8, ease, overwrite: true });
+}
+
 document.querySelectorAll<HTMLElement>(".nav-btn").forEach((btn) => {
-  const label = btn.querySelector<HTMLElement>(".label");
-  const bar = btn.querySelector<HTMLElement>(".bar");
-
-  if (!label || !bar) return; // TS forces you to handle the null case
-
-  btn.addEventListener("mouseenter", () => {
-    gsap.to(label, { y: -10, duration: 0.5, ease: "elastic.out(1,0.3)" });
-    gsap.to(bar, {
-      opacity: 1,
-      scaleY: 1,
-      duration: 0.8,
-      ease: "elastic.out(1,0.3)",
-    });
-  });
-
-  btn.addEventListener("mouseleave", () => {
-    gsap.to(label, { y: 0, duration: 0.5, ease: "elastic.out(1,0.3)" });
-    gsap.to(bar, {
-      opacity: 0,
-      scaleY: 0,
-      duration: 0.8,
-      ease: "elastic.out(1,0.3)",
-    });
-  });
+  btn.addEventListener("mouseenter", () => hoverIn(btn));
+  btn.addEventListener("mouseleave", () => hoverOut(btn));
 });
+
+// The header is persisted across view transitions, so the server-rendered
+// active state goes stale. Re-sync it on every navigation instead.
+const activeTimelines = new Map<HTMLElement, ReturnType<typeof gsap.timeline>>();
 
 document.querySelectorAll<HTMLElement>(".nav-btn--active").forEach((btn) => {
   const label = btn.querySelector<HTMLElement>(".label");
@@ -33,7 +29,7 @@ document.querySelectorAll<HTMLElement>(".nav-btn--active").forEach((btn) => {
   const barLeft = btn.querySelector<HTMLElement>(".bar-left");
   const barRight = btn.querySelector<HTMLElement>(".bar-right");
 
-  let tl = gsap.timeline();
+  let tl = gsap.timeline({ paused: true });
 
   tl.from(label, {
     y: 25,
@@ -70,4 +66,36 @@ document.querySelectorAll<HTMLElement>(".nav-btn--active").forEach((btn) => {
     },
     0.25,
   );
+
+  activeTimelines.set(btn, tl);
 });
+
+function isActivePath(url: string) {
+  const path = window.location.pathname;
+  return path === url || path.startsWith(`${url}/`);
+}
+
+function updateActiveNav() {
+  document.querySelectorAll<HTMLElement>(".nav-btn").forEach((link) => {
+    const active = isActivePath(link.dataset.navUrl ?? "");
+    link.classList.toggle("hidden", active);
+    link.classList.toggle("block", !active);
+
+    // mouseleave doesn't fire while the view transition overlay covers the page,
+    // so reset every link the cursor isn't actually over anymore
+    if (active) hoverOut(link, true);
+    else if (!link.matches(":hover")) hoverOut(link);
+  });
+
+  activeTimelines.forEach((tl, btn) => {
+    const active = isActivePath(btn.dataset.navUrl ?? "");
+    const wasVisible = !btn.classList.contains("hidden");
+    btn.classList.toggle("hidden", !active);
+    btn.classList.toggle("block", active);
+
+    if (active && (!wasVisible || tl.progress() === 0)) tl.restart();
+  });
+}
+
+// Fires on the initial load and after every client-side navigation
+document.addEventListener("astro:page-load", updateActiveNav);
