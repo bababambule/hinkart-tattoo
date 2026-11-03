@@ -3,11 +3,9 @@ import Icons from './Icons.astro';
 const { icon, label, id } = Astro.props;
 ---
 
-<button type="button" id={id} aria-label={label} class="w-16 h-16 relative">
-	<div class="w-full h-full -skew-3 bg-winter-sky-600 rounded-sm"></div>
+<button type="button" id={id} aria-label={label} class="relative h-16 w-16">
+	<div class="h-full w-full -skew-3 rounded-sm bg-winter-sky-600"></div>
 	<div class="absolute top-0 text-winter-sky-50">
-		{icon.map((el: string, index: number) => (
-			<Icons icon={el} size={64} classes={index == 0 ? '' : 'hidden'} />
-		))}
+		{icon.map((el: string, index: number) => <Icons icon={el} size={64} classes={index == 0 ? '' : 'hidden'} />)}
 	</div>
 </button>

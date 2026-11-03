@@ -20,7 +20,7 @@ const newsletterBenefits = [
 ];
 ---
 
-<div class="p-2 mt-12">
+<div class="mt-12 p-2 lg:hidden">
 	<div class="relative">
 		<svg width="100%" height="4.5rem" class="absolute top-3 overflow-visible">
 			<rect
@@ -32,32 +32,25 @@ const newsletterBenefits = [
 				stroke-width="4px"
 				stroke="var(--color-winter-sky-1000)"
 				filter="url(#displacementFilter)"
-				class="-skew-y-4"
-			></rect>
+				class="-skew-y-4"></rect>
 		</svg>
 		<div class="relative z-10 flex flex-row gap-4">
 			<label for="newsletterTrigger" class="flex-1">
 				<NewsletterIcon />
 			</label>
-			<div class="font-display text-daintree-200 -rotate-2 stroke-color-black text-stroke-width-[0.3rem] pr-8 long-shadow-xs [--ls-from:black] [--ls-to:black]">
-				<p
-					class="text-2xl leading-7
-						xl:text-3xl xl:leading-4"
-				>
+			<div
+				class="-rotate-2 pr-8 font-display text-daintree-200 text-stroke-width-[0.3rem] [--ls-from:black] [--ls-to:black] long-shadow-xs stroke-color-black"
+			>
+				<p class="text-2xl leading-7 xl:text-3xl xl:leading-4">
 					Subscribe to our
-					<span class="inline-block -rotate-3 font-bold stroke-color-rose-bud-cherry-500 text-rose-bud-cherry-300">ニュースレター</span>
+					<span class="inline-block -rotate-3 font-bold text-rose-bud-cherry-300 stroke-color-rose-bud-cherry-500">ニュースレター</span>
 				</p>
-				<p
-					class="text-3xl
-					xl:text-7xl long-shadow-sm [--ls-from:black] [--ls-to:black]"
-				>
-					Newsletter
-				</p>
+				<p class="text-3xl [--ls-from:black] [--ls-to:black] long-shadow-sm xl:text-7xl">Newsletter</p>
 			</div>
 		</div>
 	</div>
 	<div class="relative">
-		<svg width="100%" class="absolute top-3 overflow-visible h-[93%]">
+		<svg width="100%" class="absolute top-3 h-[93%] overflow-visible">
 			<rect
 				x="0"
 				y="0"
@@ -67,17 +60,18 @@ const newsletterBenefits = [
 				stroke-width="4px"
 				stroke="var(--color-winter-sky-1000)"
 				filter="url(#displacementFilter)"
-				class="-skew-y-2"
-			></rect>
+				class="-skew-y-2"></rect>
 		</svg>
 		<div class="flex flex-col gap-8 p-3 pt-6">
-			<ul class="flex flex-row flex-wrap gap-x-3 gap-y-4 items-start">
-				{newsletterBenefits.map((benefit) => (
-					<li class="bg-winter-sky-900 text-winter-sky-100 text-md font-bold pl-3 pr-10 py-2 -skew-2 relative even:-translate-y-1.5">
-						<span class="max-w-[10ch] inline-block">{benefit.text}</span>
-						<Image src={benefit.icon} alt="icon" width={40} class={'absolute -top-1 -right-2'} />
-					</li>
-				))}
+			<ul class="flex flex-row flex-wrap items-start gap-x-3 gap-y-4">
+				{
+					newsletterBenefits.map((benefit) => (
+						<li class="text-md relative -skew-2 bg-winter-sky-900 py-2 pr-10 pl-3 font-bold text-winter-sky-100 even:-translate-y-1.5">
+							<span class="inline-block max-w-[10ch]">{benefit.text}</span>
+							<Image src={benefit.icon} alt="icon" width={40} class={'absolute -top-1 -right-2'} />
+						</li>
+					))
+				}
 			</ul>
 			<NewsletterForm />
 		</div>

@@ -3,51 +3,54 @@ import Layout from '../layouts/Layout.astro';
 import Heading from '../components/Heading.astro';
 import KanjiTitle from '../components/KanjiTitle.astro';
 import PrideFlag from '../components/PrideFlag.astro';
-import Button from '../components/Button.astro';
+import Button from '../components/ui/Button.astro';
 import { Image } from 'astro:assets';
 import aboutImage from '../assets/images/about.webp';
 ---
 
 <Layout>
-	<div class="flex flex-col max-w-dvw overflow-x-clip lg:flex-row lg:h-full lg:overflow-x-visible">
+	<div class="flex max-w-dvw flex-col overflow-x-clip lg:h-full lg:flex-row lg:overflow-x-visible">
 		<div
-			class="mx-auto w-[calc(100%-2rem)] h-80 md:h-[28rem] bg-daintree-300 border-x-4 border-b-4 border-daintree-1000
-				lg:mx-0 lg:w-auto lg:flex-1 lg:h-full lg:bg-transparent lg:border-0"
+			class="mx-auto h-80 w-[calc(100%-2rem)] border-x-4 border-b-4 border-daintree-1000 bg-daintree-300 md:h-[28rem] lg:mx-0 lg:h-full lg:w-auto lg:flex-1 lg:border-0 lg:bg-transparent"
 		>
 			<Image src={aboutImage} alt="The Hinkart Tattoo Studio team" class="size-full object-cover object-[50%_30%] lg:object-right" />
 		</div>
 
-		<div class="flex flex-col lg:flex-1 lg:h-full lg:pr-16 xl:pt-24">
-			<div class="-rotate-3 px-2 -mt-8 md:-mt-14 lg:rotate-0 lg:px-0 lg:mt-0 lg:-ml-32">
+		<div class="flex flex-col lg:h-full lg:flex-1 lg:pr-16 xl:pt-24">
+			<div class="-mt-8 -rotate-3 px-2 md:-mt-14 lg:mt-0 lg:-ml-32 lg:rotate-0 lg:px-0">
 				<div class="md:hidden">
 					<Heading title="Hinkart" size="text-6xl" yPos={58} />
 				</div>
 				<div class="hidden md:block">
 					<Heading title="Hinkart" />
 				</div>
-				<KanjiTitle title="じこしょうかい" size="text-3xl md:text-5xl xl:text-7xl" classes="-mt-24 mr-2 text-right md:-mt-12 md:mr-8 lg:mt-0 lg:mr-0 lg:text-left" />
+				<KanjiTitle
+					title="じこしょうかい"
+					size="text-3xl md:text-5xl xl:text-7xl"
+					classes="-mt-24 mr-2 text-right md:-mt-12 md:mr-8 lg:mt-0 lg:mr-0 lg:text-left"
+				/>
 			</div>
 
-			<div class="text-daintree-100 flex-1 px-4 pt-4 pb-12 md:px-8 md:text-lg lg:px-0 lg:pt-0 lg:pb-0 lg:-ml-64 xl:text-2xl">
-				<div class="hidden lg:block h-full w-1/5 invisible float-left shape-outside"></div>
+			<div class="flex-1 px-4 pt-4 pb-12 text-daintree-100 md:px-8 md:text-lg lg:-ml-64 lg:px-0 lg:pt-0 lg:pb-0 xl:text-2xl">
+				<div class="shape-outside invisible float-left hidden h-full w-1/5 lg:block"></div>
 
-				<p class="text-2xl md:text-3xl lg:text-4xl leading-snug md:leading-normal mb-6 lg:mb-4">
+				<p class="mb-6 text-2xl leading-snug md:text-3xl md:leading-normal lg:mb-4 lg:text-4xl">
 					<span class="sr-only">Hinkart </span>is a <strong>creative tattoo studio</strong> based in <strong>Groningen, Netherlands.</strong> Home to several
 					international artists— each with their own unique style and vision. Together, we form a vibrant and inclusive space where art, identity, and personal
 					stories can come to life.
 				</p>
-				<p class="mb-6 lg:mb-4 leading-relaxed max-w-[75ch]">
+				<p class="mb-6 max-w-[75ch] leading-relaxed lg:mb-4">
 					At Hinkart you’ll find a studio that celebrates individuality. Whether you’re looking for expressive anime, black horror work, colorful
 					realism, or something completely custom, our Artists with their several years of experience, bring diverse perspectives, and high-quality
 					tattooing.
 				</p>
 				<PrideFlag />
-				<p class="mb-6 lg:mb-4 leading-relaxed max-w-[75ch]">
+				<p class="mb-6 max-w-[75ch] leading-relaxed lg:mb-4">
 					We are proudly queer-friendly and committed to providing a safe, welcoming environment for everyone. Your comfort, boundaries, and creative
 					expression matter to us.
 				</p>
 				<div class="clear-both flex flex-col items-start gap-4 pt-4 md:flex-row md:items-center md:gap-8 lg:clear-none">
-					<p class="font-bold text-xl md:text-lg xl:text-2xl">Come as you are. Leave with something uniquely yours.</p>
+					<p class="text-xl font-bold md:text-lg xl:text-2xl">Come as you are. Leave with something uniquely yours.</p>
 					<Button label="Discover the artists" icon={null} href="/artists" kanji="アーティスト" />
 				</div>
 			</div>

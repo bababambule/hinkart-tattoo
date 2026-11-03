@@ -12,12 +12,12 @@ const { type, name, id, label, placeholder, maxLength, required } = Astro.props;
 ---
 
 <label for={id} id=`${id}Wrapper` class="flex flex-col">
-	<div class="-rotate-1 origin-top-left relative">
+	<div class="relative origin-top-left -rotate-1">
 		<select
 			name={name}
 			id={id}
 			required={required}
-			class="bg-daintree-700 w-full pl-8 pr-20 py-4 text-daintree-100 placeholder:text-daintree-500 hover:bg-daintree-800 rounded-sm transition-colors duration-200"
+			class="w-full rounded-sm bg-daintree-700 py-4 pr-20 pl-8 text-daintree-100 transition-colors duration-200 placeholder:text-daintree-500 hover:bg-daintree-800"
 		>
 			<slot />
 		</select>

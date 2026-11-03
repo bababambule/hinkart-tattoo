@@ -1,0 +1,20 @@
+---
+import NavLogo from '../brand/NavLogo.astro';
+import Navigation from '../sections/Navigation.astro';
+---
+
+<header
+	transition:persist
+	transition:name="site-header"
+	transition:animate="none"
+	class="fixed top-0 right-0 left-0 z-50 flex w-dvw flex-row items-end justify-between px-4 pt-4 lg:left-0 lg:h-screen lg:w-1/5 lg:flex-col lg:justify-start lg:gap-8 lg:py-12"
+>
+	<NavLogo />
+	<Navigation />
+	<div
+		class="absolute top-0 left-0 hidden w-full bg-[url(../assets/sidebar-bgx2.webp)] bg-cover bg-right bg-no-repeat lg:block lg:h-screen lg:w-full lg:scale-x-100 lg:-rotate-0 lg:bg-right"
+	>
+	</div>
+</header>
+
+<script src="../../scripts/menu.ts"></script>

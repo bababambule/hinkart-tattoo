@@ -1,0 +1,12 @@
+<mj-head>
+	<mj-style>
+		body {
+			background-image: url('./assets/halftone/halftone_1x.webp');
+			background-color: #ff007b;
+			background-size: cover;
+			background-repeat: no-repeat;
+			background-position: top center;
+		}
+	</mj-style>
+	<mj-font name="Rubik Spray Paint" href="https://fonts.googleapis.com/css2?family=Rubik+Spray+Paint" />
+</mj-head>

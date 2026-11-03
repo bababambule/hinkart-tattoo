@@ -1,0 +1,11 @@
+---
+const { img, alt, classes } = Astro.props;
+
+import { Image } from 'astro:assets';
+---
+
+<div
+	class="mx-auto h-90 w-[calc(100%-2rem)] border-r-4 border-b-4 border-l-4 border-daintree-1000 bg-daintree-300 lg:h-full lg:flex-1 lg:border-0 lg:bg-transparent"
+>
+	<Image src={img} alt={alt} class:list={['size-full object-cover lg:object-right', classes]} />
+</div>

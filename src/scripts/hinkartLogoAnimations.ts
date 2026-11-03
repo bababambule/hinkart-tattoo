@@ -14,10 +14,10 @@
  * Every loop starts and ends on the untouched logo, so finish() can always
  * hand over to the next animation without a jump.
  */
-import { gsap } from "gsap";
+import { gsap } from 'gsap';
 
-export const LOADING_ANIMATIONS = ["inkDrip", "needleBuzz", "stampPress", "splitSeal", "inkFill"] as const;
-export const IDLE_ANIMATIONS = ["lineBoil", "breathe", "dropSway", "hover", "sheen"] as const;
+export const LOADING_ANIMATIONS = ['inkDrip', 'needleBuzz', 'stampPress', 'splitSeal', 'inkFill'] as const;
+export const IDLE_ANIMATIONS = ['lineBoil', 'breathe', 'dropSway', 'hover', 'sheen'] as const;
 
 export type LoadingAnimation = (typeof LOADING_ANIMATIONS)[number];
 export type IdleAnimation = (typeof IDLE_ANIMATIONS)[number];
@@ -42,7 +42,7 @@ export interface LogoAnimator {
 /* Internals                                                           */
 /* ------------------------------------------------------------------ */
 
-const SVG_NS = "http://www.w3.org/2000/svg";
+const SVG_NS = 'http://www.w3.org/2000/svg';
 
 interface Offset {
 	el: SVGFEOffsetElement;
@@ -72,28 +72,28 @@ type OnDispose = (fn: () => void) => void;
 type Builder = (p: Parts, onDispose: OnDispose) => gsap.core.Timeline;
 
 function getParts(svg: SVGSVGElement): Parts {
-	const badge = svg.querySelector<SVGElement>(":scope > circle");
-	const logo = svg.querySelector<SVGGElement>(":scope > g");
-	const dropOutline = logo?.querySelector<SVGElement>(":scope > use");
-	const inner = logo?.querySelector<SVGGElement>(":scope > g");
-	const [left, right, dropFill] = inner ? Array.from(inner.querySelectorAll<SVGElement>(":scope > use")) : [];
+	const badge = svg.querySelector<SVGElement>(':scope > circle');
+	const logo = svg.querySelector<SVGGElement>(':scope > g');
+	const dropOutline = logo?.querySelector<SVGElement>(':scope > use');
+	const inner = logo?.querySelector<SVGGElement>(':scope > g');
+	const [left, right, dropFill] = inner ? Array.from(inner.querySelectorAll<SVGElement>(':scope > use')) : [];
 
 	if (!badge || !logo || !dropOutline || !left || !right || !dropFill) {
-		throw new Error("hinkartLogoAnimations: logo markup not recognised");
+		throw new Error('hinkartLogoAnimations: logo markup not recognised');
 	}
 
-	const filter = svg.getElementsByTagNameNS(SVG_NS, "filter")[0];
-	const turbulence = (filter?.getElementsByTagNameNS(SVG_NS, "feTurbulence")[0] as SVGFETurbulenceElement) ?? null;
-	const displacement = (filter?.getElementsByTagNameNS(SVG_NS, "feDisplacementMap")[0] as SVGFEDisplacementMapElement) ?? null;
+	const filter = svg.getElementsByTagNameNS(SVG_NS, 'filter')[0];
+	const turbulence = (filter?.getElementsByTagNameNS(SVG_NS, 'feTurbulence')[0] as SVGFETurbulenceElement) ?? null;
+	const displacement = (filter?.getElementsByTagNameNS(SVG_NS, 'feDisplacementMap')[0] as SVGFEDisplacementMapElement) ?? null;
 	const offsets: Offset[] = filter
-		? Array.from(filter.getElementsByTagNameNS(SVG_NS, "feOffset")).map((el) => ({
+		? Array.from(filter.getElementsByTagNameNS(SVG_NS, 'feOffset')).map((el) => ({
 				el: el as SVGFEOffsetElement,
-				dx: Number(el.getAttribute("dx") ?? 0),
-				dy: Number(el.getAttribute("dy") ?? 0),
+				dx: Number(el.getAttribute('dx') ?? 0),
+				dy: Number(el.getAttribute('dy') ?? 0),
 			}))
 		: [];
 	const deepest = offsets.reduce((m, o) => (o.dx + o.dy > m.dx + m.dy ? { dx: o.dx, dy: o.dy } : m), { dx: 0, dy: 0 });
-	const mask = svg.getElementsByTagNameNS(SVG_NS, "mask")[0];
+	const mask = svg.getElementsByTagNameNS(SVG_NS, 'mask')[0];
 
 	return {
 		svg,
@@ -109,8 +109,8 @@ function getParts(svg: SVGSVGElement): Parts {
 		deepest,
 		maskId: mask?.id || null,
 		base: {
-			seed: turbulence?.getAttribute("seed") ?? "0",
-			scale: displacement?.getAttribute("scale") ?? "2",
+			seed: turbulence?.getAttribute('seed') ?? '0',
+			scale: displacement?.getAttribute('scale') ?? '2',
 		},
 	};
 }
@@ -118,8 +118,8 @@ function getParts(svg: SVGSVGElement): Parts {
 /** Scales the 6-step extrusion. 1 = original, 0 = flat, >1 = deeper. */
 function setDepth(p: Parts, depth: number) {
 	for (const o of p.offsets) {
-		o.el.setAttribute("dx", String(o.dx * depth));
-		o.el.setAttribute("dy", String(o.dy * depth));
+		o.el.setAttribute('dx', String(o.dx * depth));
+		o.el.setAttribute('dy', String(o.dy * depth));
 	}
 }
 
@@ -131,10 +131,10 @@ function depthProxy(p: Parts) {
 function reset(p: Parts) {
 	const moved = [...p.whole, p.left, p.right, ...p.drop];
 	gsap.killTweensOf(moved);
-	gsap.set(moved, { clearProps: "transform,opacity" });
+	gsap.set(moved, { clearProps: 'transform,opacity' });
 	setDepth(p, 1);
-	p.turbulence?.setAttribute("seed", p.base.seed);
-	p.displacement?.setAttribute("scale", p.base.scale);
+	p.turbulence?.setAttribute('seed', p.base.seed);
+	p.displacement?.setAttribute('scale', p.base.scale);
 }
 
 function svgEl<K extends keyof SVGElementTagNameMap>(tag: K, attrs: Record<string, string | number> = {}) {
@@ -145,7 +145,7 @@ function svgEl<K extends keyof SVGElementTagNameMap>(tag: K, attrs: Record<strin
 
 /** A layer clipped to the logo silhouette via the existing #hk-mask. */
 function maskedOverlay(p: Parts, onDispose: OnDispose) {
-	const g = svgEl("g", { mask: `url(#${p.maskId})`, "pointer-events": "none" });
+	const g = svgEl('g', { mask: `url(#${p.maskId})`, 'pointer-events': 'none' });
 	p.svg.appendChild(g);
 	onDispose(() => g.remove());
 	return g;
@@ -167,15 +167,15 @@ function wavePath() {
 const inkDrip: Builder = (p) =>
 	gsap
 		.timeline({ repeat: -1 })
-		.set(p.drop, { transformOrigin: "50% 100%" })
-		.to(p.drop, { scale: 0, duration: 0.3, ease: "back.in(2)" })
+		.set(p.drop, { transformOrigin: '50% 100%' })
+		.to(p.drop, { scale: 0, duration: 0.3, ease: 'back.in(2)' })
 		.set(p.drop, { y: -95, scaleX: 0.75, scaleY: 1.3, opacity: 0 })
-		.to(p.drop, { y: 0, duration: 0.5, ease: "power2.in" })
-		.to(p.drop, { opacity: 1, duration: 0.12 }, "<")
-		.to(p.drop, { scaleX: 1.3, scaleY: 0.68, duration: 0.08, ease: "power1.out" })
-		.to([p.left, p.right], { y: 4, duration: 0.08, ease: "power1.out" }, "<")
-		.to(p.drop, { scaleX: 1, scaleY: 1, duration: 0.6, ease: "elastic.out(1, 0.35)" })
-		.to([p.left, p.right], { y: 0, duration: 0.5, ease: "elastic.out(1, 0.4)" }, "<")
+		.to(p.drop, { y: 0, duration: 0.5, ease: 'power2.in' })
+		.to(p.drop, { opacity: 1, duration: 0.12 }, '<')
+		.to(p.drop, { scaleX: 1.3, scaleY: 0.68, duration: 0.08, ease: 'power1.out' })
+		.to([p.left, p.right], { y: 4, duration: 0.08, ease: 'power1.out' }, '<')
+		.to(p.drop, { scaleX: 1, scaleY: 1, duration: 0.6, ease: 'elastic.out(1, 0.35)' })
+		.to([p.left, p.right], { y: 0, duration: 0.5, ease: 'elastic.out(1, 0.4)' }, '<')
 		.to({}, { duration: 0.35 });
 
 /** Coil-machine rhythm: two buzzing bursts, the extrusion pressed flat while it runs. */
@@ -183,11 +183,11 @@ const needleBuzz: Builder = (p) => {
 	const { proxy, apply } = depthProxy(p);
 	const tl = gsap.timeline({ repeat: -1 });
 	const burst = () => {
-		tl.to(proxy, { v: 0.55, duration: 0.12, ease: "power2.out", onUpdate: apply })
-			.to(p.logo, { x: "random(-1.6, 1.6)", y: "random(-1.6, 1.6)", duration: 0.035, repeat: 11, repeatRefresh: true, ease: "none" }, "<")
-			.to(p.drop, { scale: 1.08, transformOrigin: "50% 50%", duration: 0.21, yoyo: true, repeat: 1, ease: "sine.inOut" }, "<")
+		tl.to(proxy, { v: 0.55, duration: 0.12, ease: 'power2.out', onUpdate: apply })
+			.to(p.logo, { x: 'random(-1.6, 1.6)', y: 'random(-1.6, 1.6)', duration: 0.035, repeat: 11, repeatRefresh: true, ease: 'none' }, '<')
+			.to(p.drop, { scale: 1.08, transformOrigin: '50% 50%', duration: 0.21, yoyo: true, repeat: 1, ease: 'sine.inOut' }, '<')
 			.to(p.logo, { x: 0, y: 0, duration: 0.06 })
-			.to(proxy, { v: 1, duration: 0.3, ease: "back.out(3)", onUpdate: apply }, "<");
+			.to(proxy, { v: 1, duration: 0.3, ease: 'back.out(3)', onUpdate: apply }, '<');
 	};
 	burst();
 	tl.to({}, { duration: 0.15 });
@@ -206,9 +206,9 @@ const stampPress: Builder = (p) => {
 	};
 	return gsap
 		.timeline({ repeat: -1 })
-		.to(proxy, { v: 0, duration: 0.32, ease: "power3.in", onUpdate: apply })
+		.to(proxy, { v: 0, duration: 0.32, ease: 'power3.in', onUpdate: apply })
 		.to({}, { duration: 0.18 })
-		.to(proxy, { v: 1, duration: 0.75, ease: "back.out(2.5)", onUpdate: apply })
+		.to(proxy, { v: 1, duration: 0.75, ease: 'back.out(2.5)', onUpdate: apply })
 		.to({}, { duration: 0.4 });
 };
 
@@ -217,20 +217,20 @@ const splitSeal: Builder = (p) => {
 	const { proxy, apply } = depthProxy(p);
 	return gsap
 		.timeline({ repeat: -1 })
-		.set(p.left, { transformOrigin: "100% 100%" })
-		.set(p.right, { transformOrigin: "0% 100%" })
-		.set(p.drop, { transformOrigin: "50% 50%" })
-		.set(p.badge, { transformOrigin: "50% 50%" })
-		.to(p.left, { x: -12, rotation: -5, duration: 0.45, ease: "power2.inOut" })
-		.to(p.right, { x: 12, rotation: 5, duration: 0.45, ease: "power2.inOut" }, "<")
-		.to(p.drop, { y: -14, scale: 1.12, duration: 0.45, ease: "power2.out" }, "<")
-		.to(p.drop, { rotation: 360, duration: 0.6, ease: "power2.inOut" }, "<0.1")
-		.to([p.left, p.right], { x: 0, rotation: 0, duration: 0.22, ease: "power4.in" })
-		.to(p.drop, { y: 0, scale: 1, duration: 0.22, ease: "power4.in" }, "<")
-		.to(p.badge, { scale: 1.05, duration: 0.08, ease: "power1.out" })
-		.to(proxy, { v: 0.6, duration: 0.08, onUpdate: apply }, "<")
-		.to(p.badge, { scale: 1, duration: 0.55, ease: "elastic.out(1, 0.4)" })
-		.to(proxy, { v: 1, duration: 0.45, ease: "elastic.out(1, 0.4)", onUpdate: apply }, "<")
+		.set(p.left, { transformOrigin: '100% 100%' })
+		.set(p.right, { transformOrigin: '0% 100%' })
+		.set(p.drop, { transformOrigin: '50% 50%' })
+		.set(p.badge, { transformOrigin: '50% 50%' })
+		.to(p.left, { x: -12, rotation: -5, duration: 0.45, ease: 'power2.inOut' })
+		.to(p.right, { x: 12, rotation: 5, duration: 0.45, ease: 'power2.inOut' }, '<')
+		.to(p.drop, { y: -14, scale: 1.12, duration: 0.45, ease: 'power2.out' }, '<')
+		.to(p.drop, { rotation: 360, duration: 0.6, ease: 'power2.inOut' }, '<0.1')
+		.to([p.left, p.right], { x: 0, rotation: 0, duration: 0.22, ease: 'power4.in' })
+		.to(p.drop, { y: 0, scale: 1, duration: 0.22, ease: 'power4.in' }, '<')
+		.to(p.badge, { scale: 1.05, duration: 0.08, ease: 'power1.out' })
+		.to(proxy, { v: 0.6, duration: 0.08, onUpdate: apply }, '<')
+		.to(p.badge, { scale: 1, duration: 0.55, ease: 'elastic.out(1, 0.4)' })
+		.to(proxy, { v: 1, duration: 0.45, ease: 'elastic.out(1, 0.4)', onUpdate: apply }, '<')
 		.to({}, { duration: 0.25 });
 };
 
@@ -238,15 +238,15 @@ const splitSeal: Builder = (p) => {
 const inkFill: Builder = (p, onDispose) => {
 	const tl = gsap.timeline({ repeat: -1 });
 	if (!p.maskId) return tl;
-	const wave = svgEl("path", { d: wavePath() });
-	wave.style.fill = "var(--color-daintree-1000)";
+	const wave = svgEl('path', { d: wavePath() });
+	wave.style.fill = 'var(--color-daintree-1000)';
 	maskedOverlay(p, onDispose).appendChild(wave);
 	gsap.set(wave, { y: 228 });
 
 	return tl
-		.to(wave, { x: -55, duration: 0.675, repeat: 3, ease: "none" }, 0)
-		.to(wave, { y: -12, duration: 1.3, ease: "power1.inOut" }, 0)
-		.to(wave, { y: 228, duration: 1.1, ease: "power2.in" }, 1.6);
+		.to(wave, { x: -55, duration: 0.675, repeat: 3, ease: 'none' }, 0)
+		.to(wave, { y: -12, duration: 1.3, ease: 'power1.inOut' }, 0)
+		.to(wave, { y: 228, duration: 1.1, ease: 'power2.in' }, 1.6);
 };
 
 /* ------------------------------------------------------------------ */
@@ -271,31 +271,29 @@ export interface BoilOptions {
  */
 export function boilFilter(filter: SVGFilterElement, options: BoilOptions = {}): gsap.core.Timeline {
 	const { scaleBoost = 1.5, frames = 3, step = 0.12 } = options;
-	const reduced =
-		options.reducedMotion ??
-		(typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+	const reduced = options.reducedMotion ?? (typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
 	const tl = gsap.timeline({ repeat: -1 });
-	const t = filter.getElementsByTagNameNS(SVG_NS, "feTurbulence")[0] as SVGFETurbulenceElement | undefined;
+	const t = filter.getElementsByTagNameNS(SVG_NS, 'feTurbulence')[0] as SVGFETurbulenceElement | undefined;
 	if (!t || reduced) return tl;
-	const d = filter.getElementsByTagNameNS(SVG_NS, "feDisplacementMap")[0] as SVGFEDisplacementMapElement | undefined;
+	const d = filter.getElementsByTagNameNS(SVG_NS, 'feDisplacementMap')[0] as SVGFEDisplacementMapElement | undefined;
 
-	const seed = t.getAttribute("seed") ?? "0";
-	const scale = d?.getAttribute("scale") ?? "0";
+	const seed = t.getAttribute('seed') ?? '0';
+	const scale = d?.getAttribute('scale') ?? '0';
 	const base = Number(seed) || 0;
-	d?.setAttribute("scale", String(Number(scale) * scaleBoost));
-	tl.eventCallback("onInterrupt", () => {
-		t.setAttribute("seed", seed);
-		d?.setAttribute("scale", scale);
+	d?.setAttribute('scale', String(Number(scale) * scaleBoost));
+	tl.eventCallback('onInterrupt', () => {
+		t.setAttribute('seed', seed);
+		d?.setAttribute('scale', scale);
 	});
 
 	for (let i = 0; i < frames; i++) {
-		tl.call(() => t.setAttribute("seed", String(base + i + 1)), undefined, 0.001 + i * step);
+		tl.call(() => t.setAttribute('seed', String(base + i + 1)), undefined, 0.001 + i * step);
 	}
 	return tl.to({}, { duration: frames * step }, 0);
 }
 
 const lineBoil: Builder = (p) => {
-	const filter = p.svg.getElementsByTagNameNS(SVG_NS, "filter")[0] as SVGFilterElement | undefined;
+	const filter = p.svg.getElementsByTagNameNS(SVG_NS, 'filter')[0] as SVGFilterElement | undefined;
 	return filter ? boilFilter(filter, { reducedMotion: false }) : gsap.timeline({ repeat: -1 });
 };
 
@@ -303,8 +301,8 @@ const lineBoil: Builder = (p) => {
 const breathe: Builder = (p) => {
 	const { proxy, apply } = depthProxy(p);
 	return gsap
-		.timeline({ repeat: -1, defaults: { duration: 2.4, ease: "sine.inOut" } })
-		.set(p.whole, { svgOrigin: "55 108" })
+		.timeline({ repeat: -1, defaults: { duration: 2.4, ease: 'sine.inOut' } })
+		.set(p.whole, { svgOrigin: '55 108' })
 		.to(p.whole, { scale: 1.03 }, 0)
 		.to(proxy, { v: 1.3, onUpdate: apply }, 0)
 		.to(p.drop, { y: -3 }, 0)
@@ -316,8 +314,8 @@ const breathe: Builder = (p) => {
 /** The drop hangs from its tip and swings with a damped pendulum. */
 const dropSway: Builder = (p) =>
 	gsap
-		.timeline({ repeat: -1, defaults: { ease: "sine.inOut" } })
-		.set(p.drop, { transformOrigin: "50% 0%" })
+		.timeline({ repeat: -1, defaults: { ease: 'sine.inOut' } })
+		.set(p.drop, { transformOrigin: '50% 0%' })
 		.to(p.drop, { rotation: 6, duration: 1.3 })
 		.to(p.drop, { rotation: -4.5, duration: 1.9 })
 		.to(p.drop, { rotation: 2.5, duration: 1.5 })
@@ -328,8 +326,8 @@ const dropSway: Builder = (p) =>
 const hover: Builder = (p) => {
 	const { proxy, apply } = depthProxy(p);
 	return gsap
-		.timeline({ repeat: -1, defaults: { duration: 2, ease: "sine.inOut" } })
-		.set(p.whole, { svgOrigin: "55 108" })
+		.timeline({ repeat: -1, defaults: { duration: 2, ease: 'sine.inOut' } })
+		.set(p.whole, { svgOrigin: '55 108' })
 		.to(p.whole, { y: -5, rotation: -1.2 }, 0)
 		.to(proxy, { v: 1.4, onUpdate: apply }, 0)
 		.to(p.whole, { y: 0, rotation: 0 }, 2)
@@ -344,13 +342,13 @@ const hover: Builder = (p) => {
 const sheen: Builder = (p, onDispose) => {
 	const tl = gsap.timeline({ repeat: -1 });
 	if (!p.maskId) return tl;
-	const tilt = svgEl("g", { transform: "rotate(24 55 108)" });
-	const band = svgEl("rect", { x: -92, y: -80, width: 16, height: 380, fill: "#fff", "fill-opacity": 0.5 });
-	const thin = svgEl("rect", { x: -68, y: -80, width: 5, height: 380, fill: "#fff", "fill-opacity": 0.4 });
+	const tilt = svgEl('g', { transform: 'rotate(24 55 108)' });
+	const band = svgEl('rect', { x: -92, y: -80, width: 16, height: 380, fill: '#fff', 'fill-opacity': 0.5 });
+	const thin = svgEl('rect', { x: -68, y: -80, width: 5, height: 380, fill: '#fff', 'fill-opacity': 0.4 });
 	tilt.append(band, thin);
 	maskedOverlay(p, onDispose).appendChild(tilt);
 
-	return tl.to([band, thin], { x: 265, duration: 0.85, ease: "power2.inOut" }).to({}, { duration: 3.2 });
+	return tl.to([band, thin], { x: 265, duration: 0.85, ease: 'power2.inOut' }).to({}, { duration: 3.2 });
 };
 
 /* ------------------------------------------------------------------ */
@@ -359,7 +357,7 @@ const sheen: Builder = (p, onDispose) => {
 
 const gentlePulse: Builder = (p) =>
 	gsap
-		.timeline({ repeat: -1, defaults: { duration: 0.9, ease: "sine.inOut" } })
+		.timeline({ repeat: -1, defaults: { duration: 0.9, ease: 'sine.inOut' } })
 		.to(p.whole, { opacity: 0.5 })
 		.to(p.whole, { opacity: 1 });
 
@@ -384,9 +382,7 @@ const BUILDERS: Record<LogoAnimation, Builder> = {
 
 export function createLogoAnimator(svg: SVGSVGElement, options: LogoAnimatorOptions = {}): LogoAnimator {
 	const p = getParts(svg);
-	const reduced =
-		options.reducedMotion ??
-		(typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+	const reduced = options.reducedMotion ?? (typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
 
 	let active: { name: LogoAnimation; tl: gsap.core.Timeline; disposers: (() => void)[] } | null = null;
 	let finishing: { tween: gsap.core.Tween; resolve: () => void } | null = null;
@@ -425,7 +421,7 @@ export function createLogoAnimator(svg: SVGSVGElement, options: LogoAnimatorOpti
 			const tween = gsap.to(tl, {
 				time: tl.duration(),
 				duration: Math.min(remaining, maxDuration),
-				ease: "none",
+				ease: 'none',
 				onComplete: () => {
 					finishing = null;
 					if (active === run) stop();

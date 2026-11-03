@@ -22,32 +22,32 @@ import review from '../assets/images/memes/nailed-it-high-five.gif';
 ---
 
 <Layout>
-	<div class="flex flex-col h-full">
-		<div class="flex flex-row flex-1">
+	<div class="flex h-full flex-col">
+		<div class="flex flex-1 flex-row">
 			<div class="flex-1">
-				<Image src={aftercareImage} alt="The Hinkart Tattoo Studio team" class="h-full object-right object-cover" />
+				<Image src={aftercareImage} alt="The Hinkart Tattoo Studio team" class="h-full object-cover object-right" />
 			</div>
-			<div class="flex-1 flex flex-col pr-16 xl:pt-24">
+			<div class="flex flex-1 flex-col pr-16 xl:pt-24">
 				<div class="-ml-32">
 					<Heading title="Aftercare" />
 					<KanjiTitle title="アフターケア" />
 				</div>
 
-				<div class="text-daintree-100 -ml-64 flex-1 xl:text-2xl">
-					<div class="h-full w-1/5 invisible float-left shape-outside"></div>
+				<div class="-ml-64 flex-1 text-daintree-100 xl:text-2xl">
+					<div class="shape-outside invisible float-left h-full w-1/5"></div>
 
-					<p class="text-4xl leading-normal mb-4">
+					<p class="mb-4 text-4xl leading-normal">
 						During tattooing, the skin breaks, causing a wound. If you take good care of the tattoo, it will take about six weeks for this wound to
 						heal.
 					</p>
-					<p class="mb-4 leading-relaxed max-w-[75ch]">
+					<p class="mb-4 max-w-[75ch] leading-relaxed">
 						If the tattoo is covered with self adhesive second-skin, you can remove it in 24 hours. If the tattoo is covered with a sterile compress
 						or cling film, you can remove it after 3 to 5 hours. You can take a shower with a tattoo.
 					</p>
 				</div>
 			</div>
 		</div>
-		<div class="flex-1 ml-96 -mt-10">
+		<div class="-mt-10 ml-96 flex-1">
 			<Tabs>
 				<TabTitle slot="titles" id="tab-1" href="#uncovered-tattoo" title="Uncovered tattoo" />
 				<TabPanel slot="panels" id="uncovered-tattoo" target="tab-1">

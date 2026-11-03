@@ -14,25 +14,19 @@ const checkBoxName = `terms${name}`;
 ---
 
 <div
-	class="relative isolate overflow-hidden basis-20 px-1 py-2 group transition-all duration-500 interpolate"
+	class="group relative isolate basis-20 overflow-hidden px-1 py-2 transition-all duration-500 interpolate"
 	class:list={['aria-expanded:basis-auto']}
 	data-form="termbox"
 	aria-expanded={expanded}
 >
 	<label for={checkBoxName} class="relative cursor-pointer" id=`terms${name}Wrapper` data-disabled={disabled}>
 		<svg
-			class="h-full w-[96%] left-[2%] overflow-visible absolute -z-10 invisible"
+			class="invisible absolute left-[2%] -z-10 h-full w-[96%] overflow-visible"
 			class:list={['group-aria-expanded:visible', 'xl:w-[98%]', 'xl:left-[1%]']}
 		>
 			<filter id="rough">
 				<feTurbulence type="turbulence" baseFrequency="0.01" numOctaves="2" result="turbulence"></feTurbulence>
-				<feDisplacementMap
-					in2="turbulence"
-					in="SourceGraphic"
-					scale="2"
-					xChannelSelector="R"
-					yChannelSelector="G"
-					result="displaced"
+				<feDisplacementMap in2="turbulence" in="SourceGraphic" scale="2" xChannelSelector="R" yChannelSelector="G" result="displaced"
 				></feDisplacementMap>
 			</filter>
 			<rect
@@ -44,21 +38,14 @@ const checkBoxName = `terms${name}`;
 				fill="var(--color-daintree-600)"
 				stroke="var(--color-daintree-1000)"
 				stroke-width="4"
-				filter="url(#rough)"
-			></rect>
+				filter="url(#rough)"></rect>
 		</svg>
 		<div>
-			<div class="flex flex-row justify-between relative" class:list="">
-				<svg class="size-full overflow-visible absolute -z-10">
+			<div class="relative flex flex-row justify-between" class:list="">
+				<svg class="absolute -z-10 size-full overflow-visible">
 					<filter id="rough" x="-30%" y="-30%" width="160%" height="160%">
 						<feTurbulence type="turbulence" baseFrequency="0.01" numOctaves="2" result="turbulence"></feTurbulence>
-						<feDisplacementMap
-							in2="turbulence"
-							in="SourceGraphic"
-							scale="2"
-							xChannelSelector="R"
-							yChannelSelector="G"
-							result="displaced"
+						<feDisplacementMap in2="turbulence" in="SourceGraphic" scale="2" xChannelSelector="R" yChannelSelector="G" result="displaced"
 						></feDisplacementMap>
 					</filter>
 					<rect
@@ -69,18 +56,17 @@ const checkBoxName = `terms${name}`;
 						fill="var(--color-daintree-100)"
 						stroke="var(--color-daintree-1000)"
 						stroke-width="4"
-						filter="url(#rough)"
-					></rect>
+						filter="url(#rough)"></rect>
 				</svg>
-				<h2 class="relative text-button-stroke-daintree-1000 text-daintree-100 self-start max-w-fit -rotate-3">
-					<span class="uppercase text-2xl font-bold px-4 py-2 leading-relaxed">{title}</span>
+				<h2 class="relative max-w-fit -rotate-3 self-start text-daintree-100 text-button-stroke-daintree-1000">
+					<span class="px-4 py-2 text-2xl leading-relaxed font-bold uppercase">{title}</span>
 				</h2>
-				<div class="-translate-y-3 -translate-x-3 -rotate-3">
+				<div class="-translate-x-3 -translate-y-3 -rotate-3">
 					<CheckboxField name=`terms${name}` id=`terms${name}` />
 				</div>
 			</div>
 			<p
-				class="peer/body invisible size-0 text-daintree-100 px-6 py-4 max-w-[75ch] text-lg"
+				class="peer/body invisible size-0 max-w-[75ch] px-6 py-4 text-lg text-daintree-100"
 				class:list={['group-aria-expanded:visible', 'group-aria-expanded:size-auto']}
 			>
 				{text}

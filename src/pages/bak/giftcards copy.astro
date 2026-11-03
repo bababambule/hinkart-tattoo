@@ -9,42 +9,42 @@ import giftcardImage from '../assets/images/giftcard_10x15_front.webp';
 ---
 
 <Layout>
-	<div class="flex flex-col h-full">
-		<div class="flex flex-row flex-1">
-			<div class="flex-1 flex justify-end items-center pr-4">
-				<Image src={giftcardImage} alt="Get your Giftcard" class="h-3/4 w-3/4 z-20" />
+	<div class="flex h-full flex-col">
+		<div class="flex flex-1 flex-row">
+			<div class="flex flex-1 items-center justify-end pr-4">
+				<Image src={giftcardImage} alt="Get your Giftcard" class="z-20 h-3/4 w-3/4" />
 			</div>
-			<div class="flex-1 flex flex-col pr-16 xl:pt-24">
-				<div class="-ml-32 z-30">
+			<div class="flex flex-1 flex-col pr-16 xl:pt-24">
+				<div class="z-30 -ml-32">
 					<Heading title="Giftcards" />
 					<KanjiTitle title="ギフトカード" />
 				</div>
 
-				<div class="flex flex-col h-full">
-					<div class="text-daintree-100 -ml-64 flex-1 xl:text-2xl">
-						<div class="h-full w-1/5 invisible float-left shape-outside"></div>
-						<p class="text-4xl leading-normal mb-4">
+				<div class="flex h-full flex-col">
+					<div class="-ml-64 flex-1 text-daintree-100 xl:text-2xl">
+						<div class="shape-outside invisible float-left h-full w-1/5"></div>
+						<p class="mb-4 text-4xl leading-normal">
 							Want to give someone their first tattoo, help fund their next piece, or let them choose their own artist? Gift cards work for all of it.
 						</p>
-						<p class="mb-4 leading-relaxed max-w-[75ch]">
+						<p class="mb-4 max-w-[75ch] leading-relaxed">
 							Pick any amount between €15 and €200—whatever makes sense for what you're gifting. The recipient can use it toward a session with any of
 							our artists, and if they don't spend it all at once, the balance stays in our system for next time.
 						</p>
 					</div>
-					<div class="self-end h-80 w-full mr-64 mb-16 relative">
-						<div class="relative z-10 w-full h-full py-8 pl-56 pr-2">
+					<div class="relative mr-64 mb-16 h-80 w-full self-end">
+						<div class="relative z-10 h-full w-full py-8 pr-2 pl-56">
 							<form
-								class="z-10 h-full relative flex flex-col justify-evenly"
+								class="relative z-10 flex h-full flex-col justify-evenly"
 								action="https://webhooktest.net/webhook/01a0ede0-54f9-714d-b900-d3eb2d6f6d48"
 							>
-								<div class="flex flex-row gap-4 justify-between">
+								<div class="flex flex-row justify-between gap-4">
 									<RadioButton name="voucher" id="voucher20" value="20" label="20€" />
 									<RadioButton name="voucher" id="voucher50" value="50" label="50€" />
 									<RadioButton name="voucher" id="voucher100" value="100" label="100€" />
 									<RadioButton name="voucher" id="voucher200" value="200" label="200€" />
 									<Button icon="Map" href="" label="Buy" kanji="金額" />
 								</div>
-								<p class="text-base text-daintree-600 max-w-[60ch]">
+								<p class="max-w-[60ch] text-base text-daintree-600">
 									No physical card gets mailed out. Once you buy it, the gift card info is stored in our system and you'll get a printable version you
 									can give however you want—stick it in a card, email it, wrap it up, whatever works. They just bring it up when they book. Giftcards
 									are non-refundable.
@@ -67,8 +67,7 @@ import giftcardImage from '../assets/images/giftcard_10x15_front.webp';
 									stroke-linejoin="round"
 									paint-order="stroke"
 									style="width:calc(100% - 16px); height: calc(100% - 16px);"
-									transform="skewX(-12)"
-								></rect>
+									transform="skewX(-12)"></rect>
 							</svg>
 							<!-- <div class="absolute w-full h-full -skew-x-12 border-4 border-daintree-1000 bg-daintree-100"></div>-->
 						</div>

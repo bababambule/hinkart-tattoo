@@ -1,6 +1,6 @@
 ---
 import BookingStep from '../components/BookingStepIndicator.astro';
-import Button from '../components/Button.astro';
+import Button from './ui/Button.astro';
 import MultiStep from './form/MultiStep.astro';
 
 // Steps
@@ -20,17 +20,11 @@ let totalSteps: number;
 ---
 
 <div class="flex flex-col gap-4">
-	<div class="w-full relative">
-		<svg class="size-full overflow-visible absolute -z-10">
+	<div class="relative w-full">
+		<svg class="absolute -z-10 size-full overflow-visible">
 			<filter id="rough" x="-30%" y="-30%" width="160%" height="160%">
 				<feTurbulence type="turbulence" baseFrequency="0.01" numOctaves="2" result="turbulence"></feTurbulence>
-				<feDisplacementMap
-					in2="turbulence"
-					in="SourceGraphic"
-					scale="2"
-					xChannelSelector="R"
-					yChannelSelector="G"
-					result="displaced"
+				<feDisplacementMap in2="turbulence" in="SourceGraphic" scale="2" xChannelSelector="R" yChannelSelector="G" result="displaced"
 				></feDisplacementMap>
 			</filter>
 			<defs>
@@ -39,32 +33,20 @@ let totalSteps: number;
 					<stop offset="55%" stop-color="var(--color-daintree-900)"></stop>
 				</linearGradient>
 			</defs>
-			<rect
-				x="0"
-				y="0"
-				width="100%"
-				height="100%"
-				fill="url(#gradient-1)"
-				stroke="var(--color-daintree-1000)"
-				stroke-width="4"
-				filter="url(#rough)"
+			<rect x="0" y="0" width="100%" height="100%" fill="url(#gradient-1)" stroke="var(--color-daintree-1000)" stroke-width="4" filter="url(#rough)"
 			></rect>
 		</svg>
 
-		<div class="font-display text-daintree-100 flex flex-col justify-center items-center pt-4">
-			<div class="text-[clamp(1.5rem,6vw+1rem,2rem)] leading-none" class:list={['xl:text-6xl']}>
-				Book your
-			</div>
+		<div class="flex flex-col items-center justify-center pt-4 font-display text-daintree-100">
+			<div class="text-[clamp(1.5rem,6vw+1rem,2rem)] leading-none" class:list={['xl:text-6xl']}>Book your</div>
 
 			<div
-				class="text-[clamp(1.5rem,6vw+1rem,2rem)] -my-5 font-kanji text-winter-sky-600 z-10 text-button-stroke-winter-sky-900"
+				class="z-10 -my-5 font-kanji text-[clamp(1.5rem,6vw+1rem,2rem)] text-winter-sky-600 text-button-stroke-winter-sky-900"
 				class:list={['xl:text-6xl', 'xl:-my-8']}
 			>
 				よやく
 			</div>
-			<div class="text-[clamp(2rem,8vw+1rem,2.5rem)] leading-none" class:list={['xl:text-8xl']}>
-				Appointment
-			</div>
+			<div class="text-[clamp(2rem,8vw+1rem,2.5rem)] leading-none" class:list={['xl:text-8xl']}>Appointment</div>
 		</div>
 		<div id="stepList" class="@container flex flex-row justify-evenly pb-2 text-daintree-100" class:list={[]}>
 			<BookingStep active={true} step={1} label="Terms" kanji="りようきやく" />
@@ -78,7 +60,7 @@ let totalSteps: number;
 
 <div class="col-start-1 w-full">
 	<form action="https://automation.orange-works.de/webhook/67c2b973-06fc-46b9-b4e4-aa7949d27b59" method="post" class="h-full">
-		<div class="flex flex-col h-full">
+		<div class="flex h-full flex-col">
 			<div class="flex-1">
 				<MultiStep name="terms" step="1" hidden="false">
 					<StepTerms />

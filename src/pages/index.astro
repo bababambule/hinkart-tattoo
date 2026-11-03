@@ -19,11 +19,10 @@ const heroPoster = await getImage({ src: heroPosterSrc, format: 'webp', width: 1
 
 <Layout>
 	<div
-		class="index-wrapper relative h-[calc(100dvh-4rem)] flex-1 flex flex-col
-			lg:h-[calc(100dvh-var(--footer-desktop-h))]"
+		class="index-wrapper relative flex h-[calc(100dvh-4rem)] flex-1 flex-col lg:h-[calc(100dvh-var(--footer-desktop-h))]"
 		style={`--clip-shape-mobile: ${clipShapeMobile}; --clip-shape: ${clipShape}`}
 	>
-		<div class="index-bg absolute top-0 left-0 size-full z-10 pointer-events-none">
+		<div class="index-bg pointer-events-none absolute top-0 left-0 z-10 size-full">
 			<svg
 				id="video-outline"
 				data-slant={SLANT}
@@ -44,20 +43,18 @@ const heroPoster = await getImage({ src: heroPosterSrc, format: 'webp', width: 1
 					stroke-width="4"
 					stroke-linejoin="round"
 					vector-effect="non-scaling-stroke"
-					filter="url(#video-boil)"
-				></polygon>
+					filter="url(#video-boil)"></polygon>
 			</svg>
 		</div>
-		<div class="relative flex-1 h-full flex flex-col">
+		<div class="relative flex h-full flex-1 flex-col">
 			<div
-				class="absolute bottom-4 right-4 z-20 flex flex-row gap-4 -skew-y-5 origin-bottom-right scale-75
-					lg:skew-y-0 lg:scale-100 lg:right-10 lg:bottom-10"
+				class="absolute right-4 bottom-4 z-20 flex origin-bottom-right scale-75 -skew-y-5 flex-row gap-4 lg:right-10 lg:bottom-10 lg:scale-100 lg:skew-y-0"
 			>
 				<IconButton id="play-button" label="Pause" icon={arrayPlayButton} />
 				<IconButton id="vol-button" label="Unmute" icon={arrayVolumeButton} />
 				<IconButton id="full-button" label="Fullscreen" icon={arraySizeButton} />
 			</div>
-			<video class="flex-1 h-full object-cover clip-path" id="heroVideo" poster={heroPoster.src} preload="metadata" autoplay playsinline muted loop>
+			<video class="clip-path h-full flex-1 object-cover" id="heroVideo" poster={heroPoster.src} preload="metadata" autoplay playsinline muted loop>
 				<source src={heroVideo} type="video/webm" />
 				<source src={heroVideoAlt} type="video/mp4" />
 			</video>

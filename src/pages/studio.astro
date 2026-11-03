@@ -1,13 +1,15 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Button from '../components/Button.astro';
+import Button from '../components/ui/Button.astro';
 import example from '../assets/images/studio/studio-example.jpg';
 import halftoneMap from '../assets/images/studio/halftoneMap.jpg';
 import houseDrawing from '../assets/images/studio/house_drawing.webp';
 ---
 
 <Layout>
-	<div class="absolute right-16 bottom-24 top-8 left-1/6">
+	<div
+		class="relative mx-2 mt-28 aspect-[1480/732] md:mx-8 md:mt-32 lg:absolute lg:top-8 lg:right-16 lg:bottom-24 lg:left-1/6 lg:mx-0 lg:mt-0 lg:aspect-auto"
+	>
 		<svg width="100%" height="100%" viewBox="0 0 1480 732" class="overflow-visible">
 			<filter id="displacementFilter">
 				<feTurbulence type="turbulence" baseFrequency="0.01" numOctaves="4" result="turbulence"></feTurbulence>
@@ -69,13 +71,13 @@ import houseDrawing from '../assets/images/studio/house_drawing.webp';
 			</g> -->
 			<g mask="url(#letters)">
 				<image id="svgImage" y="-90" class="w-full object-cover" preserveAspectRatio="xMaxYMin" />
-				<rect x="0" y="-90" width="100%" id="shapeFill" fill="var(--color-daintree-100)" class="w-full h-[120%]" preserveAspectRatio="xMaxYMin"
+				<rect x="0" y="-90" width="100%" id="shapeFill" fill="var(--color-daintree-100)" class="h-[120%] w-full" preserveAspectRatio="xMaxYMin"
 				></rect>
 				<image href={halftoneMap.src} id="halftoneMap" class="w-full object-cover mix-blend-color-burn" />
 				<image
 					href={houseDrawing.src}
 					id="houseDrawing"
-					class="h-[116%] -rotate-3 origin-top-left -translate-x-28 -translate-y-16 mix-blend-multiply"
+					class="h-[116%] origin-top-left -translate-x-28 -translate-y-16 -rotate-3 mix-blend-multiply"
 				/>
 			</g>
 
@@ -83,6 +85,8 @@ import houseDrawing from '../assets/images/studio/house_drawing.webp';
 				d="M0 0 H252.586 V202.977 H108.355 V264.176 H252.586 V731.328 H0 V528.351 H144.412 V467.152H 0 V0 Z"
 				fill="transparent"
 				id="letterS"
+				pointer-events="all"
+				class="cursor-pointer"
 				stroke="black"
 				stroke-width="4"
 				filter="url(#displacementFilter)"></path>
@@ -93,6 +97,8 @@ import houseDrawing from '../assets/images/studio/house_drawing.webp';
 					H 526.915 V 202.977 H 454.799 V 731.328 H 346.445 V 202.977 H 274.329 V0Z"
 				fill="transparent"
 				id="letterT"
+				pointer-events="all"
+				class="cursor-pointer"
 				filter="url(#displacementFilter)"
 				stroke="black"
 				stroke-width="4"></path>
@@ -100,6 +106,8 @@ import houseDrawing from '../assets/images/studio/house_drawing.webp';
 				d="M693.071 0H801.244V731.328H548.658V0H657.013V528.351H693.071V0Z"
 				fill="transparent"
 				id="letterU"
+				pointer-events="all"
+				class="cursor-pointer"
 				filter="url(#displacementFilter)"
 				stroke="black"
 				stroke-width="4"></path>
@@ -107,6 +115,8 @@ import houseDrawing from '../assets/images/studio/house_drawing.webp';
 				d="M822.988 0H1039.52L1075.57 101.488V629.84L1039.52 731.328H822.988V0ZM931.343 202.977V528.351H967.401V202.977H931.343Z"
 				fill="transparent"
 				id="letterD"
+				pointer-events="all"
+				class="cursor-pointer"
 				filter="url(#displacementFilter)"
 				stroke="black"
 				stroke-width="4"></path>
@@ -114,6 +124,8 @@ import houseDrawing from '../assets/images/studio/house_drawing.webp';
 				d="M1097.32 731.328V0H1205.67V731.328H1097.32Z"
 				fill="transparent"
 				id="letterI"
+				pointer-events="all"
+				class="cursor-pointer"
 				filter="url(#displacementFilter)"
 				stroke="black"
 				stroke-width="4"></path>
@@ -121,17 +133,24 @@ import houseDrawing from '../assets/images/studio/house_drawing.webp';
 				d="M1227.41 731.328V0H1480V731.328H1227.41ZM1335.77 202.977V528.351H1371.83V202.977H1335.77Z"
 				fill="transparent"
 				id="letterO"
+				pointer-events="all"
+				class="cursor-pointer"
 				filter="url(#displacementFilter)"
 				stroke="black"
 				stroke-width="4"></path>
 		</svg>
 	</div>
-	<div class="size-full pr-24 relative z-10 flex flex-col justify-end items-end gap-12 pointer-events-none">
-		<div id="kanjiTitle" class="font-kanji text-8xl text-daintree-200 text-button-stroke-daintree-400 -rotate-3 tracking-tighter">
+	<div
+		class="pointer-events-none relative z-10 flex flex-col gap-6 pb-16 md:items-end md:gap-8 md:px-8 lg:size-full lg:justify-end lg:gap-12 lg:pr-24 lg:pb-0 lg:pl-0"
+	>
+		<div
+			id="kanjiTitle"
+			class="-mt-10 mr-2 -rotate-3 self-end font-kanji text-4xl tracking-tighter whitespace-nowrap text-daintree-200 text-button-stroke-daintree-400 md:-mt-16 md:mr-0 md:text-6xl lg:mt-0 lg:text-8xl lg:whitespace-normal"
+		>
 			タトゥースタジオ
 		</div>
-		<div class="flex flex-col gap-8 mb-32 relative">
-			<svg class="absolute size-full overflow-visible -z-10">
+		<div class="relative mx-2 flex flex-col gap-6 md:mx-0 md:gap-8 lg:mb-32">
+			<svg class="absolute -z-10 size-full overflow-visible">
 				<filter id="displacementFilter">
 					<feTurbulence type="turbulence" baseFrequency="0.01" numOctaves="4" result="turbulence"></feTurbulence>
 					<feDisplacementMap in2="turbulence" in="SourceGraphic" scale="8" xChannelSelector="R" yChannelSelector="G"></feDisplacementMap>
@@ -148,30 +167,32 @@ import houseDrawing from '../assets/images/studio/house_drawing.webp';
 					stroke-linejoin="round"
 					paint-order="stroke"
 					width="100%"
-					style="height:calc(100% - 2rem);"
-				>
-				</rect>
+					style="height:calc(100% - 2rem);"></rect>
 			</svg>
-			<div class="flex flex-row gap-8 px-12 pt-8 pointer-events-auto">
-				<div class="flex flex-col text-2xl uppercase text-rose-bud-cherry-600 font-bold min-w-32">
-					<div class="self-start flex flex-row gap-4">
+			<div class="pointer-events-auto flex flex-col gap-4 px-6 pt-6 sm:flex-row sm:gap-8 md:px-12 md:pt-8">
+				<div class="flex min-w-32 flex-col self-start text-xl font-bold text-rose-bud-cherry-600 uppercase sm:self-auto md:text-2xl">
+					<div class="flex flex-row gap-4 self-start">
 						<p>Tue</p>
 						<p>10H</p>
 					</div>
 					<div class="self-center">
 						<p>Till</p>
 					</div>
-					<div class="self-end flex flex-row gap-4">
+					<div class="flex flex-row gap-4 self-end">
 						<p>Sat</p>
 						<p>17H</p>
 					</div>
 				</div>
-				<div class="text-2xl uppercase text-daintree-900 font-bold max-w-[16ch]">
+				<div class="max-w-[16ch] text-xl font-bold text-daintree-900 uppercase md:text-2xl">
 					<p>Verlengde oosterstraat 2 9711 en groningen</p>
 				</div>
 			</div>
-			<div class="flex flex-row gap-8 pl-6 pointer-events-auto">
-				<div class="-rotate-6"><Button href="mailto:info@hinkart.nl" label="Message us" icon="Letter" /></div>
+			<div
+				class="pointer-events-auto flex flex-row flex-wrap justify-center gap-4 px-2 pb-2 sm:justify-start sm:gap-8 sm:pr-0 sm:pl-6 lg:flex-nowrap lg:pb-0"
+			>
+				<div class="-rotate-6">
+					<Button href="mailto:info@hinkart.nl" label="Message us" icon="Letter" />
+				</div>
 				<div class="rotate-4">
 					<Button
 						href="https://share.here.com/p/s-Yz1Cb2R5JTIwUGllcmNpbmclMjAlMjYlMjBUYXR0b29zO2lkPTUyOHUxa3d0LTIwNGE5MjdiMGU4ZWM4NWU3NjgyNWEzZWJiNmEzN2Q4O2xhdD01My4yMTQ2Njtsb249Ni41NzI5ODtuPUhpbmthcnQrVGF0dG9vK1N0dWRpbztwaD0=?z=15&t=normal"
@@ -187,7 +208,13 @@ import houseDrawing from '../assets/images/studio/house_drawing.webp';
 
 <style>
 	#kanjiTitle {
-		-webkit-text-stroke-width: 0.75rem;
+		-webkit-text-stroke-width: 0.4rem;
+	}
+
+	@media (width >= 64rem) {
+		#kanjiTitle {
+			-webkit-text-stroke-width: 0.75rem;
+		}
 	}
 </style>
 

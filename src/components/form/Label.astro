@@ -9,8 +9,8 @@ const { label, icon, size = 48 } = Astro.props;
 import Icons from '../Icons.astro';
 ---
 
-<div class="flex flex-row justify-start items-end z-10 relative max-w-fit">
-	<svg viewBox="0 0 100 100" preserveAspectRatio="none" class="absolute w-full h-3/4 overflow-visible left-0 bottom-0 -z-10">
+<div class="relative z-10 flex max-w-fit flex-row items-end justify-start">
+	<svg viewBox="0 0 100 100" preserveAspectRatio="none" class="absolute bottom-0 left-0 -z-10 h-3/4 w-full overflow-visible">
 		<polygon
 			points="2,20 100,-5 95,105 -2,98"
 			fill="var(--color-tree-poppy-600)"
@@ -21,7 +21,7 @@ import Icons from '../Icons.astro';
 	<div class="translate-y-2">
 		<Icons icon={icon} size={size} classes="text-tree-poppy-100 z-10" />
 	</div>
-	<div class="pl-2 pr-6 uppercase font-bold">
+	<div class="pr-6 pl-2 font-bold uppercase">
 		<p>{label}</p>
 	</div>
 </div>

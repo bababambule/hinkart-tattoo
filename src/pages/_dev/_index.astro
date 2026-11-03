@@ -12,8 +12,8 @@ const arraySizeButton = ['Expand'];
 ---
 
 <Layout>
-	<div class:list={['index-wrapper relative h-full flex-1 flex flex-col']}>
-		<div class:list={['index-bg absolute top-0 left-0 size-full z-10']}>
+	<div class:list={['index-wrapper relative flex h-full flex-1 flex-col']}>
+		<div class:list={['index-bg absolute top-0 left-0 z-10 size-full']}>
 			<svg
 				xmlns:xlink="http://www.w3.org/1999/xlink"
 				width="100%"
@@ -26,13 +26,7 @@ const arraySizeButton = ['Expand'];
 			>
 				<filter id="videoBorder" x="-30%" y="-30%" width="160%" height="160%">
 					<feTurbulence type="turbulence" baseFrequency="0.01" numOctaves="2" result="turbulence"></feTurbulence>
-					<feDisplacementMap
-						in2="turbulence"
-						in="SourceGraphic"
-						scale="1"
-						xChannelSelector="R"
-						yChannelSelector="G"
-						result="displaced"
+					<feDisplacementMap in2="turbulence" in="SourceGraphic" scale="1" xChannelSelector="R" yChannelSelector="G" result="displaced"
 					></feDisplacementMap>
 				</filter>
 				<polygon
@@ -45,17 +39,16 @@ const arraySizeButton = ['Expand'];
 					stroke="black"
 					stroke-width="4"
 					vector-effect="non-scaling-stroke"
-					filter="url(#videoBorder)"
-				></polygon>
+					filter="url(#videoBorder)"></polygon>
 			</svg>
 		</div>
-		<div class="relative flex-1 h-full flex flex-col">
-			<div class="absolute bottom-10 right-4 z-10 flex flex-row gap-4 -skew-y-8 origin-bottom-right scale-75">
+		<div class="relative flex h-full flex-1 flex-col">
+			<div class="absolute right-4 bottom-10 z-10 flex origin-bottom-right scale-75 -skew-y-8 flex-row gap-4">
 				<IconButton id="play-button" label="Pause" icon={arrayPlayButton} />
 				<IconButton id="vol-button" label="Unmute" icon={arrayVolumeButton} />
 				<IconButton id="full-button" label="Fullscreen" icon={arraySizeButton} />
 			</div>
-			<video class="flex-1 h-full object-cover clip-path" id="heroVideo" autoplay playsinline muted loop>
+			<video class="clip-path h-full flex-1 object-cover" id="heroVideo" autoplay playsinline muted loop>
 				<source src={heroVideo} type="video/webm" />
 				<source src={heroVideoAlt} type="video/mp4" />
 			</video>

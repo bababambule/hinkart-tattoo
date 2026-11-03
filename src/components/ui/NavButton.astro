@@ -1,0 +1,68 @@
+---
+interface Props {
+	url: string;
+	text: string;
+	kanji: string;
+	classes: string;
+}
+const { url, text, kanji, classes } = Astro.props;
+
+const currentPath = Astro.url.pathname;
+const isActive = currentPath === url || currentPath.startsWith(`${url}/`);
+---
+
+<a
+	href={url}
+	target="_self"
+	data-nav-url={url}
+	class:list={[
+		'box nav-btn relative w-fit rounded-sm px-8 py-4 font-black',
+		'text-3xl lg:text-2xl xl:text-2xl 2xl:text-4xl',
+		'bg-daintree-1000 text-daintree-100',
+		'pointer-events-auto origin-left cursor-pointer',
+		'transition-[scale] duration-150 ease-out active:scale-97',
+		classes,
+		isActive ? 'hidden' : 'block',
+	]}
+>
+	<p class="label block font-display tracking-wide uppercase">{text}</p>
+	<span
+		data-ui="navKanji"
+		aria-hidden="true"
+		class="absolute -right-4 -bottom-3 rotate-6 rounded-xs border-2 border-tree-poppy-1000 bg-tree-poppy-600 px-1.5 py-1 font-kanji text-xs leading-none text-tree-poppy-1000 lg:hidden"
+	>
+		{kanji}
+	</span>
+	<div class="bar translate-x- absolute right-0 bottom-0 left-0 h-3 w-full origin-bottom scale-y-0 bg-amber-500 opacity-0"></div>
+</a>
+
+<div
+	data-nav-url={url}
+	class={`nav-btn--active ${isActive ? 'block' : 'hidden'} ${classes} relative bg-pink-600 text-pink-50 w-fit rounded-sm origin-left border-daintree-1000 border-4 px-8 pb-2`}
+>
+	<p class="label stroke-text relative -mt-4 mb-1 block font-display text-5xl tracking-wide uppercase" data-stroke-text={text}>
+		{text}
+	</p>
+	<div class="flex w-full content-center gap-2 py-2">
+		<div class="bar-left -ml-12 h-4 flex-1 rounded-sm border-4 border-tree-poppy-1000 bg-tree-poppy-600"></div>
+		<span class="kanji flex-none font-kanji text-xl leading-3 tracking-tighter">{kanji}</span>
+		<div class="bar-right -mr-12 h-4 flex-1 rounded-sm border-4 border-tree-poppy-1000 bg-tree-poppy-600"></div>
+	</div>
+</div>
+
+<script>
+	import '../../scripts/navButton.ts';
+</script>
+
+<style>
+	.stroke-text::after {
+		content: attr(data-stroke-text);
+		-webkit-text-stroke: 0.75rem black;
+		color: black;
+		display: block;
+		position: absolute;
+		top: 2px;
+		right: 2px;
+		z-index: -1;
+	}
+</style>

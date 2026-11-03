@@ -12,10 +12,10 @@ const { name, step, hidden = true } = Astro.props;
 	data-step-name={name}
 	data-step={step}
 	data-hidden={hidden}
-	class="flex flex-col gap-8 h-full relative p-4 pb-20"
+	class="relative flex h-full flex-col gap-8 p-4 pb-20"
 	class:list={['xl:p-10', 'xl:pb-20']}
 >
-	<svg class="absolute top-0 left-0 right-0 bottom-0 size-full -z-10 overflow-visible">
+	<svg class="absolute top-0 right-0 bottom-0 left-0 -z-10 size-full overflow-visible">
 		<filter id="rough" x="-30%" y="-30%" width="160%" height="160%">
 			<feTurbulence type="turbulence" baseFrequency="0.01" numOctaves="2" result="turbulence"></feTurbulence>
 			<feDisplacementMap in2="turbulence" in="SourceGraphic" scale="2" xChannelSelector="R" yChannelSelector="G" result="displaced"

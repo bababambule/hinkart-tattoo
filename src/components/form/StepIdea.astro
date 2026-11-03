@@ -1,10 +1,10 @@
 ---
 import TextareaField from './TextareaField.astro';
 import FileUpload from './FileUpload.astro';
-import Button from '../Button.astro';
+import Button from '../ui/Button.astro';
 ---
 
-<div class="flex flex-col gap-4 h-full">
+<div class="flex h-full flex-col gap-4">
 	<TextareaField id="tattooIdea" label="Your idea" name="idea" placeholder="Describe your tattoo idea" maxLength={255} required={true} />
 	<TextareaField
 		id="tattooPlacement"
@@ -23,10 +23,10 @@ import Button from '../Button.astro';
 		maxLength={255}
 		required={true}
 	/>
-	<div class="flex flex-row flex-wrap gap-8 flex-1 relative">
+	<div class="relative flex flex-1 flex-row flex-wrap gap-8">
 		<div
 			id="uploadReveal"
-			class="absolute bg-tree-poppy-600/75 bg-opacity flex flex-col justify-center gap-4 size-full z-20 px-4 border-4 border-tree-poppy-1000 rounded-sm"
+			class="bg-opacity absolute z-20 flex size-full flex-col justify-center gap-4 rounded-sm border-4 border-tree-poppy-1000 bg-tree-poppy-600/75 px-4"
 		>
 			<p class="text-center text-2xl font-bold text-tree-poppy-1000">I hereby confirm that I won't upload any AI generated images.</p>
 			<Button href="#" label="confirm" id="uploadRevealButton" kanji="fuck ai" icon="letter" disabled="false" hidden="false" />

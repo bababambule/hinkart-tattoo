@@ -1,0 +1,63 @@
+---
+import Logo from '../brand/Logo.astro';
+import FooterLink from '../ui/FooterLink.astro';
+import IconLink from '../ui/IconLink.astro';
+import mapIcon from '../../assets/icons/doodleIcons/e-commerce/location.svg';
+import mailIcon from '../../assets/icons/doodleIcons/interface/mail.svg';
+
+const footerLinks = [
+	{ url: 'https://www.instagram.com/hinkarttattoostudio/', label: 'Instagram' },
+	{ url: 'https://www.tiktok.com/@hinkarttattoostudio', label: 'TikTok' },
+	{ url: '/legal-notice', label: 'Legal Notice' },
+	{ url: '/data-privacy', label: 'Data Privacy' },
+];
+---
+
+<footer
+	transition:persist
+	class="z-0 w-full bg-linear-177 from-daintree-900 from-15% to-daintree-1000 to-15% py-8 pl-4 text-sm text-daintree-100 uppercase lg:fixed lg:right-16 lg:bottom-6 lg:left-auto lg:z-10 lg:flex lg:justify-start lg:bg-none lg:py-0 lg:pl-0"
+>
+	<div
+		class="grid grid-cols-[1fr,max-content] gap-2 border-daintree-600 lg:flex lg:h-12 lg:w-full lg:flex-row lg:gap-4 lg:rounded-tr-md lg:rounded-br-md lg:border-4 lg:bg-daintree-700 lg:pt-0 lg:pr-8 lg:pl-[5dvw] xl:gap-8 xl:border-4 xl:pl-[22.5dvw]"
+	>
+		<a href="/" target="_self" class="col-span-1 col-start-1 flex flex-row items-center justify-center gap-8 pl-4 lg:hidden">
+			<div class="w-12">
+				<Logo />
+			</div>
+			<span class="mt-4 block font-bold">Hinkart Tattoo Studio</span>
+		</a>
+		<IconLink
+			label="Verlengde Osterstraat 2, 9711 en Groningen"
+			href="https://share.here.com/l/53.21432,6.57328,Verlengde%20Oosterstraat%202,%209711%20EN%20Groningen,%20Netherlands?z=19.65&t=normal"
+			target="_blank"
+			icon={mapIcon.src}
+			iconClasses="invert"
+		/>
+		<IconLink label="info@hinkart.nl" href="mailto:info@hinkart.nl" target="_self" classes="lg:order-3" icon={mailIcon.src} iconClasses="invert" />
+		<nav
+			aria-label="Footer links"
+			class="order-3 col-span-1 col-start-2 row-span-3 row-start-1 mt-6 flex flex-wrap justify-end gap-4 pr-2 lg:order-2 lg:mt-0 lg:flex-2 lg:flex-nowrap lg:justify-center"
+		>
+			{footerLinks.map((link) => <FooterLink url={link.url} label={link.label} />)}
+		</nav>
+	</div>
+</footer>
+
+<style is:inline>
+	.clip:first-of-type {
+		clip-path: polygon(5% 5%, 100% 0%, 95% 95%, 0% 100%);
+		transform: rotate(-3deg);
+	}
+	.clip:nth-child(2) {
+		clip-path: polygon(0% 0%, 95% 5%, 100% 100%, 5% 95%);
+		transform: rotate(3deg);
+	}
+	.clip:nth-child(3) {
+		clip-path: polygon(0% 5%, 100% 5%, 95% 95%, 0% 95%);
+		transform: rotate(-3deg);
+	}
+	.clip:last-of-type {
+		clip-path: polygon(5% 0%, 100% 0%, 95% 95%, 0% 100%);
+		transform: rotate(3deg);
+	}
+</style>

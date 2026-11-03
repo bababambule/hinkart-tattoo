@@ -1,0 +1,115 @@
+---
+import NavButton from '../ui/NavButton.astro';
+import Button from '../ui/Button.astro';
+
+const links = [
+	{
+		url: '/artists',
+		text: 'Artists',
+		kanji: 'アーティスト',
+		classes: `-skew-x-6 -skew-y-3
+			max-lg:translate-x-2
+			lg:translate-x-0
+			xl:translate-x-12`,
+	},
+	{
+		url: '/studio',
+		text: 'Studio',
+		kanji: 'スタジオ',
+		classes: `-skew-x-12
+			max-lg:translate-x-14
+			lg:translate-x-14 lg:-translate-y-1
+			xl:translate-x-24`,
+	},
+	{
+		url: '/about',
+		text: 'About',
+		kanji: 'じこしょうかい',
+		classes: `-skew-x-6 -skew-y-3
+			max-lg:translate-x-6
+			lg:translate-x-4
+			xl:translate-x-12`,
+	},
+	{
+		url: '/booking',
+		text: 'Booking',
+		kanji: 'よやく',
+		classes: `-skew-x-6 -skew-y-6
+			max-lg:translate-x-12
+			lg:translate-x-12
+			xl:translate-x-24`,
+	},
+	{
+		url: '/aftercare',
+		text: 'Aftercare',
+		kanji: 'アフターケア',
+		classes: `-skew-x-12 -skew-y-1
+			max-lg:translate-x-0
+			lg:translate-x-0
+			xl:translate-x-24`,
+	},
+	{
+		url: '/giftcards',
+		text: 'Giftcards',
+		kanji: 'ギフトカード',
+		classes: `-skew-x-3 -skew-y-3
+			max-lg:translate-x-8
+			lg:translate-x-4 lg:translate-y-1
+			xl:translate-x-24`,
+	},
+];
+
+const socials = [
+	{ url: 'https://www.instagram.com/hinkarttattoostudio/', label: 'Instagram', target: '_blank' },
+	{ url: 'https://www.tiktok.com/@hinkarttattoostudio', label: 'TikTok', target: '_blank' },
+	{ url: 'mailto:info@hinkart.nl', label: 'info@hinkart.nl', target: '_self' },
+];
+---
+
+<div data-ui="menu">
+	<div data-ui="menuToggle" class="relative z-20 lg:hidden">
+		<Button label="Menu" id="menuBtn" popovertarget={null} kanji="メニュー" href="" icon={null} target="" disabled={false} hidden={false} />
+	</div>
+
+	<nav
+		id="site-nav"
+		aria-label="Main"
+		class="fixed inset-0 z-0 flex flex-col justify-between overflow-y-auto px-5 pt-32 pb-8 max-lg:invisible lg:relative lg:inset-auto lg:z-10 lg:flex lg:flex-1 lg:overflow-visible lg:px-0 lg:pt-4 lg:pb-0 xl:pl-8"
+	>
+		<ul class="flex flex-col items-start gap-6 lg:gap-2 xl:items-center">
+			{
+				links.map((link) => (
+					<li data-ui="navItem">
+						<NavButton url={link.url} text={link.text} kanji={link.kanji} classes={link.classes} />
+					</li>
+				))
+			}
+		</ul>
+
+		<ul data-ui="navSocials" class="mt-12 flex flex-wrap gap-x-6 gap-y-2 pl-2 text-sm font-bold tracking-wide text-daintree-300 uppercase lg:hidden">
+			{
+				socials.map((social) => (
+					<li>
+						<a href={social.url} target={social.target} class="inline-block py-2 transition-colors duration-150 hover:text-tree-poppy-500">
+							{social.label}
+						</a>
+					</li>
+				))
+			}
+		</ul>
+	</nav>
+
+	<div
+		data-ui="navBackground"
+		aria-hidden="true"
+		class="pointer-events-none absolute top-0 right-0 left-0 -z-10 flex h-dvh w-dvw origin-bottom [transform:translateY(-90%)] bg-linear-0 from-transparent from-5% to-daintree-800 to-5% bg-bottom bg-no-repeat before:absolute before:inset-x-0 before:bottom-full before:h-[20vh] before:bg-daintree-800 lg:hidden"
+	>
+		<span
+			data-ui="navBackgroundKanji"
+			class="invisible absolute top-24 -right-6 font-kanji text-[9rem] leading-none text-daintree-100/6 select-none [writing-mode:vertical-rl]"
+		>
+			メニュー
+		</span>
+		<div class="h-14 w-full self-end bg-[url(src/assets/layout/mobile_bg.webp)] bg-contain bg-bottom bg-no-repeat"></div>
+	</div>
+</div>

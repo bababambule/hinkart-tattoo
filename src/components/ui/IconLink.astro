@@ -1,0 +1,28 @@
+---
+interface Props {
+	label: string;
+	href: string;
+	target?: '_self' | '_blank';
+	classes?: string;
+	icon: string;
+	iconClasses?: string;
+}
+
+const { label, href, target = '_self', classes = '', icon, iconClasses = '' } = Astro.props;
+---
+
+<a
+	href={href}
+	target={target}
+	data-ui="iconLink"
+	rel={target === '_blank' ? 'noopener noreferrer' : undefined}
+	aria-label={label}
+	class:list={['col-span-1 col-start-1 inline-flex items-center gap-3', classes.trim()]}
+>
+	<div class="w-10 shrink-0 -rotate-3" aria-hidden="true">
+		<img src={icon} class:list={['max-h-10 w-10', iconClasses]} />
+	</div>
+	<p class="">{label}</p>
+</a>
+
+<script src="../../scripts/ui/IconLink.ts"></script>

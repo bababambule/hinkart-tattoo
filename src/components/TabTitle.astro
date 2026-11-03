@@ -9,9 +9,9 @@ interface props {
 const { slot, id, href, title } = Astro.props;
 ---
 
-<li slot={slot} class="flex-1 flex">
-	<a id={id} href={href} class="w-full text-center bg-daintree-1000 border-4 border-daintree-1000 px-12 py-4 -skew-x-6 relative rounded-md"
-		><span class="text-3xl uppercase text-daintree-100 font-bold w-fit relative">{title}</span></a
+<li slot={slot} class="flex flex-1">
+	<a id={id} href={href} class="relative w-full -skew-x-6 rounded-md border-4 border-daintree-1000 bg-daintree-1000 px-12 py-4 text-center"
+		><span class="relative w-fit text-3xl font-bold text-daintree-100 uppercase">{title}</span></a
 	>
 </li>
 

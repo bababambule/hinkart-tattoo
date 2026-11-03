@@ -4,14 +4,15 @@ const { id, paramName, label, icon } = Astro.props;
 import Label from './Label.astro';
 ---
 
-<div class="translate-y-2 relative z-10">
+<div class="relative z-10 translate-y-2">
 	<Label label={label} icon={icon} />
 </div>
 <div
 	id={id}
 	data-dropzone={paramName}
-	class="dropzone relative p-8 grid grid-cols-2 border-4! border-dashed border-daintree-1000 bg-daintree-700 gap-2"
-></div>
+	class="dropzone relative grid grid-cols-2 gap-2 border-4! border-dashed border-daintree-1000 bg-daintree-700 p-8"
+>
+</div>
 
 <script src="../../scripts/fileupload.ts"></script>
 

@@ -25,11 +25,11 @@ import Icons from './Icons.astro';
 	]}
 >
 	<summary
-		class="flex flex-row gap-2 cursor-pointer text-daintree-100 border-b-2 border-daintree-1000 p-2 mb-4"
+		class="mb-4 flex cursor-pointer flex-row gap-2 border-b-2 border-daintree-1000 p-2 text-daintree-100"
 		class:list={['in-open:bg-daintree-900', 'in-open:border-2', 'in-open:border-daintree-1000', 'in-open:mb-0']}
 	>
 		<div
-			class="opacity-0 -translate-x-full block-0 transition-all duration-200"
+			class="-translate-x-full opacity-0 transition-all duration-200 block-0"
 			class:list={['in-open:opacity-100', 'in-open:translate-x-0', 'in-open:text-winter-sky-600']}
 		>
 			<Icons icon="TriangleRightFilled" size={24} classes={null} />
@@ -38,7 +38,7 @@ import Icons from './Icons.astro';
 			{question}
 		</span>
 	</summary>
-	<p class="text-daintree-100 px-10 py-3" class:list={[]}>
+	<p class="px-10 py-3 text-daintree-100" class:list={[]}>
 		{answer}
 	</p>
 </details>

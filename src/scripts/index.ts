@@ -72,7 +72,8 @@ function init() {
 	fullscreen?.addEventListener(
 		'click',
 		() => {
-			if (video.webkitEnterFullscreen) video.webkitEnterFullscreen(); // iOS
+			if (video.webkitEnterFullscreen)
+				video.webkitEnterFullscreen(); // iOS
 			else if (video.requestFullscreen) video.requestFullscreen();
 			else video.webkitRequestFullscreen?.(); // older Safari
 		},

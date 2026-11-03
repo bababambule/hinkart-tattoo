@@ -3,12 +3,14 @@ import { getCollection } from 'astro:content';
 const elements = await getCollection('reviews');
 ---
 
-{elements.map((item) => (
-	<div>
-		<p>{item.data.artist}</p>
-		<p>{item.data.styles}</p>
-		<p>{item.data.date}</p>
-		<p>{item.data.name}</p>
-		<p>{item.data.review}</p>
-	</div>
-))}
+{
+	elements.map((item) => (
+		<div>
+			<p>{item.data.artist}</p>
+			<p>{item.data.styles}</p>
+			<p>{item.data.date}</p>
+			<p>{item.data.name}</p>
+			<p>{item.data.review}</p>
+		</div>
+	))
+}
