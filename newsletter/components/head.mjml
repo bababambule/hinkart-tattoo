@@ -1,12 +1,73 @@
 <mj-head>
+	<mj-attributes>
+		<mj-column padding="0" />
+		<mj-section padding="0" />
+		<mj-image padding="0" />
+		<mj-text line-height="130%" padding="0" color="#7F003D" />
+	</mj-attributes>
+	<mj-font name="Gore" href="https://raw.githubusercontent.com/bababambule/hinkart-tattoo/refs/heads/master/src/assets/gore.css" />
 	<mj-style>
 		body {
-			background-image: url('./assets/halftone/halftone_1x.webp');
-			background-color: #ff007b;
-			background-size: cover;
-			background-repeat: no-repeat;
+			background-image: url('https://img.mailinblue.com/10922970/images/content_library/original/6aeb308be31f4bac9aebdcc3.jpg');
+			background-color: #18000b;
+			background-size: contain;
+			background-repeat: repeat-x;
 			background-position: top center;
+			padding-bottom: 40px;
+		}
+
+		@media screen and (max-width: 480px) {
+			body {
+				padding: 0 12px 40px 12px;
+			}
+		}
+
+		a {
+			text-decoration: none;
+			color: #7f003d;
+		}
+
+		p {
+			margin: 0;
+			padding: 0;
+			font-size: 16px;
+			line-height: 130%;
+			color: #7f003d;
+		}
+
+		@media screen and (max-width: 600px) {
+			.footer div,
+			.footer div a {
+				display: block;
+				text-align: center !important;
+			}
+		}
+
+		.box--top-center {
+			background-image: url('https://img.mailinblue.com/10922970/images/content_library/original/6aea6b63bae7eb6823a6a283.jpg');
+			background-size: auto 24px;
+			background-repeat: repeat-x;
+			background-position: top center;
+			height: 24px;
+		}
+		.box--right-center {
+			background-image: url('https://img.mailinblue.com/10922970/images/content_library/original/6aea6b630ea771d152c42b47.jpg');
+			background-size: 24px auto;
+			background-repeat: repeat-y;
+			background-position: top right;
+		}
+		.box--left-center {
+			background-image: url('https://img.mailinblue.com/10922970/images/content_library/original/6aea6b63e797c6d6b6385757.jpg');
+			background-size: 24px auto;
+			background-repeat: repeat-y;
+			background-position: top left;
+		}
+		.box--bottom-center {
+			background-image: url('https://img.mailinblue.com/10922970/images/content_library/original/6aea6b636dbcaafc6f3223bc.jpg');
+			background-size: auto 24px;
+			background-repeat: repeat-x;
+			background-position: bottom center;
+			height: 24px;
 		}
 	</mj-style>
-	<mj-font name="Rubik Spray Paint" href="https://fonts.googleapis.com/css2?family=Rubik+Spray+Paint" />
 </mj-head>

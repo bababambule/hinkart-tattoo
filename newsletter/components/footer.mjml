@@ -1,0 +1,31 @@
+<mj-section padding="24px 0 12px 0" gutter="12px">
+	<mj-column width="300px">
+		<mj-text font-size="10px" color="#FFD4E9" css-class="footer">
+			<a href="https://hinkart.nl" target="_blank" style="color: #ffd4e9; font-weight: bold">Hinkart Tattoo</a>
+		</mj-text>
+		<mj-text font-size="10px" color="#FFD4E9" css-class="footer"
+			><a
+				href="https://www.openstreetmap.org/directions?to=Verlengde+Oosterstraat+2%2C+9711+EN+Groningen+#map=19/53.214328/6.573750"
+				target="_blank"
+				style="color: #ffd4e9"
+			>
+				Verlengde Oosterstraat 2, <br />9711 EN Groningen
+			</a></mj-text
+		>
+		<mj-text font-size="10px" css-class="footer"><a href="mailto:info@hinkart.nl" style="color: #ffd4e9">info@hinkart.nl</a></mj-text>
+	</mj-column>
+	<mj-column width="300px">
+		<mj-text color="#FFD4E9" font-size="10px" css-class="footer"> KvK: 70372640 </mj-text>
+		<mj-text color="#FFD4E9" font-size="10px" css-class="footer"> BTW:NL436702009 </mj-text>
+		<mj-text font-size="10px" css-class="footer"
+			><a href="https://hinkart.nl/data-privacy" target="_blank" style="color: #ffd4e9; text-decoration: underline">Data Privacy</a></mj-text
+		>
+	</mj-column>
+</mj-section>
+<mj-section padding="40px 0">
+	<mj-column>
+		<mj-text font-size="10px" align="center"
+			><a href="{{ unsubscribe }}" style="color: #ffd4e9; text-decoration: underline">Unsubscribe from our Newsletter</a></mj-text
+		>
+	</mj-column>
+</mj-section>

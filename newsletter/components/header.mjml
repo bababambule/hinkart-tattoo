@@ -1,0 +1,15 @@
+<mj-section>
+	<mj-column width="100%" padding="24px 0 40px 0">
+		<mj-text align="center" font-size="12px" color="#FFD4E9"
+			><a href="{{ mirror }}" target="_blank" style="text-decoration: none; color: #ffd4e9">View this mail in your browser</a></mj-text
+		>
+		<mj-spacer height="24px" />
+		<mj-image
+			src="https://img.mailinblue.com/10922970/images/content_library/original/6aeafcdfe797c6d6b6386ae2.png"
+			href="https://hinkart.nl"
+			target="_blank"
+			width="60px"
+			alt="Hinkart Tattoo Groningen"
+		/>
+	</mj-column>
+</mj-section>
