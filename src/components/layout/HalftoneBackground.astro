@@ -1,0 +1,91 @@
+---
+
+---
+
+<div class="halftone-bg" transition:persist transition:animate="none" aria-hidden="true"></div>
+
+<style>
+	.halftone-bg {
+		/* Anpassen: Farben (die Teal-Werte als "R G B", damit Alpha ergänzt werden kann) */
+		--dark: #00090a;
+		--teal: 1 35 37;
+
+		/* Anpassen: Lichtschein */
+		--glow-x: 50%;
+		--glow-y: 40%;
+		--glow-width: 47%;
+		--glow-height: 29%;
+
+		/* Anpassen: Raster */
+		--dot-cell: 8px; /* gerade Werte halten die Punkte auf 1x, 2x und 3x scharf */
+		--dot-light-size: 0.75px;
+		--dot-dark-size: 0.25px;
+
+		position: absolute;
+		top: 0;
+		left: 0;
+		z-index: -10;
+		width: 100%;
+		height: 100lvh; /* bleibt stabil, wenn die mobile Adressleiste ein- und ausfährt */
+		pointer-events: none;
+		background-color: var(--dark);
+		background-image:
+			radial-gradient(
+				var(--glow-width) var(--glow-height) at var(--glow-x) var(--glow-y),
+				rgb(var(--teal) / 1) 0%,
+				rgb(var(--teal) / 0.85) 40%,
+				rgb(var(--teal) / 0.62) 60%,
+				rgb(var(--teal) / 0.38) 76%,
+				rgb(var(--teal) / 0.12) 90%,
+				rgb(var(--teal) / 0) 100%
+			),
+			radial-gradient(55% 12% at 50% 41%, rgb(var(--teal) / 0.2), rgb(var(--teal) / 0)),
+			linear-gradient(
+				to bottom,
+				rgb(var(--teal) / 0) 30%,
+				rgb(var(--teal) / 0.08) 40%,
+				rgb(var(--teal) / 0.15) 50%,
+				rgb(var(--teal) / 0.42) 60%,
+				rgb(var(--teal) / 0.65) 70%,
+				rgb(var(--teal) / 0.85) 80%,
+				rgb(var(--teal) / 0.96) 90%,
+				rgb(var(--teal) / 1) 100%
+			);
+	}
+
+	/* Gemeinsames 45°-Gitter: zweite Ebene um eine halbe Zelle versetzt */
+	.halftone-bg::before,
+	.halftone-bg::after {
+		content: '';
+		position: absolute;
+		inset: 0;
+		background-size: var(--dot-cell) var(--dot-cell);
+		background-position:
+			0 0,
+			calc(var(--dot-cell) / 2) calc(var(--dot-cell) / 2);
+	}
+
+	/* Helle Punkte: nur im Übergang aus dem Dunkeln */
+	.halftone-bg::before {
+		--dot: radial-gradient(circle, rgb(var(--teal)) var(--dot-light-size), transparent calc(var(--dot-light-size) + 0.5px));
+		background-image: var(--dot), var(--dot);
+		/* Ring um den Lichtschein, dazu der Übergang an den Seiten */
+		mask-image:
+			radial-gradient(var(--glow-width) var(--glow-height) at var(--glow-x) var(--glow-y), transparent 35%, #000 65%, #000 80%, transparent 96%),
+			linear-gradient(to bottom, transparent 50%, rgb(0 0 0 / 0.6) 62%, rgb(0 0 0 / 0.6) 72%, transparent 85%);
+	}
+
+	/* Dunkle Punkte: im hellen Bereich, zum unteren Rand ausdünnend */
+	.halftone-bg::after {
+		--dot: radial-gradient(circle, var(--dark) var(--dot-dark-size), transparent calc(var(--dot-dark-size) + 0.5px));
+		background-image: var(--dot), var(--dot);
+		mask-image: linear-gradient(to bottom, transparent 52%, rgb(0 0 0 / 0.7) 62%, rgb(0 0 0 / 0.35) 75%, rgb(0 0 0 / 0.1) 90%, transparent 100%);
+	}
+
+	/* Beispiel für einen Breakpoint (Tailwind lg): nur Werte überschreiben */
+	@media (width >= 64rem) {
+		.halftone-bg {
+			--glow-width: 40%;
+		}
+	}
+</style>

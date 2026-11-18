@@ -6,6 +6,7 @@ import Footer from '../components/layout/Footer.astro';
 import Newsletter from '../components/Newsletter.astro';
 import Reviews from '../components/Reviews.astro';
 import SvgFilter from '../components/SvgFilter.astro';
+import HalftoneBackground from '../components/layout/HalftoneBackground.astro';
 import { ClientRouter } from 'astro:transitions';
 ---
 
@@ -21,6 +22,7 @@ import { ClientRouter } from 'astro:transitions';
 		<ClientRouter />
 	</head>
 	<body class="flex min-h-dvh flex-col bg-daintree-900 lg:max-h-dvh lg:max-w-dvw lg:flex-row lg:overflow-clip">
+		<HalftoneBackground />
 		<Header />
 		<Main><slot /></Main>
 		<!-- <Newsletter />
